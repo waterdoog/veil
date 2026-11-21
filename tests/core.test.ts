@@ -166,3 +166,12 @@ describe("names are case-sensitive and scoped", () => {
     expect(guardPayload("Dev said hi.", cb, std, "p6").ok).toBe(false);
   });
 });
+
+describe("surname linking", () => {
+  it("links 'Dr Patel' to 'Sanjay Patel' in the same interview", () => {
+    const raw = "I saw Sanjay Patel at the surgery. Dr. Patel said rest. Dr Patel again.";
+    let cb = mergeEntities([], [e("Sanjay Patel", "PERSON")], "p1");
+    cb = mergeEntities(cb, extendNames(raw, [], ["Sanjay Patel"]), "p1");
+    expect(applyCodebook(raw, cb, std, "p1").redacted).toBe("I saw [PERSON_1] at the surgery. [PERSON_1] said rest. [PERSON_1] again.");
+  });
+});

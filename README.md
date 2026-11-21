@@ -1,6 +1,6 @@
 # Veil — pseudonymise on your device, analyse in the cloud
 
-**Veil lets qualitative researchers use a cloud AI model on interview transcripts without the participants' identities ever leaving their laptop.**
+**Veil lets qualitative researchers use a cloud AI model on interview transcripts while the work of finding and removing participants' identities happens on their own laptop.**
 
 Gemini Nano, running in Chrome through **Firebase AI Logic hybrid inference**, finds names, places, organisations, dates, contact details and rare identifying details *on the device*. Veil swaps each for a consistent placeholder (`[PERSON_1]`, `[ORG_4]`), shows the researcher exactly what will leave, re-scans every outgoing payload and blocks it if anything identifying slipped through, and only then sends the pseudonymised text to cloud Gemini for long-context thematic analysis. The results come back with placeholders, and Veil puts the real names back — on the researcher's screen only.
 
@@ -61,7 +61,7 @@ flowchart LR
 | **Firebase AI Logic** (hybrid inference, Gemini Developer API backend) | Six model instances across `ONLY_ON_DEVICE`, `ONLY_IN_CLOUD`, `PREFER_ON_DEVICE`; `initializeDeviceModel` with download progress; structured output on device (`responseConstraint`) and in cloud (`responseSchema`); streaming; `inferenceSource` | [`src/ai/backend.ts`](src/ai/backend.ts) |
 | **App Check** | Required by AI Logic; reCAPTCHA v3 in production, debug provider in development | [`src/firebase.ts`](src/firebase.ts) |
 | **Authentication** | Anonymous sign-in, so each researcher's Firestore data is private to them | [`src/firebase.ts`](src/firebase.ts) |
-| **Cloud Firestore** | Stores only pseudonymised text and analysis; offline persistence; security rules also reject interview text that still contains an email or UK mobile number | [`src/store/cloud.ts`](src/store/cloud.ts), [`firestore.rules`](firestore.rules) |
+| **Cloud Firestore** | Stores only pseudonymised text and analysis; offline persistence. Security rules also reject interview text containing an email or UK mobile number — a last-ditch backstop against bad writes, not the privacy mechanism (the airlock runs before anything is sent) | [`src/store/cloud.ts`](src/store/cloud.ts), [`firestore.rules`](firestore.rules) |
 | **Remote Config** | Cloud model name, default redaction policy, on-device chunk size — changeable without a redeploy | [`src/firebase.ts`](src/firebase.ts), [`remoteconfig.template.json`](remoteconfig.template.json) |
 | **Hosting** | Serves the app | [`firebase.json`](firebase.json) |
 
@@ -76,7 +76,9 @@ What never touches Firebase or any server: raw transcripts, photos of notes, and
 3. Click **Load the sample study** → open an interview → **Pseudonymise on this device**.
 4. Review the highlights, check the airlock, then **Release to cloud analysis**.
 5. Open **Cross-interview synthesis**, and the **Airlock log** to see where every call ran and what left the device.
-6. To see it fail closed, open Veil in a browser without Gemini Nano: pseudonymisation falls back to pattern detection + manual redaction, never to the cloud.
+6. To see it fail closed, open Veil in a browser without Gemini Nano: pseudonymisation falls back to pattern detection + manual redaction, never to the cloud, and release stays locked until you confirm a manual review.
+
+If the chip says "On-device model unavailable" in Chrome 139+: check `chrome://on-device-internals` for the model status, make sure the flag above is enabled, and on some machines also enable `chrome://flags/#optimization-guide-on-device-model`. Gemini Nano needs ~22 GB free disk space and a supported GPU or 16 GB RAM (see Chrome's Prompt API docs).
 
 The sample interviews in [`sample-data/`](sample-data) are entirely fictional, generated for testing; phone numbers use Ofcom's drama range and emails use `example.com`.
 
@@ -101,11 +103,12 @@ Firebase setup:
 
 - On-device inference needs desktop Chrome 139+ with the Prompt API; Nano's quality is lower than a cloud model's, which is why Veil adds deterministic detectors, a second pass, a human review step and the airlock rather than trusting one model.
 - Pseudonymisation is not anonymisation: rich qualitative data can be re-identifiable from context. Veil reduces the work and the risk; the researcher still reviews and stays responsible to their ethics approval.
-- The airlock checks for identifiers Veil knows about (codebook + patterns). It cannot catch an identifier no detector and no reviewer ever flagged.
+- The airlock checks for identifiers Veil knows about (codebook + patterns). It cannot catch an identifier no detector and no reviewer ever flagged — which is why the human review step exists and why Veil reports how many identifiers it removed on the answer-keyed sample.
+- `deviceStatus()` reads Chrome's `LanguageModel.availability()` directly, only to show model status in the header before any click; every inference call goes through Firebase AI Logic. If the SDK doesn't report `inferenceSource`, the log says "source not reported" rather than guessing.
 
 ## Built during #BuildHybridAI
 
-Everything in this repository was written during the submission period (from 2026-11-21). The team builds [aicoo](https://www.aicoo.io), an AI workspace with meeting recording and transcription; Veil is a new, separate, open-source app and contains no aicoo code. Development used Claude Code as the coding assistant. Third-party code: React, Vite, the Firebase JS SDK (all via npm, under their own licences).
+Everything in this repository was written during the submission period (work started 2026-11-21; the period opened 2026-11-11). The team builds [aicoo](https://www.aicoo.io), an AI workspace with meeting recording and transcription; Veil is a new, separate, open-source app and contains no aicoo code. Development used Claude Code as the coding assistant. Third-party code: React, Vite, the Firebase JS SDK (all via npm, under their own licences).
 
 ## Licence
 

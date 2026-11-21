@@ -14,8 +14,9 @@ export const TYPE_LABEL: Record<EntityType, string> = {
   QUASI: "Quasi-identifier",
 };
 
-export function SourceBadge({ source, mode }: { source?: "on_device" | "in_cloud"; mode?: string }) {
+export function SourceBadge({ source, mode }: { source?: "on_device" | "in_cloud" | "unknown"; mode?: string }) {
   if (!source && !mode) return null;
+  if (source === "unknown") return <span className="badge" title={mode ? `Requested mode: ${mode}` : undefined}>source not reported</span>;
   const s = source ?? (mode === "only_in_cloud" ? "in_cloud" : "on_device");
   return (
     <span className={`badge ${s === "on_device" ? "badge-device" : "badge-cloud"}`} title={mode ? `Requested mode: ${mode}` : undefined}>

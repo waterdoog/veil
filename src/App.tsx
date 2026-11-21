@@ -170,9 +170,9 @@ function Home({ veil, onAdd, onOpen }: { veil: Veil; onAdd: () => void; onOpen: 
     <div className="home">
       <div className="hero">
         <h1>
-          Your participants' names never reach the cloud.
+          Find the names on your laptop.
           <br />
-          <em>The analysis still does.</em>
+          <em>Send the cloud only the story.</em>
         </h1>
         <p className="lede">
           Qualitative researchers promise ethics committees that identifiable transcripts stay under their control, then

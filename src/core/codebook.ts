@@ -11,6 +11,7 @@ export function norm(s: string): string {
 }
 
 const MIN_LEN = 2;
+const TITLES = new Set(["dr", "mr", "mrs", "ms", "miss", "prof", "nurse"]);
 /** Common words a small model sometimes returns as "entities". Never treat these as identifiers. */
 const STOP = new Set([
   "i", "me", "my", "we", "us", "you", "he", "she", "they", "him", "her", "them", "it",
@@ -64,12 +65,18 @@ export function mergeEntities(codebook: CodebookEntry[], entities: Entity[], ori
     if (byNorm.has(k) || (raw.type !== "PERSON" && out.some((e) => e.type === "PERSON" && e.origin === origin && norm(e.real) === n))) continue;
     let token: string | undefined;
     if (raw.type === "PERSON") {
+      const titled = (x: string[]) => x.length === 2 && TITLES.has(x[0].replace(/\.$/, ""));
       const parts = n.split(" ");
       for (const e of out) {
         if (e.type !== "PERSON" || e.origin !== origin) continue;
         const ep = norm(e.real).split(" ");
         // "sarah" ~ "sarah jenkins", or "sarah jenkins" ~ "sarah" (first name seen first)
-        if ((parts.length === 1 && ep[0] === parts[0]) || (ep.length === 1 && parts[0] === ep[0])) {
+        const firstLink = (parts.length === 1 && ep[0] === parts[0]) || (ep.length === 1 && parts[0] === ep[0]);
+        // "dr patel" ~ "sanjay patel" (same surname, one side has a title)
+        const lastLink =
+          (titled(parts) && !titled(ep) && ep.length > 1 && ep[ep.length - 1] === parts[1]) ||
+          (titled(ep) && !titled(parts) && parts.length > 1 && parts[parts.length - 1] === ep[1]);
+        if (firstLink || lastLink) {
           token = e.token;
           break;
         }

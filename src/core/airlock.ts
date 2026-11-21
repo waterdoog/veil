@@ -69,7 +69,7 @@ export interface LedgerEntry {
   /** Inference mode requested from Firebase AI Logic. */
   mode: "only_on_device" | "only_in_cloud" | "prefer_on_device";
   /** What actually ran, from response.inferenceSource. */
-  source?: "on_device" | "in_cloud";
+  source?: "on_device" | "in_cloud" | "unknown";
   status: "running" | "ok" | "blocked" | "error";
   bytesIn: number;
   payloadPreview: string;

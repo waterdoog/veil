@@ -11,6 +11,8 @@ import { firebaseApp } from "../firebase";
 import type { Entity, EntityType } from "../core/types";
 import { ENTITY_TYPES } from "../core/types";
 import {
+  redactPrompt,
+  secondPassPrompt,
   ANALYST_SYSTEM,
   ENTITY_JSON_SCHEMA,
   IMAGE_JSON_SCHEMA,
@@ -21,7 +23,9 @@ import {
   SYNTH_SYSTEM,
 } from "./prompts";
 
-export type Source = "on_device" | "in_cloud";
+/** Where inference ran, as reported by the SDK's `response.inferenceSource`. "unknown" if the SDK didn't say. */
+export type Source = "on_device" | "in_cloud" | "unknown";
+const src = (v: unknown): Source => (v === "on_device" || v === "in_cloud" ? v : "unknown");
 export interface AiResult<T> {
   data: T;
   source: Source;
@@ -74,6 +78,27 @@ function cleanEntities(raw: unknown): Entity[] {
 function parseJson(text: string): unknown {
   const t = text.trim().replace(/^```(?:json)?\s*|\s*```$/g, "");
   return JSON.parse(t);
+}
+
+/** Small models sometimes stop mid-JSON. Recover the complete {"text","type"} objects that did arrive. */
+function salvageEntities(text: string): unknown {
+  const out: { text: string; type: string }[] = [];
+  for (const m of text.matchAll(/\{\s*"text"\s*:\s*"((?:[^"\\]|\\.)*)"\s*,\s*"type"\s*:\s*"([A-Z]+)"\s*\}/g)) {
+    try {
+      out.push({ text: JSON.parse(`"${m[1]}"`), type: m[2] });
+    } catch {
+      /* skip */
+    }
+  }
+  return { entities: out };
+}
+
+function parseEntities(text: string): Entity[] {
+  try {
+    return cleanEntities(parseJson(text));
+  } catch {
+    return cleanEntities(salvageEntities(text));
+  }
 }
 
 const onDeviceText = (system: string, schema: object) => ({
@@ -182,18 +207,14 @@ export class FirebaseBackend implements AiBackend {
     });
   }
 
+  /**
+   * Reads Chrome's availability state for the on-device model so the UI can show "ready / downloadable /
+   * unavailable" before the user clicks anything. Firebase AI Logic's own check runs inside
+   * generateContent(); this read-only probe doesn't create a session or start a download (which Chrome
+   * only allows after a user gesture). All inference still goes through Firebase AI Logic.
+   */
   async deviceStatus(): Promise<DeviceStatus> {
-    const LM = (globalThis as unknown as { LanguageModel?: { availability(o?: object): Promise<string> } }).LanguageModel;
-    if (!LM) return "unavailable";
-    try {
-      const a = await LM.availability({
-        expectedInputs: [{ type: "text", languages: ["en"] }],
-        expectedOutputs: [{ type: "text", languages: ["en"] }],
-      });
-      return (["unavailable", "downloadable", "downloading", "available"].includes(a) ? a : "unknown") as DeviceStatus;
-    } catch {
-      return "unavailable";
-    }
+    return languageModelAvailability([{ type: "text", languages: ["en"] }]);
   }
 
   async prepareDevice(onProgress: (p: number) => void): Promise<void> {
@@ -206,36 +227,48 @@ export class FirebaseBackend implements AiBackend {
   }
 
   async findIdentifiers(chunk: string): Promise<AiResult<Entity[]>> {
-    const { redactPrompt } = await import("./prompts");
     const r = await this.redactor.generateContent(redactPrompt(chunk));
-    return { data: cleanEntities(parseJson(r.response.text())), source: (r.response.inferenceSource ?? "on_device") as Source };
+    const text = r.response.text();
+    let data = parseEntities(text);
+    // An empty or broken answer on a long chunk: retry once as two halves (shorter prompts, shorter replies).
+    if (!data.length && chunk.length > 1200) {
+      const mid = chunk.lastIndexOf("\n", chunk.length / 2) > 0 ? chunk.lastIndexOf("\n", chunk.length / 2) : Math.floor(chunk.length / 2);
+      const halves = [chunk.slice(0, mid), chunk.slice(mid)];
+      for (const h of halves) {
+        const rr = await this.redactor.generateContent(redactPrompt(h));
+        data = data.concat(parseEntities(rr.response.text()));
+      }
+    }
+    return { data, source: src(r.response.inferenceSource) };
   }
 
   async findResidual(chunk: string): Promise<AiResult<Entity[]>> {
-    const { secondPassPrompt } = await import("./prompts");
     const r = await this.checker.generateContent(secondPassPrompt(chunk));
-    return { data: cleanEntities(parseJson(r.response.text())), source: (r.response.inferenceSource ?? "on_device") as Source };
+    return { data: parseEntities(r.response.text()), source: src(r.response.inferenceSource) };
   }
 
   async readImage(file: File): Promise<AiResult<{ transcript: string; entities: Entity[] }>> {
+    // Image input needs the multimodal on-device model; check before we try (ONLY_ON_DEVICE would throw).
+    if ((await languageModelAvailability([{ type: "text", languages: ["en"] }, { type: "image" }])) === "unavailable")
+      throw new Error("Image input isn't available for Gemini Nano in this browser. Enable chrome://flags/#prompt-api-for-gemini-nano-multimodal-input.");
     await this.imageReader.initializeDeviceModel();
     const part = await fileToPart(file);
     const r = await this.imageReader.generateContent(["Transcribe these notes and list identifying spans.", part]);
     const d = parseJson(r.response.text()) as { transcript?: string };
     return {
       data: { transcript: String(d.transcript ?? ""), entities: cleanEntities(d) },
-      source: (r.response.inferenceSource ?? "on_device") as Source,
+      source: src(r.response.inferenceSource),
     };
   }
 
   async analyseInterview(prompt: string): Promise<AiResult<Analysis>> {
     const r = await this.analyst.generateContent(prompt);
-    return { data: parseJson(r.response.text()) as Analysis, source: (r.response.inferenceSource ?? "in_cloud") as Source };
+    return { data: parseJson(r.response.text()) as Analysis, source: src(r.response.inferenceSource) };
   }
 
   async synthesise(prompt: string): Promise<AiResult<Synthesis>> {
     const r = await this.synthesiser.generateContent(prompt);
-    return { data: parseJson(r.response.text()) as Synthesis, source: (r.response.inferenceSource ?? "in_cloud") as Source };
+    return { data: parseJson(r.response.text()) as Synthesis, source: src(r.response.inferenceSource) };
   }
 
   async memo(prompt: string, onText: (t: string) => void): Promise<AiResult<string>> {
@@ -246,7 +279,18 @@ export class FirebaseBackend implements AiBackend {
       onText(text);
     }
     const final = await r.response;
-    return { data: text, source: (final.inferenceSource ?? "in_cloud") as Source };
+    return { data: text, source: src(final.inferenceSource) };
+  }
+}
+
+async function languageModelAvailability(expectedInputs: object[]): Promise<DeviceStatus> {
+  const LM = (globalThis as unknown as { LanguageModel?: { availability(o?: object): Promise<string> } }).LanguageModel;
+  if (!LM) return "unavailable";
+  try {
+    const a = await LM.availability({ expectedInputs, expectedOutputs: [{ type: "text", languages: ["en"] }] });
+    return (["unavailable", "downloadable", "downloading", "available"].includes(a) ? a : "unknown") as DeviceStatus;
+  } catch {
+    return "unavailable";
   }
 }
 

@@ -113,10 +113,10 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
           patch(id, { progress: { done: n + 1, total: chunks.length, stage: "Finding identifiers" } });
         }
         await new Promise((r) => setTimeout(r, 0));
-        const firsts = studyRef.current.codebook
-          .filter((e) => e.type === "PERSON" && e.origin === id && !e.real.includes(" "))
-          .map((e) => e.real);
-        addEntities(extendNames(iv.raw, firsts), id);
+        const people = studyRef.current.codebook.filter((e) => e.type === "PERSON" && e.origin === id);
+        const firsts = people.filter((e) => !e.real.includes(" ")).map((e) => e.real);
+        const fulls = people.filter((e) => e.real.includes(" ") && !/^(Dr|Mr|Mrs|Ms|Miss|Prof|Nurse)\b/.test(e.real)).map((e) => e.real);
+        addEntities(extendNames(iv.raw, firsts, fulls), id);
         if (POLICIES[studyRef.current.policy].secondPass) {
           await new Promise((r) => setTimeout(r, 50)); // let the codebook state settle
           const s = studyRef.current;

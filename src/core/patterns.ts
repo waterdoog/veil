@@ -56,9 +56,20 @@ const NOT_SURNAME = new Set(["I", "The", "And", "But", "So", "Then", "Yeah", "Um
  * If the model found a first name, also catch "First Surname" in the raw text — small models often
  * return just the first name. Returns extra PERSON entities to merge (same token via first-name linking).
  */
-export function extendNames(text: string, firstNames: string[]): Entity[] {
+export function extendNames(text: string, firstNames: string[], fullNames: string[] = []): Entity[] {
   const out: Entity[] = [];
   const seen = new Set<string>();
+  // "Sanjay Patel" known -> also catch "Dr Patel", "Mrs. Patel" anywhere in the interview.
+  for (const full of fullNames) {
+    const last = full.trim().split(/\s+/).pop() ?? "";
+    if (!/^[A-Z][a-z'’-]{2,}$/.test(last)) continue;
+    const re = new RegExp(`\\b(?:Dr|Mr|Mrs|Ms|Miss|Prof|Nurse)\\.?\\s+${last}\\b`, "g");
+    for (const m of text.matchAll(re)) {
+      if (seen.has(m[0])) continue;
+      seen.add(m[0]);
+      out.push({ text: m[0], type: "PERSON", source: "pattern" });
+    }
+  }
   for (const f of firstNames) {
     if (!/^[A-Z][a-z'’-]+$/.test(f)) continue;
     const re = new RegExp(`\\b${f}\\s+((?:[A-Z][a-z'’-]+-)?[A-Z][a-z'’-]{2,})\\b`, "g");
