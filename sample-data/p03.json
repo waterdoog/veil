@@ -1,0 +1,223 @@
+{
+ "id": "p03",
+ "title": "Hiding Long COVID in Remote Fintech",
+ "transcript": "[00:00:12] INT: Thanks so much for making time to speak with me today, Priya. Just to confirm for the recording, this is an interview for the Working with Long COVID study at the University of Westbridge. You've already signed the consent form, and I've got your contact details down as priya.nair@example.com and 07700 900412 in case we need to send the voucher or follow up. Is that all still right?\n[00:00:34] P: Yeah, yeah, that's all right. Sorry if I sound a bit croaky, I've just had a rough morning.\n[00:00:41] INT: No need to apologise at all. If you need a break, or if you want to pause or stop at any point, just say. To start off, could you tell me a bit about yourself and what you do for work?\n[00:00:55] P: Sure. Um, so I'm Priya Nair, I'm 27, and I live in Eastgate, just outside Millford, with my partner, Callum Brooks. We rent a little two-bed flat at 14 Larkspur Close. Work-wise, I'm a junior software developer at a fintech startup called ClearLedger Ltd. I've been there about eighteen months now, working fully remotely. I'm in the Core Payments Squad, which sounds very grand, but mostly at the moment I'm writing COBOL-to-Rust migration scripts for some legacy banking rails we're trying to modernise. It's... yeah, it's quite niche, quite fiddly work.\n[00:01:42] INT: That does sound intense. And when did you first get COVID, and how did things develop into Long COVID for you?\n[00:01:51] P: So I tested positive on the 14th of November 2022. I remember the exact date because it was the day after Callum's birthday and we'd been out for dinner. At the time it just felt like a really nasty flu—I've got mild asthma anyway, so chest infections always knock me about a bit. I took a week off, went back to my laptop, and I just... I never bounced back. By January I was still getting this crushing fatigue where I'd finish a two-hour coding session and feel like I'd been hit by a bus. And then in March 2023, my GP, Dr. Hannah Al-Mansoor at Meadowbrook Surgery, finally said, look, this is Long COVID.\n[00:02:45] INT: How did you feel hearing that?\n[00:02:49] P: Honestly? A mix of relief and absolute panic. Relief because I wasn't making it up, you know? Because for months I was thinking, am I just lazy? Am I just bad at my job? Especially being a junior. But then panic because she basically said there's no magic pill. She referred me to the Westbridge Long COVID Clinic over at St Jude's Infirmary. I've got the referral letter pinned to my corkboard right next to me actually—let me see, yeah, reference LC-2023-8841, and my NHS number 999 482 1039 is plastered at the top of it because I've had to ring them so many times to chase appointments.\n[00:03:38] INT: Has it been hard getting seen through the NHS?\n[00:03:42] P: Oh, it's been a nightmare. The waitlist at St Jude's Infirmary was over nine months. In the end, I got so desperate with the heart palpitations and shortness of breath that I paid £240 to see a private cardiologist, Dr. Simon Okafor, just to make sure my heart wasn't actually failing. He was lovely, really thorough, and he said it looks like POTS—postural orthostatic tachycardia syndrome—on top of the Long COVID. He wrote back to Meadowbrook Surgery and got me started on propranolol for the heart rate, and I also take fexofenadine every day because he thought there might be a histamine thing going on. The propranolol helps the racing heart, definitely, though it doesn't touch the brain fog or the crashes.\n[00:04:39] INT: Can you describe what the brain fog and those crashes feel like when you're trying to work?\n[00:04:46] P: Yeah. Um... sorry, let me gather my thoughts. That's literally it, right there! Sometimes a word just vanishes. When I'm coding, I'll be staring at a function I wrote twenty minutes ago and it's like reading a foreign language. I'll forget basic Rust syntax. I'll read the same ticket on Jira four times and nothing sticks. And the post-exertional malaise—the crashes—are the worst part because they're delayed. If I push through a heavy sprint on a Tuesday, by Thursday afternoon I can barely sit upright. My limbs feel like they're full of wet cement, my eyes burn, and I just have to lie in a dark room.\n[00:05:38] INT: And you mentioned before we started recording that your manager doesn't know about any of this. Can you tell me about that decision?\n[00:05:47] P: Yeah... no, Gareth Pritchard—he's my engineering manager at ClearLedger—he has no idea. Not a clue. And I know how that sounds, like I'm being deceitful or something, because everyone says oh, you should be open, ask for reasonable adjustments. But ClearLedger is a Series A startup. People get let go quietly all the time if they're not seen as hungry enough. Gareth is nice enough on the surface, very \"move fast, ship code\", lots of talk about velocity. A few months ago someone in another squad had a burnout wobble and took three weeks off, and within two months they'd been managed out. So I'm terrified. If I tell Gareth I've got Long COVID and some days my brain turns to soup, I genuinely believe I'll be first on the chopping block when they do the next round of cuts.\n[00:06:51] INT: That sounds like a huge amount of pressure to carry on your own. How do you actually manage to hide it day to day?\n[00:06:59] P: Remote work is the only reason I still have a job, full stop. If I had to commute into an office, I'd be unemployed. Because I'm at home, I can fake it. I keep my camera off in afternoon meetings and say my broadband in Eastgate is playing up. Sometimes I literally work lying flat on the sofa with a laptop stand over my stomach because sitting at my desk triggers the POTS. If I'm having a really bad brain fog morning, I'll stare at my screen, wiggle my mouse so my Slack dot stays green, and then at nine o'clock at night—when sometimes the fog lifts a tiny bit—I'll log back in and actually write the code so I've got something to show in the morning stand-up.\n[00:07:52] INT: Does anyone at ClearLedger know at all?\n[00:07:56] P: One person. Toby Chen, he's a mid-level dev on the Core Payments Squad. We pair-program a lot. Back on the 19th of September, I had a massive crash right in the middle of a screen-share with him. I just completely blanked, couldn't even remember how to run a git rebase, and I started crying on the call. It was mortifying. I ended up telling Toby everything. He's been an absolute lifesaver—he doesn't tell Gareth, and on days when I'm really struggling he'll quietly pick up the trickier tickets or review my pull requests extra carefully so I don't push anything embarrassing to production. I hate relying on him like that, though. I feel like a fraud.\n[00:08:50] INT: You're definitely not a fraud, Priya. You're managing a serious chronic illness without support. What about the financial side of things? Does money play into why you feel you can't disclose or cut your hours?\n[00:09:04] P: Massively. Yeah, massively. I earn £38,500, which isn't bad for a junior, and our rent at 14 Larkspur Close is £1,150 a month, plus bills, council tax, food. Callum is doing his teacher training at the moment, so he's not bringing in much at all. If I drop to three days a week, we literally can't pay the rent. In October 2023 I actually looked into applying for PIP, just to see if it could bridge the gap, because I was so exhausted. I downloaded the form and read the questions and just wept. It felt like you had to prove you couldn't walk to the kettle, and I thought, I'm a 27-year-old software developer, they're going to laugh me out of the building. Plus I just didn't have the energy to fight the DWP on top of working full-time.\n[00:10:02] INT: It's a real trap, isn't it? Having to spend all your energy just to stay afloat financially.\n[00:10:08] P: Completely. And it's wrecked my life outside work, because work takes 100% of my battery—actually, more like 120%, I'm constantly in energy debt. Before November 2022, I used to play underwater hockey twice a week at the leisure centre in Millford. I know, weird sport, everyone laughs when I say it, but I loved it. And on weekends I used to spend hours restoring vintage 1980s Casio synthesizers—soldering circuit boards, hunting for parts on eBay. I haven't touched a soldering iron in over a year. My hands shake too much from the fatigue, and I can't concentrate on the schematics. It feels like the person I was just... evaporated, and all that's left is this shell that writes Rust scripts and sleeps.\n[00:11:05] INT: That sounds really painful, losing those parts of your identity. How has all of this affected your relationship with Callum?\n[00:11:13] P: Oh, Callum is a saint, honestly, I don't know what I'd do without him. He does almost all the cooking, all the grocery shopping, all the hoovering. Because by six o'clock I'm done. I feel awful about it, though. Sometimes I get really snappy because I'm just overstimulated and exhausted, and then I feel guilty for days. We used to go on spontaneous weekend trips, go to gigs, and now our big Saturday night is me lying on the sofa with a heat pad while he watches telly next to me. I worry he's going to resent me eventually. He says he won't, he says we're a team, but... yeah, it's hard not to feel like a burden.\n[00:12:04] INT: What does the next few months look like for you? Do you have any follow-ups coming up?\n[00:12:10] P: I've finally got my first proper face-to-face follow-up at the Westbridge Long COVID Clinic on the 6th of January. I'm hoping they might offer some proper pacing therapy or maybe look at my medications again. And at work... I don't know. I keep telling myself that once I get promoted to mid-level, or once I've got two years on my CV, maybe I'll look for a job in the public sector or somewhere with an actual HR department where I don't have to hide. Until then, I'm just keeping my head down, keeping my Slack green, and hoping I don't crash too hard before Christmas.\n[00:12:55] INT: Thank you so much for being so honest and open with me today, Priya. I really appreciate you sharing all of that, especially when you're already managing so much fatigue. I'll stop the recording now.",
+ "identifiers": [
+  {
+   "text": "Priya",
+   "type": "PERSON"
+  },
+  {
+   "text": "University of Westbridge",
+   "type": "ORG"
+  },
+  {
+   "text": "priya.nair@example.com",
+   "type": "CONTACT"
+  },
+  {
+   "text": "07700 900412",
+   "type": "CONTACT"
+  },
+  {
+   "text": "Priya Nair",
+   "type": "PERSON"
+  },
+  {
+   "text": "27",
+   "type": "QUASI"
+  },
+  {
+   "text": "Eastgate",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Millford",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Callum Brooks",
+   "type": "PERSON"
+  },
+  {
+   "text": "14 Larkspur Close",
+   "type": "LOCATION"
+  },
+  {
+   "text": "junior software developer",
+   "type": "QUASI"
+  },
+  {
+   "text": "fintech startup",
+   "type": "QUASI"
+  },
+  {
+   "text": "ClearLedger Ltd",
+   "type": "ORG"
+  },
+  {
+   "text": "Core Payments Squad",
+   "type": "ORG"
+  },
+  {
+   "text": "COBOL-to-Rust migration scripts",
+   "type": "QUASI"
+  },
+  {
+   "text": "Long COVID",
+   "type": "HEALTH"
+  },
+  {
+   "text": "14th of November 2022",
+   "type": "DATE"
+  },
+  {
+   "text": "Callum",
+   "type": "PERSON"
+  },
+  {
+   "text": "mild asthma",
+   "type": "HEALTH"
+  },
+  {
+   "text": "fatigue",
+   "type": "HEALTH"
+  },
+  {
+   "text": "March 2023",
+   "type": "DATE"
+  },
+  {
+   "text": "Dr. Hannah Al-Mansoor",
+   "type": "PERSON"
+  },
+  {
+   "text": "Meadowbrook Surgery",
+   "type": "ORG"
+  },
+  {
+   "text": "Westbridge Long COVID Clinic",
+   "type": "ORG"
+  },
+  {
+   "text": "St Jude's Infirmary",
+   "type": "ORG"
+  },
+  {
+   "text": "LC-2023-8841",
+   "type": "ID"
+  },
+  {
+   "text": "999 482 1039",
+   "type": "ID"
+  },
+  {
+   "text": "NHS",
+   "type": "ORG"
+  },
+  {
+   "text": "heart palpitations",
+   "type": "HEALTH"
+  },
+  {
+   "text": "shortness of breath",
+   "type": "HEALTH"
+  },
+  {
+   "text": "£240",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "Dr. Simon Okafor",
+   "type": "PERSON"
+  },
+  {
+   "text": "POTS",
+   "type": "HEALTH"
+  },
+  {
+   "text": "postural orthostatic tachycardia syndrome",
+   "type": "HEALTH"
+  },
+  {
+   "text": "propranolol",
+   "type": "HEALTH"
+  },
+  {
+   "text": "fexofenadine",
+   "type": "HEALTH"
+  },
+  {
+   "text": "brain fog",
+   "type": "HEALTH"
+  },
+  {
+   "text": "crashes",
+   "type": "HEALTH"
+  },
+  {
+   "text": "post-exertional malaise",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Gareth Pritchard",
+   "type": "PERSON"
+  },
+  {
+   "text": "ClearLedger",
+   "type": "ORG"
+  },
+  {
+   "text": "Gareth",
+   "type": "PERSON"
+  },
+  {
+   "text": "Toby Chen",
+   "type": "PERSON"
+  },
+  {
+   "text": "19th of September",
+   "type": "DATE"
+  },
+  {
+   "text": "Toby",
+   "type": "PERSON"
+  },
+  {
+   "text": "£38,500",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "£1,150",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "October 2023",
+   "type": "DATE"
+  },
+  {
+   "text": "PIP",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "DWP",
+   "type": "ORG"
+  },
+  {
+   "text": "November 2022",
+   "type": "DATE"
+  },
+  {
+   "text": "underwater hockey",
+   "type": "QUASI"
+  },
+  {
+   "text": "restoring vintage 1980s Casio synthesizers",
+   "type": "QUASI"
+  },
+  {
+   "text": "6th of January",
+   "type": "DATE"
+  }
+ ]
+}

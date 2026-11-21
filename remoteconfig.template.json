@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "cloud_model": {
+      "defaultValue": { "value": "gemini-3.8-flash" },
+      "description": "Cloud Gemini model used for interview analysis and cross-interview synthesis (ONLY_IN_CLOUD) and as the PREFER_ON_DEVICE fallback.",
+      "valueType": "STRING"
+    },
+    "default_policy": {
+      "defaultValue": { "value": "standard" },
+      "description": "Default redaction policy for new studies: standard | strict.",
+      "valueType": "STRING"
+    },
+    "chunk_chars": {
+      "defaultValue": { "value": "3500" },
+      "description": "Characters per on-device chunk (Gemini Nano's prompt limit is ~9k tokens including the reply).",
+      "valueType": "NUMBER"
+    }
+  }
+}

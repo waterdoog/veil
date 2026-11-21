@@ -1,0 +1,25 @@
+rules_version = '2';
+// Firestore only ever receives pseudonymised text and cloud analysis (see src/store/cloud.ts).
+// Each signed-in (anonymous) user can read and write only their own studies.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+    match /users/{uid}/{document=**} {
+      allow read: if isOwner(uid);
+    }
+    match /users/{uid}/studies/{studyId} {
+      allow write: if isOwner(uid);
+    }
+    // Belt and braces on top of the client-side airlock: refuse interview text that still
+    // carries an email address or a UK mobile number.
+    match /users/{uid}/studies/{studyId}/interviews/{interviewId} {
+      allow delete: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && request.resource.data.redacted is string
+        && !request.resource.data.redacted.matches('(?s).*[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.][A-Za-z]{2,}.*')
+        && !request.resource.data.redacted.matches('(?s).*(^|[^0-9])07[0-9]{3} ?[0-9]{3} ?[0-9]{3}([^0-9]|$).*');
+    }
+  }
+}
