@@ -144,7 +144,7 @@ The six-interview study pseudonymises in about 4–5 minutes on a MacBook, entir
 
 **No Gemini Nano in your browser?** Click **Replay a recorded Nano run**: the sample study loads with the detections real Gemini Nano made in Chrome 158 (clearly labelled as recorded), and review, the airlock and cloud analysis run live.
 
-| Cloud analysis, re-identified on this device | Exactly what the cloud saw |
+| Cloud analysis, re-identified on this device | What the cloud will see — and the airlock blocking a slipped-in name |
 |---|---|
 | ![](docs/2-cloud-analysis-reidentified-locally.jpg) | ![](docs/3-what-the-cloud-saw.jpg) |
 
