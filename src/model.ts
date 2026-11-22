@@ -44,6 +44,10 @@ export interface Study {
   synthesisSource?: Source;
   synthStatus?: "idle" | "running" | "done" | "blocked" | "error";
   synthError?: string;
+  /** One term per line: always redacted in every document (e.g. a site name the model can't know). */
+  denyList?: string;
+  /** One term per line: never redacted (e.g. "NHS", a public policy name). */
+  allowList?: string;
   /** Set when the detections come from a recorded Gemini Nano run rather than this browser. */
   replay?: { capturedAt: string; browser: string };
 }

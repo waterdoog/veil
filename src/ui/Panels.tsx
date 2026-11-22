@@ -195,7 +195,7 @@ export function AddInterview({ veil, onDone }: { veil: Veil; onDone: (id?: strin
         <textarea className="input" rows={10} placeholder="Paste a transcript…" value={text} onChange={(e) => setText(e.target.value)} />
         <div className="actions">
           <button className="btn btn-ghost" onClick={() => fileRef.current?.click()}>
-            Upload .txt / .vtt / .docx
+            Upload .txt / .vtt / .docx / .pdf
           </button>
           <button className="btn btn-ghost" onClick={() => imgRef.current?.click()}>
             <DeviceIcon /> Photo of notes
@@ -211,13 +211,19 @@ export function AddInterview({ veil, onDone }: { veil: Veil; onDone: (id?: strin
         <input
           ref={fileRef}
           type="file"
-          accept=".txt,.vtt,.md,.docx,text/plain"
+          accept=".txt,.vtt,.md,.docx,.pdf,text/plain,application/pdf"
           hidden
           onChange={async (e) => {
             const f = e.target.files?.[0];
             if (!f) return;
             try {
-              setText(/\.docx$/i.test(f.name) ? await docxToText(await f.arrayBuffer()) : vttToText(await f.text()));
+              setText(
+                /\.pdf$/i.test(f.name)
+                  ? await (await import("../core/pdf")).pdfToText(await f.arrayBuffer())
+                  : /\.docx$/i.test(f.name)
+                    ? await docxToText(await f.arrayBuffer())
+                    : vttToText(await f.text()),
+              );
             } catch (err) {
               setText("");
               alert(`Couldn't read ${f.name}: ${String(err)}`);

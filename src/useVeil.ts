@@ -5,7 +5,7 @@ import { guardPayload, guardSections, sha256, type GuardResult, type LedgerEntry
 import { chunkTranscript } from "./core/chunk";
 import { applyCodebook, mergeEntities, mergeTokens, norm } from "./core/codebook";
 import { extendAcronyms, extendNames, extendOrgs, findPatterns } from "./core/patterns";
-import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/types";
+import { POLICIES, type CodebookEntry, type Entity, type EntityType, type PolicyName } from "./core/types";
 import type { RuntimeConfig } from "./firebase";
 import { emptyStudy, releasable, uid, type Interview, type Study } from "./model";
 import { evalStudy, FIELD_NOTE_TRUTH, holdoutStudy, quickStudy, sampleStudy, scenariosStudy, tabStudy } from "./sample";
@@ -88,7 +88,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
   }, []);
 
   const addEntities = useCallback((entities: Entity[], origin: string) => {
-    setStudy((s) => ({ ...s, codebook: mergeEntities(s.codebook, entities, origin) }));
+    setStudy((s) => ({ ...s, codebook: withLists(mergeEntities(s.codebook, entities, origin), s) }));
   }, []);
 
   const prepareDevice = useCallback(async () => {
@@ -383,6 +383,12 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
         })),
       /** Replace the current study, e.g. from a decrypted backup. */
       restoreStudy: (st: Study) => setStudy({ ...st, interviews: st.interviews.map((i) => (i.status === "pseudonymising" || i.status === "analysing" ? { ...i, status: "review" as const, progress: undefined } : i)) }),
+      /** Custom always-redact / never-redact terms, applied study-wide now and to every later detection. */
+      setLists: (denyList: string, allowList: string) =>
+        setStudy((s) => {
+          const next = { ...s, denyList, allowList };
+          return { ...next, codebook: withLists(next.codebook, next) };
+        }),
       loadSample: () => setStudy(sampleStudy(studyRef.current.policy)),
       loadQuick: () => setStudy(quickStudy(studyRef.current.policy)),
       loadHoldout: () => setStudy(holdoutStudy(studyRef.current.policy)),
@@ -470,4 +476,15 @@ async function thumbnail(file: File, max = 1200): Promise<string> {
   c.height = Math.round(bmp.height * k);
   c.getContext("2d")!.drawImage(bmp, 0, 0, c.width, c.height);
   return c.toDataURL("image/jpeg", 0.82);
+}
+
+const lines = (t?: string) => (t ?? "").split("\n").map((x) => x.trim()).filter((x) => x.length >= 2);
+
+/** Deny-list terms join the codebook as study-wide manual entries; allow-list terms are switched off wherever they appear. */
+function withLists(codebook: CodebookEntry[], s: Pick<Study, "denyList" | "allowList">): CodebookEntry[] {
+  const deny = lines(s.denyList).filter((t) => !codebook.some((e) => norm(e.real) === norm(t)));
+  let cb = deny.length ? mergeEntities(codebook, deny.map((text) => ({ text, type: "QUASI" as EntityType, source: "manual" as const }))) : codebook;
+  const allow = new Set(lines(s.allowList).map(norm));
+  if (allow.size) cb = cb.map((e) => (allow.has(norm(e.real)) && e.source !== "manual" ? { ...e, enabled: false } : e));
+  return cb;
 }

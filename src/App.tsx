@@ -99,6 +99,14 @@ export function App({
               onChange={(e) => veil.setQuestions(e.target.value)}
             />
           </label>
+          <label className="field">
+            <span>Always redact (one per line)</span>
+            <textarea className="rq" rows={2} placeholder="e.g. Hollins Lane" value={study.denyList ?? ""} onChange={(e) => veil.setLists(e.target.value, study.allowList ?? "")} />
+          </label>
+          <label className="field">
+            <span>Never redact (one per line)</span>
+            <textarea className="rq" rows={2} placeholder="e.g. NHS" value={study.allowList ?? ""} onChange={(e) => veil.setLists(study.denyList ?? "", e.target.value)} />
+          </label>
             </div>
           </details>
           <div className="list-head">
