@@ -73,7 +73,7 @@ export function App({
         </div>
       )}
 
-      <div className="body">
+      <div className={`body ${view === "home" ? "is-home" : ""}`}>
         <nav className="sidebar">
           <input className="study-name" value={study.name} onChange={(e) => veil.setName(e.target.value)} aria-label="Study name" />
           <details className="side-group settings-group">
@@ -107,6 +107,15 @@ export function App({
               Add
             </button>
           </div>
+          <select className="doc-picker" value={current ? current.id : view} onChange={(e) => setView(e.target.value)} aria-label="Open a document">
+            <option value="home">Overview</option>
+            {study.interviews.map((i) => (
+              <option key={i.id} value={i.id}>
+                {i.title}
+              </option>
+            ))}
+            {study.interviews.length > 0 && <option value="synthesis">Cross-document synthesis</option>}
+          </select>
           <ul className="iv-list">
             {study.interviews.map((i) => (
               <li key={i.id}>

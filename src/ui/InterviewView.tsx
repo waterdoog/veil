@@ -174,6 +174,17 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                     </>
                   )}
                 </div>
+                <div className="transcript transcript-out">
+                  <div className="out-title">Title: <TokenText text={title} codebook={study.codebook} showReal={false} /></div>
+                  <TokenText text={redacted} codebook={study.codebook} showReal={false} />
+                </div>
+
+                {((guard.ok && worth.length > 0) || evalRes) && (
+                  <details className="checks-drawer">
+                    <summary>
+                      Airlock details{evalRes ? ` · ${evalRes.caught} of ${evalRes.total} on the answer key` : ""}
+                      {guard.ok && worth.length > 0 ? ` · ${worth.length} to look at` : ""}
+                    </summary>
                 {guard.ok && worth.length > 0 && (
                   <div className="worth-row">
                     <span title="Name-like text that no detector flagged. Click one to redact it everywhere in this document.">Worth a look:</span>
@@ -187,10 +198,10 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                 )}
 
                 {evalRes && (
-                  <details className="evalcard">
-                    <summary>
+                  <div className="evalcard">
+                    <div className="eval-line">
                       Answer key: <b>{evalRes.caught} of {evalRes.total}</b> identifiers removed · {Math.round(evalRes.precision * 100)}% of replacements correct
-                    </summary>
+                    </div>
                     <div className="eval-more">
                       <span>
                         Scored against this sample's answer key (types the policy redacts).
@@ -208,14 +219,11 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                         </span>
                       )}
                     </div>
-                  </details>
+                  </div>
                 )}
 
-                <div className="transcript transcript-out">
-                  <div className="out-title">Title: <TokenText text={title} codebook={study.codebook} showReal={false} /></div>
-                  <TokenText text={redacted} codebook={study.codebook} showReal={false} />
-                </div>
-
+                  </details>
+                )}
                 {iv.deviceMissing && (
                   <label className="attest">
                     <input type="checkbox" checked={!!iv.attested} onChange={(e) => veil.setAttested(iv.id, e.target.checked)} />

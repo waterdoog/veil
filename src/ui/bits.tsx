@@ -147,8 +147,8 @@ export function LinedTranscript({
           .filter((s) => s.start < end && s.end > start)
           .map((s) => ({ ...s, start: Math.max(0, s.start - start), end: Math.min(line.length, s.end - start) }));
         return (
-          <div key={i} data-line={i} className={`tline ${flash === i ? "flash" : ""}`}>
-            {line ? <HighlightedText text={line} spans={local} onToggle={onToggle} /> : " "}
+          <div key={i} data-line={i} className={`tline ${turn(line, local) ? "turn" : ""} ${flash === i ? "flash" : ""}`}>
+            {line ? <Line text={line} spans={local} onToggle={onToggle} /> : " "}
           </div>
         );
       })}
@@ -172,4 +172,23 @@ export function findQuoteLine(raw: string, quote: { quote: string; timestamp?: s
     if (i >= 0) return i;
   }
   return null;
+}
+
+/** "[00:01:12] P: ..." — timestamps and speaker tags are structure, not prose; set them apart (when no identifier sits inside them). */
+const TURN = /^(\[\d{1,2}:\d{2}(?::\d{2})?\])(\s*)([A-Z][A-Za-z]{0,11}:)?(\s*)/;
+function turn(line: string, spans: Span[]) {
+  const m = line.match(TURN);
+  return m && !spans.some((s) => s.start < m[0].length) ? m : null;
+}
+function Line({ text, spans, onToggle }: { text: string; spans: Span[]; onToggle?: (token: string, real: string) => void }) {
+  const m = turn(text, spans);
+  if (!m) return <HighlightedText text={text} spans={spans} onToggle={onToggle} />;
+  const n = m[0].length;
+  return (
+    <>
+      <span className="ts">{m[1]}</span>
+      {m[3] && <span className="who">{m[3]}</span>}{" "}
+      <HighlightedText text={text.slice(n)} spans={spans.map((s) => ({ ...s, start: s.start - n, end: s.end - n }))} onToggle={onToggle} />
+    </>
+  );
 }

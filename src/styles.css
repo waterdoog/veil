@@ -1273,3 +1273,262 @@ textarea.input {
     animation: none !important;
   }
 }
+
+/* ===== Round chosen by the Carbon design swarm (6 proposals, 4 reviewers): dark anchor bar, full-contrast documents,
+   indigo placeholder stamps, territories for device vs cloud, reading sheet for analysis, centred home. ===== */
+:root {
+  --bg: #f1f5f9;
+  --side: #f8fafc;
+  --line: #e2e8f0;
+  --line-2: #cbd5e1;
+  --ink: #0f172a;
+  --ink-2: #334155;
+  --muted: #64748b;
+  --device: #0d9488;
+  --device-tint: #f0fdfa;
+  --device-line: #0d9488;
+  --cloud: #4338ca;
+  --cloud-tint: #eef2ff;
+  --mark: #ccfbf1;
+  --radius: 6px;
+}
+.topbar {
+  background: #0f172a;
+  color: #f8fafc;
+  height: 48px;
+  border-bottom: 0;
+}
+.topbar .brand {
+  color: #f8fafc;
+}
+.topbar .chip-status {
+  color: #e2e8f0;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: var(--t-xs);
+}
+.topbar .chip-status.device::before {
+  background: #2dd4bf;
+}
+.topbar .chip-status.warn {
+  color: #fcd34d;
+}
+.topbar .chip-status:not(.device):not(.warn):not(.off) {
+  display: none;
+}
+.topbar .btn-ghost {
+  background: transparent;
+  color: #e2e8f0;
+  border-color: #334155;
+}
+.topbar .btn-ghost:hover {
+  background: #1e293b;
+}
+.topbar .count {
+  color: #94a3b8;
+}
+.btn,
+.btn-small,
+.tabs,
+.tabs button,
+.input,
+.field select,
+textarea.rq,
+.starter,
+.chip {
+  border-radius: 4px;
+}
+.sidebar {
+  background: var(--side);
+  border-right-color: var(--line-2);
+}
+.body {
+  grid-template-columns: 264px 1fr;
+}
+.doc-picker {
+  display: none;
+}
+
+/* the two territories */
+.pane {
+  border-color: var(--line-2);
+  border-radius: var(--radius);
+}
+.pane-device {
+  border-top: 4px solid var(--device);
+}
+.pane-device > header {
+  background: var(--device-tint);
+}
+.pane-out {
+  border-top: 4px solid var(--cloud);
+}
+.pane-out > header {
+  background: var(--cloud-tint);
+}
+.transcript {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: #111827;
+}
+.transcript-out {
+  color: #111827;
+  font-size: 16px;
+}
+.out-title {
+  display: none;
+}
+.tline.turn {
+  margin-bottom: 12px;
+}
+.ts {
+  font: var(--t-xs) var(--mono);
+  color: var(--muted);
+  margin-right: 6px;
+}
+.who {
+  font: 600 var(--t-sm) var(--sans);
+  color: var(--ink-2);
+}
+.hl {
+  background: var(--mark);
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--device);
+  padding: 0 3px;
+}
+.hl:hover {
+  background: #99f6e4;
+}
+.token {
+  font: 500 12px var(--mono);
+  background: var(--cloud-tint);
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+  border-radius: 3px;
+  padding: 0 4px;
+}
+.guard {
+  margin-top: 14px;
+}
+.checks-drawer {
+  margin: 12px 18px 0;
+  font-size: var(--t-xs);
+  color: var(--muted);
+}
+.checks-drawer > summary {
+  cursor: pointer;
+  color: var(--ink-2);
+}
+.checks-drawer > .worth-row,
+.checks-drawer > .evalcard {
+  margin-top: 8px;
+}
+.eval-line b {
+  color: var(--ink-2);
+}
+
+/* actions: one solid call to action */
+.pane > .actions .btn-ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-2);
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.pane > .actions .btn-ghost:hover {
+  background: var(--side);
+}
+.pane > .actions .btn-cloud {
+  margin-left: auto;
+  font-weight: 600;
+  padding: 8px 16px;
+}
+.tabs {
+  background: #e2e8f0;
+}
+.tabs button.on {
+  color: #fff;
+  box-shadow: none;
+}
+.tabs button.on small {
+  color: rgba(255, 255, 255, 0.8);
+}
+.tabs button:first-child.on {
+  background: var(--device);
+}
+.tabs button:last-child.on {
+  background: var(--cloud);
+}
+
+/* analysis as a reading sheet */
+.analysis {
+  max-width: 760px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-top: 4px solid var(--cloud);
+  border-radius: var(--radius);
+  padding: 32px 40px;
+}
+.card p.muted,
+.theme p {
+  color: var(--ink-2);
+}
+
+/* home: no sidebar, centred */
+.body.is-home {
+  grid-template-columns: 1fr;
+}
+.body.is-home .sidebar {
+  display: none;
+}
+.body.is-home .main {
+  padding-top: 48px;
+}
+.home {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.hero h1 {
+  font: 500 40px/1.12 var(--serif);
+  letter-spacing: -0.02em;
+}
+.hero h1 em {
+  font-style: italic;
+}
+.starter {
+  border-color: var(--line-2);
+}
+
+@media (max-width: 760px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+  .sidebar .study-name,
+  .sidebar .list-head,
+  .sidebar .iv-list {
+    display: none;
+  }
+  .doc-picker {
+    display: block;
+    width: 100%;
+    height: 38px;
+    font: var(--t-sm) var(--sans);
+    border: 1px solid var(--line-2);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--ink);
+    padding: 0 10px;
+  }
+  .sidebar {
+    padding: 10px 16px;
+  }
+  .analysis {
+    padding: 20px 18px;
+  }
+  .hero h1 {
+    font-size: 30px;
+  }
+}
