@@ -178,7 +178,7 @@ What never touches Firebase or any server: raw transcripts, photos of notes, and
 1. Enable `chrome://flags/#prompt-api-for-gemini-nano-multimodal-input`, restart Chrome.
 2. Open Veil and click **Set up on-device model** (one-time download, stays on your machine).
 3. Click **Load the sample study** → open an interview → **Pseudonymise on this device**.
-4. Review the highlights, check the airlock, then **Release to cloud analysis**.
+4. Review the highlights, check the airlock, then **Send to cloud analysis**.
 5. Open **Cross-interview synthesis**, and the **Airlock log** to see where every call ran and what left the device.
 6. Click **Test the airlock**: Veil slips a real name back into the outgoing text and shows the airlock blocking it (nothing is sent).
 7. To see it fail closed, open Veil in a browser without Gemini Nano: pseudonymisation falls back to pattern detection + manual redaction, never to the cloud, and release stays locked until you confirm a manual review.
