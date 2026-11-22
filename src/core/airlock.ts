@@ -36,7 +36,9 @@ export function guardPayload(payload: string, codebook: CodebookEntry[], policy:
   }
   for (const p of findPatterns(payload)) {
     if (allowed.has(norm(p.text))) continue;
-    if (p.type === "FINANCIAL") continue; // amounts are often research data; policy decides via codebook
+    // Only fixed-shape identifiers are re-checked here. Amounts are often research data, and the fuzzy
+    // detectors (institution names, ages) would block ordinary capitalised phrases like a title.
+    if (p.type === "FINANCIAL" || p.type === "ORG" || p.type === "QUASI") continue;
     findings.push({ text: p.text, reason: "pattern" });
   }
   return { ok: findings.length === 0, findings, bytes: new TextEncoder().encode(payload).length };

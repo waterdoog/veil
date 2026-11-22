@@ -280,3 +280,9 @@ describe("institution and age detectors", () => {
     expect(findPatterns("Then I went to the clinic and the union rep was there.").filter((x) => x.type === "ORG")).toEqual([]);
   });
 });
+
+describe("airlock ignores fuzzy detectors", () => {
+  it("does not block a title like 'A Part-Time Hospital Porter'", () => {
+    expect(guardPayload("Interview: Carrying the Weight: A Part-Time Hospital Porter and Carer", [], std).ok).toBe(true);
+  });
+});

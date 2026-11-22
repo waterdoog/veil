@@ -55,7 +55,8 @@ export function findPatterns(text: string): Entity[] {
     re.lastIndex = 0;
     for (const m of text.matchAll(re)) {
       let t = m[0].trim().replace(/[.,;:]+$/, "");
-      if (type === "ORG") t = t.replace(/^(?:The|the|At|at|And|and|To|to|In|in|From|from|With|with)\s+/, "");
+      if (type === "ORG") t = t.replace(/^(?:(?:The|the|A|An|At|at|And|and|To|to|In|in|From|from|With|with)\s+)+/, "");
+      if (type === "ORG" && /^(?:Part-Time|Full-Time|Local|General|Private|Public|Primary|Secondary|Big|Small)\s/i.test(t)) continue;
       // Word ages ("sixty-two") are distinctive on their own; a bare "27" is not, so keep "I'm 27" as the span.
       if (type === "QUASI" && !/\d$/.test(t)) t = t.replace(/^(?:I'm|I am|I’m|aged|age of|turned|turning)\s+/i, "");
       if (t.length < 3) continue;
