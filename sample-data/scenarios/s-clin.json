@@ -1,0 +1,275 @@
+{
+ "id": "s-clin",
+ "title": "Hospital discharge summary — cardiology",
+ "transcript": "BRAMPTON VALE NHS FOUNDATION TRUST\nSt Jude's General Hospital\nELECTRONIC DISCHARGE SUMMARY\n\nPATIENT DETAILS\nName: Arthur Pendelton\nDate of Birth: 14 March 1958\nNHS Number: 999 482 7104\nHospital Number: BV-8839201\nAddress: 42 Sycamore Close, Brampton, BR4 7LP\nTelephone: 07700 900142\nNext of Kin: Margaret Pendelton (Wife) — Tel: 07700 900189, Email: m.pendelton@example.com\n\nGP DETAILS\nGP Name: Dr Priya Nair\nPractice: Oakridge Medical Centre, 18 Highfield Road, Brampton, BR4 2QW\nEmail: p.nair@oakridge.example.com\n\nADMISSION DETAILS\nAdmission Date: 03 November 2024\nDischarge Date: 09 November 2024\nWard: Hawthorn Cardiology Ward\nResponsible Consultant: Dr Marcus Thorne (Staff ID: EMP-40912)\nDischarge Summary Author: Dr Chloe Vance, FY2 Cardiology\n\nPRIMARY DIAGNOSIS\nNon-ST-elevation myocardial infarction (NSTEMI) — treated with percutaneous coronary intervention (PCI) to proximal LAD.\n\nSECONDARY DIAGNOSES\n1. Hypertension\n2. Hyperlipidaemia\n3. Mild left ventricular systolic dysfunction\n4. Osteoarthritis of the right knee\n\nPRESENTING COMPLAINT AND HISTORY OF PRESENTING ILLNESS\nMr Pendelton is a 66-year-old gentleman who presented to the Emergency Department at St Jude's General Hospital via ambulance on 03 November 2024 with a two-hour history of central crushing chest pain radiating to his left jaw and arm. The pain came on at rest while reading the morning newspaper and was associated with marked diaphoresis, nausea, and mild dyspnoea. He had no prior history of exertional angina. Paramedics administered 300mg aspirin, sublingual GTN spray with partial relief, and intravenous morphine. Upon arrival in A&E, he was haemodynamically stable with a blood pressure of 148/86 mmHg and heart rate of 82 bpm.\n\nPAST MEDICAL, FAMILY, AND SOCIAL HISTORY\nPast medical history is notable for essential hypertension diagnosed in 2016, hyperlipidaemia, and osteoarthritis of the right knee. He has no known drug allergies.\n\nFamily history: His father died of a myocardial infarction at age 64, and his younger sister has type 2 diabetes mellitus.\n\nSocial and occupational history: Mr Pendelton is a retired railway signalman who worked for 38 years on the Midlands mainline before retiring in 2020. He lives independently in a two-storey house with his wife, Margaret Pendelton. He is an ex-smoker with a 25-pack-year history, having quit in 2012. He consumes approximately 10 units of alcohol per week, mostly real ale on weekends. Prior to this admission, his exercise tolerance was good; he walked his border collie for 45 minutes daily without limitation.\n\nINVESTIGATIONS AND HOSPITAL COURSE\nSerial 12-lead ECGs demonstrated new T-wave inversion in leads V2–V4 without ST-segment elevation. High-sensitivity troponin I was elevated at 412 ng/L on admission, rising to 1,280 ng/L at three hours. Full blood count, renal function (eGFR >90 mL/min), and liver function tests were within normal limits. Lipid profile showed total cholesterol of 6.1 mmol/L and LDL of 3.9 mmol/L. HbA1c was 39 mmol/mol.\n\nHe was admitted to Hawthorn Cardiology Ward and commenced on standard acute coronary syndrome protocol including dual antiplatelet therapy and fondaparinux. On 05 November 2024, he underwent inpatient coronary angiography via the right radial artery performed by Dr Marcus Thorne. Angiography revealed an 85% stenosis of the proximal left anterior descending (LAD) artery with minor non-obstructive plaque in the circumflex and right coronary arteries. Successful percutaneous coronary intervention (PCI) was performed with deployment of a single drug-eluting stent to the proximal LAD, achieving TIMI 3 flow.\n\nA transthoracic echocardiogram on 07 November 2024 showed mild anterior wall hypokinesis with a left ventricular ejection fraction (LVEF) of 48%, and no significant valvular pathology. He remained pain-free post-procedure with no arrhythmias on telemetry and was mobilising independently around the ward prior to discharge.\n\nDISCHARGE MEDICATIONS\n1. Aspirin 75mg once daily (lifelong)\n2. Ticagrelor 90mg twice daily (for 12 months — stop date: 05 November 2025)\n3. Atorvastatin 80mg once daily at night (increased from 20mg)\n4. Bisoprolol 2.5mg once daily (newly started)\n5. Ramipril 5mg once daily (newly started)\n6. Lansoprazole 30mg once daily (gastroprotection while on dual antiplatelet therapy)\n7. GTN spray 400 micrograms, 1–2 sprays sublingually PRN for chest pain\n\nPLAN AND FOLLOW-UP\n1. GP Action: Please review Mr Pendelton in clinic on 18 November 2024 to check blood pressure, heart rate, and renal function (U&Es) two weeks post-initiation of Ramipril, and uptitrate Bisoprolol and Ramipril as tolerated.\n2. Cardiac Rehabilitation: Referred to the Cardiac Rehabilitation Clinic at St Jude's General Hospital. First assessment appointment booked for 27 November 2024 at 10:00.\n3. Cardiology Follow-up: Outpatient review in the Cardiology Outpatient Clinic with Dr Marcus Thorne on 15 January 2025 at 14:30.\n4. Driving Advice: Informed of DVLA regulations — must not drive for 1 week following successful PCI for NSTEMI (may resume driving on 12 November 2024 provided recovery is uncomplicated).\n5. Lifestyle: Reinforced smoking abstinence, Mediterranean-style diet, and gradual return to exercise via cardiac rehabilitation.",
+ "identifiers": [
+  {
+   "text": "BRAMPTON VALE NHS FOUNDATION TRUST",
+   "type": "ORG"
+  },
+  {
+   "text": "St Jude's General Hospital",
+   "type": "ORG"
+  },
+  {
+   "text": "Arthur Pendelton",
+   "type": "PERSON"
+  },
+  {
+   "text": "14 March 1958",
+   "type": "DATE"
+  },
+  {
+   "text": "999 482 7104",
+   "type": "ID"
+  },
+  {
+   "text": "BV-8839201",
+   "type": "ID"
+  },
+  {
+   "text": "42 Sycamore Close, Brampton, BR4 7LP",
+   "type": "LOCATION"
+  },
+  {
+   "text": "07700 900142",
+   "type": "CONTACT"
+  },
+  {
+   "text": "Margaret Pendelton",
+   "type": "PERSON"
+  },
+  {
+   "text": "07700 900189",
+   "type": "CONTACT"
+  },
+  {
+   "text": "m.pendelton@example.com",
+   "type": "CONTACT"
+  },
+  {
+   "text": "Dr Priya Nair",
+   "type": "PERSON"
+  },
+  {
+   "text": "Oakridge Medical Centre",
+   "type": "ORG"
+  },
+  {
+   "text": "18 Highfield Road, Brampton, BR4 2QW",
+   "type": "LOCATION"
+  },
+  {
+   "text": "p.nair@oakridge.example.com",
+   "type": "CONTACT"
+  },
+  {
+   "text": "03 November 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "09 November 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Hawthorn Cardiology Ward",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Dr Marcus Thorne",
+   "type": "PERSON"
+  },
+  {
+   "text": "EMP-40912",
+   "type": "ID"
+  },
+  {
+   "text": "Dr Chloe Vance",
+   "type": "PERSON"
+  },
+  {
+   "text": "Non-ST-elevation myocardial infarction (NSTEMI)",
+   "type": "HEALTH"
+  },
+  {
+   "text": "percutaneous coronary intervention (PCI)",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Hypertension",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Hyperlipidaemia",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Mild left ventricular systolic dysfunction",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Osteoarthritis of the right knee",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Mr Pendelton",
+   "type": "PERSON"
+  },
+  {
+   "text": "66-year-old",
+   "type": "QUASI"
+  },
+  {
+   "text": "central crushing chest pain",
+   "type": "HEALTH"
+  },
+  {
+   "text": "diaphoresis",
+   "type": "HEALTH"
+  },
+  {
+   "text": "dyspnoea",
+   "type": "HEALTH"
+  },
+  {
+   "text": "essential hypertension",
+   "type": "HEALTH"
+  },
+  {
+   "text": "2016",
+   "type": "DATE"
+  },
+  {
+   "text": "hyperlipidaemia",
+   "type": "HEALTH"
+  },
+  {
+   "text": "osteoarthritis of the right knee",
+   "type": "HEALTH"
+  },
+  {
+   "text": "myocardial infarction",
+   "type": "HEALTH"
+  },
+  {
+   "text": "type 2 diabetes mellitus",
+   "type": "HEALTH"
+  },
+  {
+   "text": "retired railway signalman",
+   "type": "QUASI"
+  },
+  {
+   "text": "Midlands mainline",
+   "type": "LOCATION"
+  },
+  {
+   "text": "2020",
+   "type": "DATE"
+  },
+  {
+   "text": "2012",
+   "type": "DATE"
+  },
+  {
+   "text": "border collie",
+   "type": "QUASI"
+  },
+  {
+   "text": "High-sensitivity troponin I",
+   "type": "HEALTH"
+  },
+  {
+   "text": "acute coronary syndrome",
+   "type": "HEALTH"
+  },
+  {
+   "text": "05 November 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "coronary angiography",
+   "type": "HEALTH"
+  },
+  {
+   "text": "85% stenosis of the proximal left anterior descending (LAD) artery",
+   "type": "HEALTH"
+  },
+  {
+   "text": "drug-eluting stent",
+   "type": "HEALTH"
+  },
+  {
+   "text": "transthoracic echocardiogram",
+   "type": "HEALTH"
+  },
+  {
+   "text": "07 November 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "left ventricular ejection fraction (LVEF) of 48%",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Aspirin 75mg",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Ticagrelor 90mg",
+   "type": "HEALTH"
+  },
+  {
+   "text": "05 November 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "Atorvastatin 80mg",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Bisoprolol 2.5mg",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Ramipril 5mg",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Lansoprazole 30mg",
+   "type": "HEALTH"
+  },
+  {
+   "text": "GTN spray 400 micrograms",
+   "type": "HEALTH"
+  },
+  {
+   "text": "18 November 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Cardiac Rehabilitation Clinic",
+   "type": "ORG"
+  },
+  {
+   "text": "27 November 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Cardiology Outpatient Clinic",
+   "type": "ORG"
+  },
+  {
+   "text": "15 January 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "DVLA",
+   "type": "ORG"
+  },
+  {
+   "text": "12 November 2024",
+   "type": "DATE"
+  }
+ ]
+}

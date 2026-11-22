@@ -65,6 +65,18 @@ export function tabStudy(policy: PolicyName): Study {
   };
 }
 
+const evalSets: Record<string, Record<string, SampleFile>> = {
+  "tab-dev": import.meta.glob<SampleFile>("../sample-data/tab-dev/*.json", { eager: true, import: "default" }),
+  "tab-test2": import.meta.glob<SampleFile>("../sample-data/tab-test2/*.json", { eager: true, import: "default" }),
+};
+
+/** Evaluation-only sets, opened with ?load=<name> (not shown in the UI). */
+export function evalStudy(name: string, policy: PolicyName): Study | null {
+  const set = evalSets[name];
+  if (!set) return null;
+  return { id: uid(), name: `Evaluation set: ${name}`, policy, codebook: [], interviews: toInterviews(set) };
+}
+
 export function allAnswerKeys() {
   return [...Object.values(files), ...Object.values(holdout)].flatMap((f) => f.identifiers);
 }

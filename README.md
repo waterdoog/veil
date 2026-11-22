@@ -93,16 +93,14 @@ Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), scored
 | **Veil** (Gemini Nano on device), first look | 77.2% | **96.8%** |
 | **Veil**, current | **87.9%** | **97.1%** |
 
-**Public benchmark — TAB** ([Text Anonymization Benchmark](https://github.com/NorskRegnesentral/text-anonymization-benchmark), MIT; 8 short European Court of Human Rights judgments from the test split, expert annotations of direct + quasi identifiers; real public court texts, a different domain from interviews):
+**Public benchmark — TAB** ([Text Anonymization Benchmark](https://github.com/NorskRegnesentral/text-anonymization-benchmark), MIT): short European Court of Human Rights judgments with expert annotations of direct and quasi identifiers — real public court texts, a different domain from interviews. We tuned only on TAB's **dev** split and ran the **test** documents once at the end.
 
-| TAB, 8 documents | Recall | Precision |
-|---|---|---|
-| Presidio, default | 75.0% | 73.4% |
-| Presidio, organisations + money on | 78.8% | 57.7% |
-| **Veil**, first look | 65.2% | 69.2% |
-| **Veil**, after adding case-number, nationality and household detectors | **78.0%** | **82.5%** |
-
-On formal legal text Veil at first look was *worse* than Presidio; the misses (application numbers like "27961/02", nationalities, "two children") were generic gaps, now fixed — note the second row is no longer a blind test.
+| TAB | Docs (labels) | Veil recall | Veil precision | Presidio default | Presidio orgs on |
+|---|---|---|---|---|---|
+| Test, first look (before any TAB work) | 8 (132) | 65.2% | 69.2% | 75.0% / 73.4% | 78.8% / 57.7% |
+| Dev, before tuning | 12 (226) | 77.0% | 81.6% | 68.6% / 75.3% | 74.8% / 56.0% |
+| Dev, after tuning (birth years, counties/regions gazetteer, marital status, case numbers, nationality, household) | 12 (226) | 88.5% | 79.7% | | |
+| **Test, unseen, final — run once** | 8 (195) | **87.2%** | **82.4%** | 60.5% / 78.4% | 64.6% / 58.2% |
 
 A well-configured Presidio finds about as many identifiers as Veil did at first look, but a third of what it redacts isn't an identifier — that's review work and lost research data — and it misses most quasi-identifiers (4 of 13). Presidio also needs a Python server; Veil runs in the browser with nothing to install.
 

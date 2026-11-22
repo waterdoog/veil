@@ -1,0 +1,68 @@
+{
+ "id": "d05",
+ "title": "ECHR case 001-86341 (TAB dev split)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 64729/01) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr James Smith (“the applicant”), on 13 November 2000.\n\nThe applicant was unrepresented before the Court. The United Kingdom Government (“the Government”) were represented by their Agent, Mr C. Whomersley of the Foreign and Commonwealth Office, London.\n\nThe applicant complained that the United Kingdom authorities’ refusal to grant him Widow’s Bereavement Allowance or equivalent constituted discrimination on grounds of sex contrary to Article 14 of the Convention in conjunction with Article 1 of Protocol No. 1.\n\nBy a partial decision of 4 December 2001 a Chamber of the Fourth Section of the Court decided to communicate this application. Subsequently, under the provisions of Article 29 § 3 of the Convention, it was decided to examine the merits of the application at the same time as its admissibility.\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1930 and lives in Scotland.\n\nHis wife died on 24 April 1994. On 26 October 2000 the applicant made a claim to the Inland Revenue requesting an allowance equivalent to that received by a widow, namely Widow’s Bereavement Allowance (“WBA”), for previous tax years. On 29 September 2000 the Inland Revenue informed him that he was ineligible for WBA as he was not a woman. The applicant did not appeal further as he considered or was advised that such a remedy would be bound to fail since no such benefit was payable to widowers under United Kingdom law.",
+ "identifiers": [
+  {
+   "text": "64729/01",
+   "type": "ID"
+  },
+  {
+   "text": "British",
+   "type": "QUASI"
+  },
+  {
+   "text": "Mr James Smith",
+   "type": "PERSON"
+  },
+  {
+   "text": "13 November 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "Mr C. Whomersley",
+   "type": "PERSON"
+  },
+  {
+   "text": "Widow’s Bereavement Allowance",
+   "type": "QUASI"
+  },
+  {
+   "text": "4 December 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "1930",
+   "type": "DATE"
+  },
+  {
+   "text": "Scotland",
+   "type": "LOCATION"
+  },
+  {
+   "text": "24 April 1994",
+   "type": "DATE"
+  },
+  {
+   "text": "26 October 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "widow",
+   "type": "QUASI"
+  },
+  {
+   "text": "WBA",
+   "type": "QUASI"
+  },
+  {
+   "text": "29 September 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "widowers",
+   "type": "QUASI"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

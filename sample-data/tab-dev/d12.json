@@ -1,0 +1,56 @@
+{
+ "id": "d12",
+ "title": "ECHR case 001-76762 (TAB dev split)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 8374/03) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr Sydney George Pearson (“the applicant”), on 27 February 2003.\n\nThe United Kingdom Government (“the Government”) were represented by their Agent, Mr D. Walton of the Foreign and Commonwealth Office, London.\n\nThe applicant complained that as a man he was unable to receive his State pension until age 65 whereas a woman could claim her State pension at age 60. He invoked Article 14 of the Convention in conjunction with Article 1 of Protocol No. 1.\n\nThe application was allocated to the Fourth Section of the Court (Rule 52 § 1 of the Rules of Court). Within that Section, the Chamber that would consider the case (Article 27 § 1 of the Convention) was constituted as provided in Rule 26 § 1.\n\nBy a decision of 27 April 2004, the Court declared the application partly admissible.\n\nThe applicant, but not the Government, filed observations on the merits (Rule 59 § 1). The Chamber decided, after consulting the parties, that no hearing on the merits was required (Rule 59 § 3 in fine).\n\nFollowing the judgment of the Grand Chamber in Stec and Others v. the United Kingdom [GC], nos. 65731/01 and 65900/01, 12 April 2006), the applicant and the Government submitted further observations.\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1942 and lives in Birmingham.\n\nThe applicant, aged sixty three, would not become eligible for a State pension until he was sixty five, whereas a woman could claim a State pension from age sixty. He was currently unemployed but if he returned to work he and any potential employer would be liable to make national insurance contributions.\n\nOn 4 February 2002, the applicant issued proceedings for damages in the High Court against the Benefits Agency, alleging inter alia that the refusal to pay him a pension from the age of sixty was discriminatory. On 2 October 2002, the applicant’s claim was struck out on the basis that the particulars of claim disclosed no reasonable grounds for bringing the claim (Civil Procedure Rule 3.4.2.). On 27 February 2003, permission to appeal was refused.",
+ "identifiers": [
+  {
+   "text": "8374/03",
+   "type": "ID"
+  },
+  {
+   "text": "British",
+   "type": "QUASI"
+  },
+  {
+   "text": "Mr Sydney George Pearson",
+   "type": "PERSON"
+  },
+  {
+   "text": "27 February 2003",
+   "type": "DATE"
+  },
+  {
+   "text": "Mr D. Walton",
+   "type": "PERSON"
+  },
+  {
+   "text": "27 April 2004",
+   "type": "DATE"
+  },
+  {
+   "text": "12 April 2006",
+   "type": "DATE"
+  },
+  {
+   "text": "1942",
+   "type": "DATE"
+  },
+  {
+   "text": "Birmingham",
+   "type": "LOCATION"
+  },
+  {
+   "text": "sixty three",
+   "type": "QUASI"
+  },
+  {
+   "text": "4 February 2002",
+   "type": "DATE"
+  },
+  {
+   "text": "2 October 2002",
+   "type": "DATE"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

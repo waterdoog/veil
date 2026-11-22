@@ -1,0 +1,152 @@
+{
+ "id": "u01",
+ "title": "ECHR case 001-84582 (TAB test, unseen)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 65723/01) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr John Goodwin (“the applicant”) on 12 December 2000.\n\nThe applicant was unrepresented. The United Kingdom Government (“the Government”) were represented by their Agent, Mr C. Whomersley of the Foreign and Commonwealth Office, London.\n\nThe applicant complained that the United Kingdom authorities’ refusal to grant him Widow’s Bereavement Allowance or equivalent constituted discrimination on grounds of sex contrary to Article 14 of the Convention in conjunction with Article 1 of Protocol No. 1.\n\nBy a partial decision of 4 December 2001 the Court decided to communicate this application. It also decided to join this application to other applications (nos. 60525/00, 60933/00, 60937/00, 60944/00, 61038/00, 61388/00, 61949/00, 62776/00 63388/00, 63464/00, 63469/00, 63470/00, 63473/00, 63474/00, 63584/00, 63645/00, 63701/00, 63702/00 and 64735/01).\n\nOn 26 August 2003, after obtaining the parties’ observations, the Court declared the application admissible in so far as the complaint concerned Widow’s Bereavement Allowance and declared the remainder of the application inadmissible.\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1943 and lives in Solihull.\n\nHis wife died on 23 March 1999. On 16 September 2000 the applicant made a claim to the Inland Revenue requesting an allowance equivalent to that received by a widow, namely Widow’s Bereavement Allowance (“WBA”), for the years 1998/99 and 1999/2000. On 29 September 2000 the Inland Revenue informed him that he was ineligible for WBA as he was not a woman. The applicant did not appeal further as he considered or was advised that such a remedy would be bound to fail since no such benefit was payable to widowers under United Kingdom law.",
+ "identifiers": [
+  {
+   "text": "65723/01",
+   "type": "ID"
+  },
+  {
+   "text": "United Kingdom of Great Britain and Northern Ireland",
+   "type": "ORG"
+  },
+  {
+   "text": "Mr John Goodwin",
+   "type": "PERSON"
+  },
+  {
+   "text": "12 December 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "Mr C. Whomersley",
+   "type": "PERSON"
+  },
+  {
+   "text": "Widow’s Bereavement Allowance",
+   "type": "QUASI"
+  },
+  {
+   "text": "4 December 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "60525/00",
+   "type": "ID"
+  },
+  {
+   "text": "60933/00",
+   "type": "ID"
+  },
+  {
+   "text": "60937/00",
+   "type": "ID"
+  },
+  {
+   "text": "60944/00",
+   "type": "ID"
+  },
+  {
+   "text": "61038/00",
+   "type": "ID"
+  },
+  {
+   "text": "61388/00",
+   "type": "ID"
+  },
+  {
+   "text": "61949/00",
+   "type": "ID"
+  },
+  {
+   "text": "62776/00 63388/00",
+   "type": "ID"
+  },
+  {
+   "text": "63464/00",
+   "type": "ID"
+  },
+  {
+   "text": "63469/00",
+   "type": "ID"
+  },
+  {
+   "text": "63470/00",
+   "type": "ID"
+  },
+  {
+   "text": "63473/00",
+   "type": "ID"
+  },
+  {
+   "text": "63474/00",
+   "type": "ID"
+  },
+  {
+   "text": "63584/00",
+   "type": "ID"
+  },
+  {
+   "text": "63645/00",
+   "type": "ID"
+  },
+  {
+   "text": "63701/00",
+   "type": "ID"
+  },
+  {
+   "text": "63702/00",
+   "type": "ID"
+  },
+  {
+   "text": "64735/01",
+   "type": "ID"
+  },
+  {
+   "text": "26 August 2003",
+   "type": "DATE"
+  },
+  {
+   "text": "1943",
+   "type": "DATE"
+  },
+  {
+   "text": "Solihull",
+   "type": "LOCATION"
+  },
+  {
+   "text": "23 March 1999",
+   "type": "DATE"
+  },
+  {
+   "text": "16 September 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "widow",
+   "type": "QUASI"
+  },
+  {
+   "text": "WBA",
+   "type": "QUASI"
+  },
+  {
+   "text": "years 1998/99",
+   "type": "DATE"
+  },
+  {
+   "text": "1999/2000",
+   "type": "DATE"
+  },
+  {
+   "text": "29 September 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "widowers",
+   "type": "QUASI"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

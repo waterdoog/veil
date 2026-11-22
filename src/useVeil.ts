@@ -8,7 +8,7 @@ import { extendAcronyms, extendNames, extendOrgs, findPatterns } from "./core/pa
 import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/types";
 import type { RuntimeConfig } from "./firebase";
 import { emptyStudy, releasable, uid, type Interview, type Study } from "./model";
-import { holdoutStudy, sampleStudy, tabStudy } from "./sample";
+import { evalStudy, holdoutStudy, sampleStudy, tabStudy } from "./sample";
 import { recordedStudy } from "./replay";
 import { getLocal, setLocal } from "./store/local";
 import { saveInterview, saveSynthesis } from "./store/cloud";
@@ -28,7 +28,11 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
   // Raw transcripts + codebook persist in IndexedDB only.
   useEffect(() => {
     getLocal<Study>(KEY).then((s) => {
-      if (s) setStudy(s);
+      // Evaluation sets for benchmarking: ?load=tab-dev / ?load=tab-test2 (replaces the saved study).
+      const name = new URLSearchParams(location.search).get("load");
+      const ev = name ? evalStudy(name, s?.policy ?? cfg.defaultPolicy) : null;
+      if (ev) setStudy(ev);
+      else if (s) setStudy(s);
       setLoaded(true);
     });
   }, []);
@@ -362,6 +366,10 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       loadSample: () => setStudy(sampleStudy(studyRef.current.policy)),
       loadHoldout: () => setStudy(holdoutStudy(studyRef.current.policy)),
       loadTab: () => setStudy(tabStudy(studyRef.current.policy)),
+      loadEval: (name: string) => {
+        const st = evalStudy(name, studyRef.current.policy);
+        if (st) setStudy(st);
+      },
       loadReplay: () => {
         const r = recordedStudy();
         if (!r) return;

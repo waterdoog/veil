@@ -1,0 +1,195 @@
+{
+ "id": "s-hr",
+ "title": "HR investigation file — grievance and capability review",
+ "transcript": "CONFIDENTIAL — INTERNAL HR INVESTIGATION FILE\n\nCase Reference: HR-INV-2024-089\nOrganisation: Vanguard Freight & Logistics Ltd\nSite: Brackley Distribution Hub, Unit 14, Silverstone Park, Northamptonshire, NN12 8GX\nEmployee Name: Callum Henderson\nEmployee Number: VFL-44912\nJob Title / Department: Night Shift Warehouse Operative, Outbound Dispatch\nContinuous Service Start Date: 12 March 2019\nLine Manager (Subject of Grievance): Gareth Vance, Shift Operations Manager\nInvestigating Officer: Priya Sharma, Senior HR Adviser\nDate Grievance Submitted: 14 October 2024\nDate Outcome Issued: 04 November 2024\n\n1. BACKGROUND AND SCOPE OF INVESTIGATION\nThis file documents the combined investigation into a formal grievance raised by Callum Henderson on 14 October 2024 and a concurrent Stage 1 Capability Review initiated on 09 October 2024. Mr Henderson alleges that his line manager, Gareth Vance, subjected him to unfair scrutiny, made insensitive remarks regarding his health, and failed to consider reasonable adjustments following a period of sickness absence in September 2024. Mr Henderson has a diagnosed long-term condition, ulcerative colitis, and is prescribed mesalazine to manage symptoms. Due to the absence, his £450 quarterly attendance bonus was withheld, which Mr Henderson contends is discriminatory. An occupational health referral was subsequently completed with Midlands Occupational Health Services (patient NHS number 999 482 1104).\n\n2. INVESTIGATION MEETING NOTES\n\n2.1 Meeting with Callum Henderson (21 October 2024, Meeting Room B)\nPresent: Callum Henderson, Keith Holloway (National Transport Workers Union representative), and Priya Sharma.\n\nMr Henderson stated that following a severe flare-up of his ulcerative colitis in September 2024, he returned to work experiencing chronic fatigue. He reported that on 08 October 2024, while working across Bays 4 to 7, he needed to step away twice for unscheduled restroom breaks. Mr Henderson recalled: \"Gareth pulled me aside by the loading dock and said, 'If you can't handle the pace of the night shift, Callum, maybe you shouldn't be here.' He said it loud enough for the forklift drivers to hear. I felt completely humiliated.\" He added that he had asked for a temporary reallocation away from heavy pallet-wrapping, which was refused. Keith Holloway noted that Mr Henderson had a clean disciplinary record since 12 March 2019 and argued that the Stage 1 Capability Review was premature without medical input.\n\n2.2 Meeting with Gareth Vance (21 October 2024, Meeting Room B)\nPresent: Gareth Vance and Priya Sharma.\n\nMr Vance denied intentionally harassing Mr Henderson. He stated that Outbound Dispatch was under significant pressure to meet dispatch targets during September 2024 and October 2024. When asked about the incident on 08 October 2024, Mr Vance replied: \"I admit I might have spoken out of turn. We were two pallets behind schedule and I was frustrated. I didn't realise ulcerative colitis was something that required formal adjustments—I just thought it was a stomach bug that kept flaring up.\" Mr Vance confirmed he had triggered the Stage 1 Capability Review automatically after Mr Henderson hit the standard absence threshold, without consulting HR.\n\n3. WITNESS STATEMENTS (TAKEN 23 OCTOBER 2024)\n\n3.1 Statement of Danielle O'Connor (Forklift Team Leader)\n\"I was operating near Bays 4 to 7 on the night of 08 October 2024 when I saw Gareth speaking sharply to Callum. Callum looked visibly upset. I distinctly heard Gareth tell him he was letting the whole team down and that everyone else manages to hold it until the scheduled break. It felt completely out of order because Callum is normally one of the most reliable workers on the floor.\"\n\n3.2 Statement of Tariq Mahmood (Goods-In Coordinator)\n\"Back in late September 2024, I was in the supervisor's office dropping off manifests when Callum came in to ask if he could switch to lighter scanning duties for a week due to his chronic fatigue. Callum looked exhausted, and Gareth just laughed it off and said we're all tired on nights. He didn't write anything down or offer to check with HR.\"\n\n4. OCCUPATIONAL HEALTH AND CAPABILITY REVIEW FINDINGS\nA report received from Dr. Helen Kemp at Midlands Occupational Health Services on 28 October 2024 confirms that Mr Henderson's ulcerative colitis is a chronic impairment likely to meet the definition of a disability under the Equality Act 2010. Dr. Kemp advised that Mr Henderson is fit to remain in his role as a Night Shift Warehouse Operative subject to reasonable adjustments: unrestricted restroom access, temporary exemption from heavy manual handling during flare-ups, and an adjusted sickness absence trigger point.\n\n5. OUTCOME AND NEXT STEPS\nBased on the documentary evidence, occupational health advice, and corroborated witness statements from Danielle O'Connor and Tariq Mahmood, the following decisions have been reached on 04 November 2024:\n\n- Grievance Outcome: Upheld. Gareth Vance's comments on 08 October 2024 were inappropriate and failed to demonstrate reasonable managerial support. Mr Vance will undergo formal management coaching and mandatory Equality and Diversity training.\n- Capability Review: The Stage 1 Capability Review warning is formally rescinded. All disability-related absences from September 2024 will be discounted from standard Bradford Factor calculations. The withheld £450 quarterly attendance bonus will be reinstated in the November payroll.\n- Reasonable Adjustments: All recommendations from Dr. Helen Kemp will be implemented immediately, with a formal support review scheduled for 02 December 2024.\n- Right of Appeal: Mr Henderson has the right to appeal this outcome in writing to the HR Director by 18 November 2024.\n\n6. CONTACT DETAILS\nInvestigating Officer: Priya Sharma, Senior HR Adviser\nEmail: priya.sharma@vanguardfreight.example.com | Mobile: 07700 900412\n\nEmployee Contact on File: Callum Henderson\nEmail: callum.henderson@vanguardfreight.example.com | Mobile: 07700 900885",
+ "identifiers": [
+  {
+   "text": "HR-INV-2024-089",
+   "type": "ID"
+  },
+  {
+   "text": "Vanguard Freight & Logistics Ltd",
+   "type": "ORG"
+  },
+  {
+   "text": "Brackley Distribution Hub, Unit 14, Silverstone Park, Northamptonshire, NN12 8GX",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Callum Henderson",
+   "type": "PERSON"
+  },
+  {
+   "text": "VFL-44912",
+   "type": "ID"
+  },
+  {
+   "text": "Night Shift Warehouse Operative",
+   "type": "QUASI"
+  },
+  {
+   "text": "Outbound Dispatch",
+   "type": "ORG"
+  },
+  {
+   "text": "12 March 2019",
+   "type": "DATE"
+  },
+  {
+   "text": "Gareth Vance",
+   "type": "PERSON"
+  },
+  {
+   "text": "Shift Operations Manager",
+   "type": "QUASI"
+  },
+  {
+   "text": "Priya Sharma",
+   "type": "PERSON"
+  },
+  {
+   "text": "Senior HR Adviser",
+   "type": "QUASI"
+  },
+  {
+   "text": "14 October 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "04 November 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "09 October 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Mr Henderson",
+   "type": "PERSON"
+  },
+  {
+   "text": "September 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "ulcerative colitis",
+   "type": "HEALTH"
+  },
+  {
+   "text": "mesalazine",
+   "type": "HEALTH"
+  },
+  {
+   "text": "£450",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "Midlands Occupational Health Services",
+   "type": "ORG"
+  },
+  {
+   "text": "999 482 1104",
+   "type": "ID"
+  },
+  {
+   "text": "21 October 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Meeting Room B",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Keith Holloway",
+   "type": "PERSON"
+  },
+  {
+   "text": "National Transport Workers Union",
+   "type": "ORG"
+  },
+  {
+   "text": "chronic fatigue",
+   "type": "HEALTH"
+  },
+  {
+   "text": "08 October 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Bays 4 to 7",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Gareth",
+   "type": "PERSON"
+  },
+  {
+   "text": "Callum",
+   "type": "PERSON"
+  },
+  {
+   "text": "Mr Vance",
+   "type": "PERSON"
+  },
+  {
+   "text": "October 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "23 OCTOBER 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Danielle O'Connor",
+   "type": "PERSON"
+  },
+  {
+   "text": "Forklift Team Leader",
+   "type": "QUASI"
+  },
+  {
+   "text": "Tariq Mahmood",
+   "type": "PERSON"
+  },
+  {
+   "text": "Goods-In Coordinator",
+   "type": "QUASI"
+  },
+  {
+   "text": "Dr. Helen Kemp",
+   "type": "PERSON"
+  },
+  {
+   "text": "28 October 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Dr. Kemp",
+   "type": "PERSON"
+  },
+  {
+   "text": "02 December 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "18 November 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "priya.sharma@vanguardfreight.example.com",
+   "type": "CONTACT"
+  },
+  {
+   "text": "07700 900412",
+   "type": "CONTACT"
+  },
+  {
+   "text": "callum.henderson@vanguardfreight.example.com",
+   "type": "CONTACT"
+  },
+  {
+   "text": "07700 900885",
+   "type": "CONTACT"
+  }
+ ]
+}

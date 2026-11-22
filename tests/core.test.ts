@@ -345,3 +345,11 @@ describe("generic detectors from the TAB first look", () => {
     expect(findPatterns("We met on 12/03/2024.").map((x) => x.text)).not.toContain("12/03");
   });
 });
+
+describe("place names, birth years, marital status", () => {
+  it("finds counties, birth years and marital status but not recent years", () => {
+    const f = findPatterns("A widow born in 1951 in Staffordshire, she moved to Belfast in 2019.").map((x) => `${x.type}:${x.text}`);
+    expect(f).toEqual(expect.arrayContaining(["QUASI:widow", "DATE:born in 1951", "LOCATION:Staffordshire", "LOCATION:Belfast"]));
+    expect(f.join(" ")).not.toContain("2019");
+  });
+});

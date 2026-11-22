@@ -5,6 +5,37 @@ import type { Entity, EntityType } from "./types";
  * They catch the identifiers that have a fixed shape (emails, phone numbers, postcodes,
  * reference numbers), so the model's job is the hard part: names, places, context.
  */
+
+const PLACES = [
+  // UK nations, regions, counties, larger towns and cities
+  "Scotland", "Wales", "Northern Ireland",
+  "Greater London", "London", "Birmingham", "Manchester", "Liverpool", "Leeds", "Sheffield", "Bristol", "Newcastle", "Nottingham",
+  "Leicester", "Coventry", "Bradford", "Cardiff", "Swansea", "Newport", "Edinburgh", "Glasgow", "Aberdeen", "Dundee", "Inverness",
+  "Belfast", "Derry", "Londonderry", "Oxford", "Cambridge", "Brighton", "Southampton", "Portsmouth", "Plymouth", "Exeter", "York",
+  "Hull", "Stoke-on-Trent", "Wolverhampton", "Derby", "Reading", "Milton Keynes", "Norwich", "Ipswich", "Bath", "Cheltenham",
+  "Bedfordshire", "Berkshire", "Buckinghamshire", "Cambridgeshire", "Cheshire", "Cornwall", "Cumbria", "Derbyshire", "Devon", "Dorset",
+  "Durham", "Essex", "Gloucestershire", "Hampshire", "Herefordshire", "Hertfordshire", "Kent", "Lancashire", "Leicestershire",
+  "Lincolnshire", "Merseyside", "Norfolk", "Northamptonshire", "Northumberland", "Nottinghamshire", "Oxfordshire", "Rutland",
+  "Shropshire", "Somerset", "Staffordshire", "Suffolk", "Surrey", "Sussex", "East Sussex", "West Sussex", "Tyne and Wear",
+  "Warwickshire", "West Midlands", "Wiltshire", "Worcestershire", "Yorkshire", "North Yorkshire", "South Yorkshire", "West Yorkshire",
+  "East Riding", "Isle of Wight", "Wirral", "Teesside", "Lothian", "Fife", "Highlands", "Ayrshire", "Lanarkshire", "Renfrewshire",
+  "Gwynedd", "Powys", "Pembrokeshire", "Anglesey", "Antrim", "Armagh", "Down", "Fermanagh", "Tyrone", "County Derry",
+  // Ireland
+  "Dublin", "Cork", "Galway", "Limerick", "Waterford", "Kilkenny", "Wexford", "Wicklow", "Kerry", "Donegal", "Mayo", "Sligo",
+  // US states
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii",
+  "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
+  "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
+  "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
+  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming",
+  // Countries (a selection)
+  "France", "Germany", "Italy", "Spain", "Portugal", "Poland", "Romania", "Ireland", "Netherlands", "Belgium", "Sweden", "Norway",
+  "Denmark", "Finland", "Greece", "Turkey", "Russia", "Ukraine", "India", "Pakistan", "Bangladesh", "China", "Japan", "Nigeria",
+  "Ghana", "Kenya", "Somalia", "Ethiopia", "Eritrea", "Sudan", "Syria", "Iraq", "Iran", "Afghanistan", "Jamaica", "Canada",
+  "Australia", "New Zealand", "Mexico", "Brazil", "Philippines", "Vietnam", "South Africa", "Zimbabwe", "Hong Kong",
+];
+const GAZETTEER = new RegExp(`\\b(?:${[...PLACES].sort((a, b) => b.length - a.length).map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`, "g");
+
 const PATTERNS: { type: EntityType; re: RegExp }[] = [
   { type: "CONTACT", re: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi },
   // UK mobiles and landlines, with or without +44 and spaces/dashes.
@@ -26,6 +57,15 @@ const PATTERNS: { type: EntityType; re: RegExp }[] = [
   { type: "ID", re: /\b\d{3}[\s-]\d{3}[\s-]\d{4}\b/g },
   { type: "ID", re: /\b(?=[A-Z0-9-]*\d)[A-Z]{1,4}-?\d{5,}\b/g },
   { type: "ID", re: /\b\d{6,}\b/g },
+  // Years that place a person: "born in 1951", "since 1996", "in May 2000", tax years "1995/6".
+  // (Recent years after "in"/"since" are usually research context in interviews, so only birth years and 19xx count.)
+  { type: "DATE", re: /\bborn\s+(?:in\s+)?(?:(?:early|mid|late)[- ])?(?:18|19|20)\d{2}\b|\b(?:in|since|until|till|from|of|during)\s+(?:(?:early|mid|late)[- ])?19\d{2}\b/gi },
+  { type: "DATE", re: /\bMay\s+(?:18|19|20)\d{2}\b/g },
+  { type: "DATE", re: /\b(?:19|20)\d{2}\/\d{1,2}\b/g },
+  // Marital status — a quasi-identifier.
+  { type: "QUASI", re: /\b(?:widow|widows|widower|widowers|widowed|divorcee|divorcees)\b/gi },
+  // Named places from a gazetteer (UK & Ireland regions, counties, larger towns; US states; countries).
+  { type: "LOCATION", re: GAZETTEER },
   // Case / application / file numbers: "27961/02", "2019/1234".
   { type: "ID", re: /\b\d{3,6}\/\d{2,4}\b/g },
   // Nationality — a quasi-identifier in small samples.

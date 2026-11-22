@@ -1,0 +1,108 @@
+{
+ "id": "u05",
+ "title": "ECHR case 001-92425 (TAB test, unseen)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 2895/07) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr John Blackgrove (“the applicant”), on 21 December 2006.\n\nThe United Kingdom Government (“the Government”) were represented by their Agent, Mr C. Whomersley of the Foreign and Commonwealth Office, London.\n\nBy a decision of 4 September 2008 the President of the Fourth Section of the Court decided to communicate the application. Subsequently, under the provisions of Article 29 § 3 of the Convention, it was decided to examine the merits of the application at the same time as its admissibility.\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1949 and lives in Kent.\n\nThe applicant and his wife had two children, born in 1982 and 1987. The applicant’s wife died on 2 June 1999.\n\nOn 5 October 2000 the applicant applied to the Benefits Agency for the payment of social security benefits. He applied for benefits equivalent to those which a widow, whose husband had died in similar circumstances to those of his wife, would have been entitled, namely a Widow’s Payment (“Wpt”) and a Widowed Mother’s Allowance (“WMA”), payable under the Social Security and Benefits Act 1992 (“the 1992 Act”). On 17 October 2000 his application was rejected as these benefits were only available to women. This decision was reconsidered without alteration on 25 October 2000.\n\nThe applicant appealed to the Social Security Tribunal on 10 July 2001 and again his claim was rejected. In November 2001 the applicant applied for leave to appeal to the Appeal Commissioner. Eventually permission was granted but his appeal was again rejected on 28 May 2004. The applicant again appealed to the Commissioner who rejected the applicant’s appeal on 13 December 2006.\n\nFinally, the applicant submitted an appeal to the Court of Appeal (Civil Division), which was refused on 16 March 2007.\n\nAt the time of his claim in 2000 the applicant was in receipt of child benefit.",
+ "identifiers": [
+  {
+   "text": "2895/07",
+   "type": "ID"
+  },
+  {
+   "text": "British",
+   "type": "QUASI"
+  },
+  {
+   "text": "Mr John Blackgrove",
+   "type": "PERSON"
+  },
+  {
+   "text": "21 December 2006",
+   "type": "DATE"
+  },
+  {
+   "text": "Mr C. Whomersley",
+   "type": "PERSON"
+  },
+  {
+   "text": "4 September 2008",
+   "type": "DATE"
+  },
+  {
+   "text": "1949",
+   "type": "DATE"
+  },
+  {
+   "text": "Kent",
+   "type": "LOCATION"
+  },
+  {
+   "text": "two children",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "1982",
+   "type": "DATE"
+  },
+  {
+   "text": "1987",
+   "type": "DATE"
+  },
+  {
+   "text": "2 June 1999",
+   "type": "DATE"
+  },
+  {
+   "text": "5 October 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "Widow’s Payment",
+   "type": "QUASI"
+  },
+  {
+   "text": "Wpt",
+   "type": "QUASI"
+  },
+  {
+   "text": "Widowed Mother’s Allowance",
+   "type": "QUASI"
+  },
+  {
+   "text": "WMA",
+   "type": "QUASI"
+  },
+  {
+   "text": "17 October 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "25 October 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "10 July 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "November 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "28 May 2004",
+   "type": "DATE"
+  },
+  {
+   "text": "13 December 2006",
+   "type": "DATE"
+  },
+  {
+   "text": "16 March 2007",
+   "type": "DATE"
+  },
+  {
+   "text": "2000",
+   "type": "DATE"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

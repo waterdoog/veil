@@ -1,0 +1,80 @@
+{
+ "id": "d11",
+ "title": "ECHR case 001-60492 (TAB dev split)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 37471/97) against the United Kingdom of Great Britain and Northern Ireland lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by an Irish national, William Faulkner (“the applicant”), on 8 August 1996.\n\nThe applicant, who had been granted legal aid, was represented by Mr P. Macdermott, a lawyer practising in Belfast. The United Kingdom Government (“the Government”) were represented by their Agent, Mr H. Llewellyn, Foreign and Commonwealth Office.\n\nThe applicant alleged, in particular, that the prison authorities had interfered with a letter from him to the Scottish Minister of State.\n\nThe application was transmitted to the Court on 1 November 1998, when Protocol No. 11 to the Convention came into force (Article 5 § 2 of Protocol No. 11). It was originally allocated to the Third Section of the Court, which declared it partly admissible on 18 September 2001.\n\nOn 1 November 2001 the Court changed the composition of its Sections (Rule 25 § 1). The application was allocated to the new Second Section of the Court. Within that Section, the Chamber that would consider the case (Article 27 § 1 of the Convention) was constituted as provided in Rule 26 § 1 of the Rules of Court. The Chamber decided, after consulting the parties, that no hearing on the merits was required (Rule 59 § 2 in fine).\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant, who was born in 1947, was released from detention in February 1999. Prior to that he was detained at HMP Magilligan, County Derry, Northern Ireland, on temporary transfer from a Scottish prison while serving a seven year sentence for a drug offence.\n\nOn 1 July 1996 a sealed letter sent by him to the Scottish Minister of State was returned to him by the prison authorities. Following the Court’s admissibility decision, the Government informed the Court that the Prison Service was unable to explain why the letter had not been sent, since there was nothing untoward in its content.",
+ "identifiers": [
+  {
+   "text": "37471/97",
+   "type": "ID"
+  },
+  {
+   "text": "Irish",
+   "type": "QUASI"
+  },
+  {
+   "text": "William Faulkner",
+   "type": "PERSON"
+  },
+  {
+   "text": "8 August 1996",
+   "type": "DATE"
+  },
+  {
+   "text": "Mr P. Macdermott",
+   "type": "PERSON"
+  },
+  {
+   "text": "Belfast",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Mr H. Llewellyn",
+   "type": "PERSON"
+  },
+  {
+   "text": "Scottish Minister of State",
+   "type": "PERSON"
+  },
+  {
+   "text": "1 November 1998",
+   "type": "DATE"
+  },
+  {
+   "text": "18 September 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "1947",
+   "type": "DATE"
+  },
+  {
+   "text": "February 1999",
+   "type": "DATE"
+  },
+  {
+   "text": "HMP Magilligan",
+   "type": "ORG"
+  },
+  {
+   "text": "County Derry, Northern Ireland",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Scottish prison",
+   "type": "QUASI"
+  },
+  {
+   "text": "seven year",
+   "type": "DATE"
+  },
+  {
+   "text": "drug offence",
+   "type": "QUASI"
+  },
+  {
+   "text": "1 July 1996",
+   "type": "DATE"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}
