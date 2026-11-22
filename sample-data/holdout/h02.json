@@ -1,0 +1,167 @@
+{
+ "id": "h02",
+ "title": "Small-business bookkeeping study",
+ "transcript": "[00:00:08] INT: Hi there, thanks so much for making time to chat with me today. Before we jump in, I just want to confirm that you're okay with me recording this session for our internal research notes?\n[00:00:19] P: Yeah, totally fine. Go right ahead.\n[00:00:23] INT: Great. So to kick things off, could you tell me a little bit about yourself and your business?\n[00:00:31] P: Sure. My name is Derrick Holloway. I'm 52 years old, and I own and operate a food truck here in Austin, Texas called Holloway's Smoked Brisket & Tacos. Most of the regulars just call it Holloway's, and on our vendor paperwork I usually abbreviate it to HSBT because the full name never fits in those little boxes. We operate out of a converted 1988 Grumman step van. Our main thing is smoked jackfruit and brisket fusion tacos—sounds a little wild, I know, but it works really well in this town.\n[00:01:12] INT: That sounds amazing, honestly. Where are you usually parked?\n[00:01:17] P: We have a permanent spot in the East Cesar Chavez neighborhood, right at 2418 Holly Street. We share a little gravel lot with a coffee trailer and a shaved ice stand. It's a good setup, lots of foot traffic on the weekends.\n[00:01:35] INT: And is it just you running Holloway's, or do you have a team?\n[00:01:41] P: I've got one full-time guy, Trevor Vance, who handles prep and works the flat-top with me. Trevor's been with me about two years now. And then my wife, Marisol Holloway, she pitches in on Saturdays and Sundays taking orders at the window when the line gets crazy. Marisol has a regular nine-to-five during the week, so I try not to drag her into the weekday grind if I can help it.\n[00:02:10] INT: Got it. So today we're talking about how you handle your bookkeeping and finances. What are you currently using to track everything?\n[00:02:20] P: Right now I'm using LedgerSpark. I switched over to it on March 14, 2024, right after I had a pretty miserable tax season using spreadsheets. I pay $48.50 a month for their small business tier. Overall, it's been better than Excel, don't get me wrong, but there are days where I want to throw my tablet out the serving window.\n[00:02:48] INT: Walk me through a typical week of using LedgerSpark. When do you usually open it, and what are you doing in there?\n[00:02:57] P: Usually I'm opening it late at night, like ten or eleven o'clock after we've scrubbed down the truck and I'm sitting at the kitchen table. Every day I've got to check that our point-of-sale deposits came through. On a decent month we're bringing in around $14,200 in gross sales, so there's a lot of little transactions. Then I have to snap photos of paper receipts—propane refills, paper boats, napkins, and our big meat and produce orders from Lonestar Provisioning Co.\n[00:03:35] INT: How does the receipt scanning work for you?\n[00:03:40] P: It's hit or miss. The camera picks up the total maybe seventy percent of the time, but it constantly misreads the vendor name or the date. So then I have to go in and manually type it all out on my phone. And honestly, that's a real pain for me because I've got pretty bad carpal tunnel syndrome in my right wrist from twenty years of chopping brisket and lifting heavy coolers. Tapping around on tiny little form fields at eleven at night makes my hand throb.\n[00:04:14] INT: Oh, I'm sorry to hear that. That's really important context for us. Do you ever use the desktop version instead?\n[00:04:22] P: I try to on Sundays, yeah. Because on the phone, if you accidentally swipe left, it discards the whole draft receipt. I can't tell you how many times I've lost a ten-line invoice from Lonestar Provisioning Co. because my thumb grazed the edge of the screen. On the laptop it's a little better, though the layout is completely different from the mobile app, so I always feel like I'm relearning where the buttons are.\n[00:04:51] INT: Can you tell me about a recent time when LedgerSpark really frustrated you or caused a problem?\n[00:05:00] P: Oh, definitely. Back on October 3, 2025, we did a huge catering gig for a tech mixer up in Mueller. It was a $3,600 invoice, which is a big chunk of change for us. The client paid via bank transfer, and I marked the invoice as paid in LedgerSpark. Well, two days later, when the bank feed synced, the app imported the deposit as a brand new, separate income entry instead of matching it to the invoice. Suddenly my dashboard showed I made double that money.\n[00:05:38] INT: What did you do when you noticed that?\n[00:05:42] P: I tried to merge them myself, couldn't figure out how without deleting the whole invoice, and I was terrified of messing up my tax records. So I called their support line. I had to sit on hold for forty minutes, give them my account number, which is LS-90482-TX, and verify my email, derrick.holloway@example.com, and my cell, 512-555-0183. By the time the rep fixed it, I was so wound up I couldn't sleep. And I'm supposed to be watching my stress levels. I have Type 2 diabetes, and my doctor, Dr. Samuel Okafor, is always lecturing me about cortisol spikes and getting enough rest. I take metformin every morning, I try to eat right, and Dr. Okafor keeps telling me, \"Derrick, if you're up till midnight fighting with your computer, your blood sugar's gonna pay for it.\" He's right, too.\n[00:06:42] INT: That sounds genuinely exhausting. You mentioned being worried about messing up your tax records. Do you work with an accountant or bookkeeper?\n[00:06:51] P: I do, yeah. I've got an accountant here in Austin, Mrs. Patricia Lindqvist. She's fantastic, very sharp, doesn't sugarcoat anything. I give her accountant-level access to LedgerSpark so she can pull what she needs for quarterly filings and the big April 15 deadline. Every week I try to transfer $850 into a separate tax savings account so I don't get blindsided.\n[00:07:22] INT: How does Mrs. Lindqvist like working with LedgerSpark?\n[00:07:27] P: She tolerates it. Her biggest complaint is how the app auto-categorizes stuff. Like, it'll see a charge at a hardware store where I bought a replacement latch for the truck door, and it'll put it under \"Office Supplies\" instead of \"Vehicle Maintenance.\" Then Mrs. Lindqvist has to send me a long email asking what I bought, and half the time I can't remember because it was three weeks ago. She told me last month that if we're aiming to clear $125,000 in net revenue this year, my books need to be cleaner.\n[00:08:05] INT: Do you handle payroll through LedgerSpark as well?\n[00:08:10] P: I do, just for Vance. I don't even pay myself through the payroll module yet—I just take an owner's draw, which Mrs. Lindqvist helped me set up under our federal EIN, 94-8821043. Paying Trevor is mostly smooth, except when he works overtime on a festival weekend. The app doesn't automatically calculate time-and-a-half unless I manually toggle a setting buried three menus deep. One time I forgot, and Trevor's paycheck was short. I felt terrible about that. I ended up writing him a paper check to make up the difference, and then of course LedgerSpark didn't know how to categorize the paper check.\n[00:08:55] INT: That's a really clear example of how a small UI friction turns into a real-world headache. When you think about the time you spend on bookkeeping—how does it fit into the rest of your life?\n[00:09:08] P: Honestly, it eats into the only downtime I have. When I'm not at 2418 Holly Street sweating over a smoker, I just want to decompress. My big hobby is restoring vintage 1970s pinball machines in my garage. I love soldering circuit boards, repainting the playfields, getting those old mechanical relays clicking again. Marisol laughs at me because I'll spend four hours happily troubleshooting a broken bumper, but twenty minutes in LedgerSpark puts me in a foul mood. It's because with a pinball machine, if something's broken, you can see why. With this app, it feels like a black box.\n[00:09:53] INT: That's a great analogy. If you could wave a magic wand and change one or two things about LedgerSpark to make it feel less like a black box, what would you change?\n[00:10:04] P: First, make the mobile app friendlier for people with big hands or sore wrists. Bigger buttons, fewer tiny dropdowns, and let me use voice-to-text to add notes to a receipt right when I get it. If I could just snap a picture and say \"propane tank refill for HSBT\" and have it categorize it, that would save me hours. Second, when the bank feed sees a deposit that matches an open invoice amount—like that $3,600 from Mueller—just ask me in plain English: \"Hey Derrick, is this the payment for Invoice 104?\" Don't silently duplicate it and leave me to figure out why my numbers are crazy.\n[00:10:50] INT: Plain English confirmation prompts and better mobile ergonomics—that's super actionable feedback. Is there anything else about your experience with bookkeeping tools that we haven't covered today?\n[00:11:03] P: Just that small business owners like me aren't accountants. We're cooks, we're mechanics, we're customer service reps. We just want the software to have our back so we can close the laptop and go live our lives.\n[00:11:20] INT: Well said. Derrick, thank you so much for your time and for being so candid today. I'll send over your thank-you gift card to derrick.holloway@example.com later this afternoon.\n[00:11:32] P: Sounds great, appreciate it. Have a good one.",
+ "identifiers": [
+  {
+   "text": "Derrick Holloway",
+   "type": "PERSON"
+  },
+  {
+   "text": "52 years old",
+   "type": "QUASI"
+  },
+  {
+   "text": "Austin, Texas",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Holloway's Smoked Brisket & Tacos",
+   "type": "ORG"
+  },
+  {
+   "text": "Holloway's",
+   "type": "ORG"
+  },
+  {
+   "text": "HSBT",
+   "type": "ORG"
+  },
+  {
+   "text": "converted 1988 Grumman step van",
+   "type": "QUASI"
+  },
+  {
+   "text": "smoked jackfruit and brisket fusion tacos",
+   "type": "QUASI"
+  },
+  {
+   "text": "East Cesar Chavez",
+   "type": "LOCATION"
+  },
+  {
+   "text": "2418 Holly Street",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Trevor Vance",
+   "type": "PERSON"
+  },
+  {
+   "text": "Trevor",
+   "type": "PERSON"
+  },
+  {
+   "text": "Marisol Holloway",
+   "type": "PERSON"
+  },
+  {
+   "text": "Marisol",
+   "type": "PERSON"
+  },
+  {
+   "text": "LedgerSpark",
+   "type": "ORG"
+  },
+  {
+   "text": "March 14, 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "$48.50",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "$14,200",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "Lonestar Provisioning Co.",
+   "type": "ORG"
+  },
+  {
+   "text": "carpal tunnel syndrome",
+   "type": "HEALTH"
+  },
+  {
+   "text": "October 3, 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "Mueller",
+   "type": "LOCATION"
+  },
+  {
+   "text": "$3,600",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "LS-90482-TX",
+   "type": "ID"
+  },
+  {
+   "text": "derrick.holloway@example.com",
+   "type": "CONTACT"
+  },
+  {
+   "text": "512-555-0183",
+   "type": "CONTACT"
+  },
+  {
+   "text": "Type 2 diabetes",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Dr. Samuel Okafor",
+   "type": "PERSON"
+  },
+  {
+   "text": "metformin",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Dr. Okafor",
+   "type": "PERSON"
+  },
+  {
+   "text": "Derrick",
+   "type": "PERSON"
+  },
+  {
+   "text": "Austin",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Mrs. Patricia Lindqvist",
+   "type": "PERSON"
+  },
+  {
+   "text": "April 15",
+   "type": "DATE"
+  },
+  {
+   "text": "$850",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "Mrs. Lindqvist",
+   "type": "PERSON"
+  },
+  {
+   "text": "$125,000",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "Vance",
+   "type": "PERSON"
+  },
+  {
+   "text": "94-8821043",
+   "type": "ID"
+  },
+  {
+   "text": "restoring vintage 1970s pinball machines",
+   "type": "QUASI"
+  }
+ ]
+}

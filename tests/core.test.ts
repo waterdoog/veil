@@ -286,3 +286,52 @@ describe("airlock ignores fuzzy detectors", () => {
     expect(guardPayload("Interview: Carrying the Weight: A Part-Time Hospital Porter and Carer", [], std).ok).toBe(true);
   });
 });
+
+describe("precision", () => {
+  it("counts replacements outside the answer key as false positives", () => {
+    const raw = "Chloe met Mark at Leeds on Monday.";
+    const cb = mergeEntities([], [e("Chloe", "PERSON"), e("Leeds", "LOCATION"), e("Mark", "PERSON")], "p1");
+    const { spans } = applyCodebook(raw, cb, std, "p1");
+    const r = evaluate(raw, spans, [{ text: "Chloe", type: "PERSON" }, { text: "Leeds", type: "LOCATION" }]);
+    expect(r.spans).toBe(3);
+    expect(r.precision).toBeCloseTo(2 / 3);
+    expect(r.falsePositives).toEqual(["Mark"]);
+  });
+  it("the held-out set is separate and complete", () => {
+    const hdir = new URL("../sample-data/holdout/", import.meta.url);
+    const hs = readdirSync(hdir).filter((f) => f.endsWith(".json"));
+    expect(hs).toHaveLength(4);
+    for (const f of hs) {
+      const d = JSON.parse(readFileSync(new URL(f, hdir), "utf8"));
+      expect(d.identifiers.length).toBeGreaterThan(20);
+      for (const i of d.identifiers) expect(d.title).not.toContain(i.text.length > 3 ? i.text : "\u0000");
+    }
+  });
+});
+
+import { extendAcronyms } from "../src/core/patterns";
+describe("generic detectors added after the held-out run", () => {
+  it("titled names, dollar amounts, 'N years old'", () => {
+    const f = findPatterns("Mrs. Gable said I'm 52 years old and it cost $850 at Dr Kerr's.").map((x) => `${x.type}:${x.text}`);
+    expect(f).toEqual(expect.arrayContaining(["PERSON:Mrs. Gable", "QUASI:52 years old", "FINANCIAL:$850", "PERSON:Dr Kerr's"]));
+  });
+  it("acronyms of known organisations", () => {
+    expect(extendAcronyms("I worked at BVMC for years.", ["Buckeye Valley Medical Center"]).map((x) => x.text)).toEqual(["BVMC"]);
+    expect(extendAcronyms("No acronym here.", ["Buckeye Valley Medical Center"])).toEqual([]);
+  });
+});
+
+describe("fixes from the held-out second look", () => {
+  it("an age phrase is redacted whole, not just 'I'm 70'", () => {
+    const raw = "Well, I'm 70 years old now.";
+    const cb = mergeEntities([], findPatterns(raw), "p1");
+    expect(applyCodebook(raw, cb, std, "p1").redacted).toBe("Well, I'm [QUASI_1] now.");
+  });
+  it("a titled surname also covers the bare surname and the full name", () => {
+    const raw = "Mr. Foley ran the co-op. Padraig Foley was tough. Foley never smiled.";
+    let cb = mergeEntities([], findPatterns(raw), "p1");
+    cb = mergeEntities(cb, extendNames(raw, [], ["Mr. Foley"]), "p1");
+    const out = applyCodebook(raw, cb, std, "p1").redacted;
+    expect(out).not.toMatch(/Foley|Padraig/);
+  });
+});

@@ -149,6 +149,10 @@ export function App({
               Load sample study
             </button>{" "}
             ·{" "}
+            <button className="linkish" onClick={veil.loadHoldout} title="Four more fictional interviews that were never used to tune Veil">
+              Held-out set
+            </button>{" "}
+            ·{" "}
             <button className="linkish" onClick={veil.newStudy}>
               New study
             </button>

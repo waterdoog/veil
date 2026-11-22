@@ -4,11 +4,11 @@ import { analysePrompt, memoPrompt, synthPrompt } from "./ai/prompts";
 import { guardPayload, guardSections, sha256, type GuardResult, type LedgerEntry, type Purpose } from "./core/airlock";
 import { chunkTranscript } from "./core/chunk";
 import { applyCodebook, mergeEntities, mergeTokens, norm } from "./core/codebook";
-import { extendNames, extendOrgs, findPatterns } from "./core/patterns";
+import { extendAcronyms, extendNames, extendOrgs, findPatterns } from "./core/patterns";
 import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/types";
 import type { RuntimeConfig } from "./firebase";
 import { emptyStudy, releasable, uid, type Interview, type Study } from "./model";
-import { sampleStudy } from "./sample";
+import { holdoutStudy, sampleStudy } from "./sample";
 import { getLocal, setLocal } from "./store/local";
 import { saveInterview, saveSynthesis } from "./store/cloud";
 
@@ -115,10 +115,10 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
         await new Promise((r) => setTimeout(r, 0));
         const people = studyRef.current.codebook.filter((e) => e.type === "PERSON" && e.origin === id);
         const firsts = people.filter((e) => !e.real.includes(" ")).map((e) => e.real);
-        const fulls = people.filter((e) => e.real.includes(" ") && !/^(Dr|Mr|Mrs|Ms|Miss|Prof|Nurse)\b/.test(e.real)).map((e) => e.real);
+        const fulls = people.filter((e) => e.real.includes(" ")).map((e) => e.real);
         addEntities(extendNames(iv.raw, firsts, fulls), id);
         const orgs = studyRef.current.codebook.filter((e) => e.type === "ORG" && iv.raw.includes(e.real)).map((e) => e.real);
-        addEntities(extendOrgs(iv.raw, orgs), id);
+        addEntities([...extendOrgs(iv.raw, orgs), ...extendAcronyms(iv.raw, orgs)], id);
         if (POLICIES[studyRef.current.policy].secondPass) {
           await new Promise((r) => setTimeout(r, 50)); // let the codebook state settle
           const s = studyRef.current;
@@ -340,6 +340,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
           codebook: s.codebook.filter((e) => e.origin !== id || e.type !== "PERSON"),
         })),
       loadSample: () => setStudy(sampleStudy(studyRef.current.policy)),
+      loadHoldout: () => setStudy(holdoutStudy(studyRef.current.policy)),
       newStudy: () => setStudy(emptyStudy(studyRef.current.policy)),
       toggleEntry: (token: string, real: string) =>
         setStudy((s) => ({

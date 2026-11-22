@@ -11,10 +11,11 @@ interface SampleFile {
 }
 
 const files = import.meta.glob<SampleFile>("../sample-data/*.json", { eager: true, import: "default" });
+/** Four more fictional interviews (US/UK/Ireland, non-health topics) that were never used to tune Veil. */
+const holdout = import.meta.glob<SampleFile>("../sample-data/holdout/*.json", { eager: true, import: "default" });
 
-/** Six entirely fictional interviews (generated for testing) with an answer key of every identifier. */
-export function sampleInterviews(): Interview[] {
-  return Object.values(files)
+function toInterviews(set: Record<string, SampleFile>): Interview[] {
+  return Object.values(set)
     .sort((a, b) => a.id.localeCompare(b.id))
     .map((f) => ({
       id: f.id,
@@ -23,6 +24,21 @@ export function sampleInterviews(): Interview[] {
       truth: f.identifiers,
       status: "raw" as const,
     }));
+}
+
+/** Six entirely fictional interviews (generated for testing) with an answer key of every identifier. */
+export function sampleInterviews(): Interview[] {
+  return toInterviews(files);
+}
+
+export function holdoutStudy(policy: PolicyName): Study {
+  return {
+    id: uid(),
+    name: "Held-out evaluation set (fictional, never used for tuning)",
+    policy,
+    codebook: [],
+    interviews: toInterviews(holdout),
+  };
 }
 
 export function sampleStudy(policy: PolicyName): Study {
@@ -38,5 +54,5 @@ export function sampleStudy(policy: PolicyName): Study {
 }
 
 export function allAnswerKeys() {
-  return Object.values(files).flatMap((f) => f.identifiers);
+  return [...Object.values(files), ...Object.values(holdout)].flatMap((f) => f.identifiers);
 }

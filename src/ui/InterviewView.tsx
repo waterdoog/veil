@@ -148,8 +148,9 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                     </>
                   ) : guard.ok ? (
                     <>
-                      <b>Airlock check passed.</b> None of the {entries.filter((e) => e.enabled).length} known identifiers and no
-                      email/phone/postcode/reference-number patterns appear in the outgoing text.
+                      <b>Airlock: nothing known left.</b> None of the {entries.filter((e) => e.enabled).length} identifiers found so far, and no
+                      email/phone/postcode/reference-number patterns, appear in the outgoing text. It can't see identifiers nobody
+                      flagged — read the right-hand side before you release it.
                     </>
                   ) : (
                     <>
@@ -172,6 +173,10 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                         {evalRes.caught} of {evalRes.total} identifiers removed
                       </b>{" "}
                       <span className="muted">(answer key for this fictional sample, policy types only)</span>
+                      <div className="small">
+                        Precision {Math.round(evalRes.precision * 100)}% — {evalRes.spans - Math.round(evalRes.precision * evalRes.spans)} of {evalRes.spans} replacements
+                        aren't in the answer key{evalRes.falsePositives.length ? ` (e.g. ${evalRes.falsePositives.slice(0, 3).map((x) => `“${x}”`).join(", ")})` : ""}.
+                      </div>
                       {evalRes.missed.length > 0 && (
                         <div className="small">
                           Missed:{" "}

@@ -12,6 +12,10 @@ export interface EvalResult {
   missed: GroundTruth[];
   recall: number;
   byType: Record<string, { total: number; caught: number }>;
+  /** Replaced spans that overlap an answer-key identifier, out of all replaced spans. */
+  precision: number;
+  spans: number;
+  falsePositives: string[];
 }
 
 /**
@@ -56,5 +60,29 @@ export function evaluate(raw: string, spans: Span[], truth: GroundTruth[], types
       byType[t.type].caught++;
     } else missed.push(t);
   }
-  return { total, caught, missed, recall: total ? caught / total : 1, byType };
+  // Precision: a replaced span is a true positive if it overlaps any occurrence of any answer-key identifier.
+  const inTruth = new Uint8Array(raw.length);
+  for (const t of truth) {
+    const needle = t.text.toLowerCase();
+    if (!needle) continue;
+    for (let i = rawLower.indexOf(needle); i >= 0; i = rawLower.indexOf(needle, i + 1)) inTruth.fill(1, i, i + needle.length);
+  }
+  const fps: string[] = [];
+  let tp = 0;
+  for (const s of spans) {
+    let hit = false;
+    for (let i = s.start; i < s.end && !hit; i++) hit = inTruth[i] === 1;
+    if (hit) tp++;
+    else fps.push(raw.slice(s.start, s.end));
+  }
+  return {
+    total,
+    caught,
+    missed,
+    recall: total ? caught / total : 1,
+    byType,
+    precision: spans.length ? tp / spans.length : 1,
+    spans: spans.length,
+    falsePositives: [...new Set(fps)],
+  };
 }

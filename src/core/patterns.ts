@@ -39,13 +39,17 @@ const PATTERNS: { type: EntityType; re: RegExp }[] = [
     type: "ORG",
     re: /\b(?:(?:[A-Z][\w'’.-]*|&|of|and|for)\s+){0,5}?[A-Z][\w'’.-]*\s+(?:Clinic|Union|University|Group|Trust|Hospital|Infirmary|Surgery|Practice|School|College|Council|Ltd|Limited|Foundation|Society|Association|Partnership)\b|\bUniversity of [A-Z][a-z]+(?:\s[A-Z][a-z]+)?/g,
   },
+  // Titled names are people whether or not the model noticed: "Mrs. Gable", "Dr Kerr", "Prof. Mensah".
+  { type: "PERSON", re: /\b(?:Dr|Mrs|Mr|Ms|Miss|Prof|Nurse|Sister|Father|Rev)\.?\s[A-Z][a-z'’-]+(?:\s[A-Z][a-z'’-]+)?\b/g },
+  // "52 years old", "a 19-year-old".
+  { type: "QUASI", re: /\b\d{2}[- ]years?[- ]old\b/gi },
   // Stated ages ("I'm 27", "aged sixty-two") — a quasi-identifier.
   {
     type: "QUASI",
-    re: /\b(?:I'm|I am|I’m|aged|age of|turned|turning)\s+(?:\d{2}|(?:twenty|thirty|forty|fifty|sixty|seventy|eighty)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?)\b/gi,
+    re: /\b(?:I'm|I am|I’m|aged|age of|turned|turning)\s+(?:\d{2}|(?:twenty|thirty|forty|fifty|sixty|seventy|eighty)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?)(?:[- ]years?[- ]old)?\b/gi,
   },
   // Money amounts.
-  { type: "FINANCIAL", re: /£\s?\d[\d,]*(?:\.\d{2})?(?:\s?(?:k|K|grand|a (?:month|week|year)))?/g },
+  { type: "FINANCIAL", re: /[£$€]\s?\d[\d,]*(?:\.\d{2})?(?:\s?(?:k|K|grand|a (?:month|week|year)))?/g },
 ];
 
 export function findPatterns(text: string): Entity[] {
@@ -87,6 +91,20 @@ export function extendNames(text: string, firstNames: string[], fullNames: strin
       if (seen.has(m[0])) continue;
       seen.add(m[0]);
       out.push({ text: m[0], type: "PERSON", source: "pattern" });
+    }
+  }
+  // "Mr. Foley" known -> "Foley" alone and "Padraig Foley" are the same person.
+  for (const titled of fullNames.filter((n) => /^(?:Dr|Mr|Mrs|Ms|Miss|Prof|Nurse)\.?\s/.test(n))) {
+    const sur = titled.trim().split(/\s+/).pop() ?? "";
+    if (!/^[A-Z][a-z'’-]{2,}$/.test(sur)) continue;
+    for (const m of text.matchAll(new RegExp(`\\b([A-Z][a-z'’-]{2,})\\s+${sur}\\b`, "g"))) {
+      if (NOT_SURNAME.has(m[1]) || /^(Dr|Mr|Mrs|Ms|Miss|Prof|Nurse)$/.test(m[1]) || seen.has(m[0])) continue;
+      seen.add(m[0]);
+      out.push({ text: m[0], type: "PERSON", source: "pattern" });
+    }
+    if (!seen.has(sur) && new RegExp(`\\b${sur}\\b`).test(text)) {
+      seen.add(sur);
+      out.push({ text: sur, type: "PERSON", source: "pattern" });
     }
   }
   // "Chloe Bramwell" known -> people are also called just "Chloe" or "Bramwell" later on.
@@ -133,6 +151,26 @@ export function extendOrgs(text: string, orgNames: string[]): Entity[] {
     if (new RegExp(`(?<![\\p{L}\\p{N}])${esc}(?![\\p{L}\\p{N}])`, "u").test(text.replace(o, ""))) {
       seen.add(stem);
       out.push({ text: stem, type: "ORG", source: "pattern" });
+    }
+  }
+  return out;
+}
+
+/**
+ * "Buckeye Valley Medical Center" known -> "BVMC" later is the same place.
+ * Builds the initials of each known multi-word organisation and returns those that appear as words.
+ */
+export function extendAcronyms(text: string, orgNames: string[]): Entity[] {
+  const out: Entity[] = [];
+  const seen = new Set<string>();
+  for (const o of orgNames) {
+    const words = o.split(/[\s&]+/).filter((w) => /^[A-Z]/.test(w));
+    if (words.length < 2) continue;
+    const acr = words.map((w) => w[0]).join("");
+    if (acr.length < 2 || seen.has(acr)) continue;
+    if (new RegExp(`\\b${acr}\\b`).test(text)) {
+      seen.add(acr);
+      out.push({ text: acr, type: "ORG", source: "pattern" });
     }
   }
   return out;

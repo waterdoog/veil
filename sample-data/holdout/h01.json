@@ -1,0 +1,159 @@
+{
+ "id": "h01",
+ "title": "Shift scheduling app usability study",
+ "transcript": "[00:00:08] INT: Hi there, thanks so much for making time to chat with me today. Before we dive into the app itself, I just want to confirm you are okay with me recording this session for our internal research notes?\n[00:00:19] P: Yeah, totally fine. No problem at all.\n[00:00:23] INT: Great. So to kick things off, could you tell me a little bit about yourself and your current role?\n[00:00:30] P: Sure. My name is Hannah Kowalski, I am 38, and I have been an emergency room nurse for about twelve years now. Currently I work at Buckeye Valley Medical Center here in Columbus, Ohio. I am mostly on the overnight rotation, three twelves a week, usually Thursday through Saturday. I am actually the only certified SANE nurse on the overnight trauma pod right now, so my schedule gets a little complicated whenever they need forensic coverage.\n[00:01:05] INT: That sounds like a really demanding role. How long have you been at Buckeye Valley?\n[00:01:11] P: Going on six years. I started there back when it was still pretty small, before they built the new west wing. Most of us just call it BVMC when we are texting each other. It is a great team, honestly, just very busy.\n[00:01:28] INT: And outside of work, what does a typical week look like for you? I am trying to understand how your schedule fits into the rest of your life.\n[00:01:37] P: Well, I live up in Clintonville with my husband, Devon Kowalski, and our two kids. Devon works a standard nine-to-five, so we are basically passing ships during the week. We rely a ton on our neighbor, Mrs. Gable, who lives just two doors down from us on 412 Maplewood Drive. Well, we are at 412 Maplewood Drive, she is at 416, sorry. If my shift runs late or gets moved last minute, I have to text her to grab the kids from the bus stop. And then on my actual days off, when I am not catching up on sleep, I spend a lot of time in the garage restoring vintage pinball machines. It is my one real stress reliever, so when the hospital messes up my days off, I lose my sanity a little bit.\n[00:02:32] INT: Restoring vintage pinball machines! That is awesome, I have never heard that one before. Okay, so let us talk about the new shift-scheduling app that MedGrid Solutions rolled out for your department. When did you start using it?\n[00:02:49] P: They forced us over to it right around the start of October. Before that, our nurse manager, Brenda Vance, used to just email out a giant Excel spreadsheet every six weeks and we would all fight over the open slots in the breakroom. It was chaotic, sure, but at least you could print it out and stick it on the fridge.\n[00:03:12] INT: Walk me through the first time you logged into the app. How did that go?\n[00:03:18] P: Honestly, it was a headache right out of the gate. It asked for my hospital employee ID, which is EMP-884920, and then it wanted me to verify through my work email, h.kowalski@example.org. The problem is, I cannot access my work email from my personal phone without going through two different VPNs, so I had to wait until I was physically at a workstation at BVMC just to get the verification code. By the time I walked back to my locker, the code had expired.\n[00:03:54] INT: That sounds super frustrating. Once you finally got in, what was your first impression of the main schedule view?\n[00:04:03] P: Visually it is fine, I guess, lots of blue and white. Very clean. But it defaults to a single-day view, which is completely useless for a nurse. Nobody cares about just Tuesday. I need to see a full four-week block so I can see how my nights line up with Devon and whether I am working three in a row. When you pinch to zoom out to the month view, all the shift codes turn into tiny colored dots, and I cannot tell if a green dot means I am on triage, trauma, or on-call.\n[00:04:41] INT: Have you run into any specific bugs or errors since you started using it?\n[00:04:47] P: Oh, definitely. On October 14, 2024, I opened the app to check my weekend and it had me double-booked for a day shift and a night shift on the exact same date. That is twenty-four hours straight, which is literally illegal under our union rules. I tried to flag it in the app, and the little submit button just spun forever. I ended up calling the IT helpdesk and they gave me a ticket number, INC-40291, and told me it would take three to five business days. Like, I cannot wait five business days when the shift is on Friday.\n[00:05:29] INT: What did you end up doing to fix it?\n[00:05:33] P: I had to go hunt down Brenda in her office at seven in the morning after my shift. Even Vance could not figure out how to override it on her manager dashboard. She had to call someone at MedGrid Solutions directly. It was just a mess.\n[00:05:51] INT: Let us talk about swapping shifts with coworkers. Have you tried using the swap feature yet?\n[00:05:58] P: Yeah, I tried it two weeks ago. I needed to trade a Saturday night with one of my coworkers, Marcus Delgado. Marcus was totally fine taking it because he wanted the extra hours. So I go into the app, I tap my shift, I hit Request Swap, and I type in Delgado. First of all, the search bar is case-sensitive or something, because it would not pull him up until I typed his full name. Then, once I sent it, Marcus accepted it on his end, and we both thought we were good.\n[00:06:34] INT: And you were not?\n[00:06:37] P: Nope. Because I am on the trauma pod, any swap I make has to be signed off by both the charge nurse and the attending physician, which that night was Dr. Aris Thorne. The app never notified Thorne! It just sat in a pending queue that nobody checks. I only found out because I bumped into Dr. Aris Thorne in the cafeteria and mentioned I would not be there Saturday, and he looked at me like I had two heads.\n[00:07:08] INT: Wow. So there is no clear indicator of who is holding up the approval?\n[00:07:13] P: None at all. It just says Pending Approval in grey text. If it said Waiting on Brenda or Waiting on Thorne, I could actually send them a quick message. Instead, you are just flying blind.\n[00:07:28] INT: Does the app tie into your payroll or overtime tracking at all? I know some hospitals turn that module on.\n[00:07:36] P: They did turn it on, and honestly I wish they had not, because the math is wrong half the time. My base rate is $48.50 an hour, and if we pick up an extra critical-needs shift on a weekend, Buckeye Valley gives us a $150 incentive bonus on top of time-and-a-half. On my November 3rd paystub, the app failed to carry over the incentive code, so my check was short by $320. I had to screenshot the app, email payroll, and wait another two weeks for a retro check.\n[00:08:16] INT: That is a huge chunk of money to be missing. How does that affect your trust in the app?\n[00:08:23] P: Zero trust. Literally zero. Now I take a screenshot of my schedule every single Sunday night just in case it changes on me. A bunch of us do that.\n[00:08:36] INT: What about notifications? How is the app communicating with you when you are off the clock?\n[00:08:43] P: Oh, do not even get me started on the notifications. They are relentless. If there is an open shift anywhere in the hospital, even in pediatrics where I am not even credentialed, my phone buzzes. They have my cell number, 614-555-0148, hooked up to the SMS alerts too, so I get a push notification AND a text message at two in the morning when I am trying to sleep.\n[00:09:13] INT: Can you turn those off in the settings?\n[00:09:16] P: You can mute all notifications, yeah, but then you miss actual schedule changes or messages from Brenda. There is no way to just mute open-shift blasts. And for me, sleep is a big deal. I have had a chronic lower back strain ever since I helped lift a bariatric patient back in March 2022, and if I do not get solid rest between shifts, my back just locks up. I already have to take melatonin just to fall asleep during the day, and my asthma always flares up when I am run down. Getting woken up at noon by a text about a shift in another department is infuriating.\n[00:09:59] INT: I can completely see why that would be exhausting. If you had a magic wand and could change three things about this app before the next update in January 2025, what would they be?\n[00:10:12] P: Number one, fix the calendar view. Give me a normal monthly grid with actual text labels, not tiny dots, and let me sync it with my Google Calendar so Devon can see when I am working without asking me ten times a day. Number two, granular notification settings. Let me turn off open-shift alerts for departments I do not work in, and give me a Do Not Disturb window. And number three, transparency on shift swaps. Show me exactly whose desk it is sitting on, and send them a reminder if they have not clicked approve within twenty-four hours.\n[00:10:54] INT: Those are really clear, actionable points. Is there anything else about the app that you actually like, or that works well for you?\n[00:11:03] P: Hmm. Let me think. I do like that I can request PTO right from my phone instead of filling out a paper form and sliding it under Brenda's door. When I put in for a long weekend next month, it showed my accrued hours right there on the screen, which was nice. So it is not all terrible. It just feels like it was designed by people who have never actually worked a night shift in an ER.\n[00:11:32] INT: That is super helpful feedback, Hannah. I really appreciate you being so candid with me today. I am going to stop the recording now, and we will get your thank-you gift card sent over to your email later this afternoon.\n[00:11:46] P: Awesome, thanks so much. Have a good one!",
+ "identifiers": [
+  {
+   "text": "Hannah Kowalski",
+   "type": "PERSON"
+  },
+  {
+   "text": "38",
+   "type": "QUASI"
+  },
+  {
+   "text": "Buckeye Valley Medical Center",
+   "type": "ORG"
+  },
+  {
+   "text": "Columbus",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Ohio",
+   "type": "LOCATION"
+  },
+  {
+   "text": "only certified SANE nurse on the overnight trauma pod",
+   "type": "QUASI"
+  },
+  {
+   "text": "Buckeye Valley",
+   "type": "ORG"
+  },
+  {
+   "text": "BVMC",
+   "type": "ORG"
+  },
+  {
+   "text": "Clintonville",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Devon Kowalski",
+   "type": "PERSON"
+  },
+  {
+   "text": "Devon",
+   "type": "PERSON"
+  },
+  {
+   "text": "Mrs. Gable",
+   "type": "PERSON"
+  },
+  {
+   "text": "412 Maplewood Drive",
+   "type": "LOCATION"
+  },
+  {
+   "text": "restoring vintage pinball machines",
+   "type": "QUASI"
+  },
+  {
+   "text": "MedGrid Solutions",
+   "type": "ORG"
+  },
+  {
+   "text": "Brenda Vance",
+   "type": "PERSON"
+  },
+  {
+   "text": "EMP-884920",
+   "type": "ID"
+  },
+  {
+   "text": "h.kowalski@example.org",
+   "type": "CONTACT"
+  },
+  {
+   "text": "October 14, 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "INC-40291",
+   "type": "ID"
+  },
+  {
+   "text": "Brenda",
+   "type": "PERSON"
+  },
+  {
+   "text": "Vance",
+   "type": "PERSON"
+  },
+  {
+   "text": "Marcus Delgado",
+   "type": "PERSON"
+  },
+  {
+   "text": "Marcus",
+   "type": "PERSON"
+  },
+  {
+   "text": "Delgado",
+   "type": "PERSON"
+  },
+  {
+   "text": "Dr. Aris Thorne",
+   "type": "PERSON"
+  },
+  {
+   "text": "Thorne",
+   "type": "PERSON"
+  },
+  {
+   "text": "$48.50",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "$150",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "November 3rd",
+   "type": "DATE"
+  },
+  {
+   "text": "$320",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "614-555-0148",
+   "type": "CONTACT"
+  },
+  {
+   "text": "lower back strain",
+   "type": "HEALTH"
+  },
+  {
+   "text": "March 2022",
+   "type": "DATE"
+  },
+  {
+   "text": "melatonin",
+   "type": "HEALTH"
+  },
+  {
+   "text": "asthma",
+   "type": "HEALTH"
+  },
+  {
+   "text": "January 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "Hannah",
+   "type": "PERSON"
+  }
+ ]
+}
