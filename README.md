@@ -147,6 +147,12 @@ The six-interview study pseudonymises in about 4–5 minutes on a MacBook, entir
 |---|---|
 | ![](docs/2-cloud-analysis-reidentified-locally.jpg) | ![](docs/3-what-the-cloud-saw.jpg) |
 
+## Data handling, honestly
+
+- Raw text, photos and the re-identification key stay in this browser (IndexedDB). The cloud receives pseudonymised text only, after the airlock.
+- This is **pseudonymisation, not anonymisation**: on unseen documents Veil still misses roughly one identifier in seven or eight, mostly quasi-identifiers such as job titles. Review is part of the workflow for that reason.
+- The hosted demo uses the no-billing Gemini Developer API, whose terms let Google use prompts on unpaid tiers to improve its products. That is acceptable here only because those prompts are pseudonymised. For a real study, use a paid Gemini API key or Firebase AI Logic's Vertex AI backend (`new VertexAIBackend()` instead of `new GoogleAIBackend()` in `src/ai/backend.ts`).
+
 ## Firebase products used
 
 | Product | How Veil uses it | Code |
