@@ -66,10 +66,10 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
         </div>
         <div className="tabs" role="tablist">
           <button role="tab" aria-selected={tab === "pseudo"} className={tab === "pseudo" ? "on" : ""} onClick={() => setTab("pseudo")}>
-            <span className="step">1</span> Pseudonymise <small>on device</small>
+            Pseudonymise <small>on device</small>
           </button>
           <button role="tab" aria-selected={tab === "analysis"} className={tab === "analysis" ? "on" : ""} onClick={() => setTab("analysis")}>
-            <span className="step">2</span> Analyse <small>in cloud</small>
+            Analysis <small>in the cloud</small>
           </button>
         </div>
       </div>
@@ -79,15 +79,13 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
           <section className="pane pane-device">
             <header>
               <span className="pane-title">
-                <LockIcon /> Raw transcript — stays on this device
+                <LockIcon /> On this device
               </span>
-              <span className="muted">{spans.length} spans replaced</span>
+              <span className="muted">{spans.length} replacements</span>
             </header>
             {study.replay && (
-              <div className="notice">
-                <b>Recorded run.</b> These highlights were produced by real Gemini Nano in {study.replay.browser} on{" "}
-                {new Date(study.replay.capturedAt).toLocaleDateString()} and replayed here, because this browser can't run the
-                model. Review, the airlock and cloud analysis below run live.
+              <div className="note-line" title="This browser can't run Gemini Nano, so Veil replays detections recorded from real Gemini Nano. The airlock and the cloud analysis run live.">
+                Highlights recorded from real Gemini Nano ({study.replay.browser}) · everything else runs live
               </div>
             )}
             {iv.photo && (
@@ -137,15 +135,14 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
               <span className="pane-title">
                 <CloudIcon /> What the cloud will see
               </span>
-              <span className="muted">{(guard.bytes / 1024).toFixed(1)} KB</span>
+              <span className="muted">{(guard.bytes / 1024).toFixed(1)} KB, not sent yet</span>
             </header>
 
             {!reviewed ? (
               <div className="cta-block">
                 <p>
-                  Gemini Nano reads the transcript <b>on this device</b>, in {Math.max(1, Math.ceil(iv.raw.length / 3500))} chunks, and
-                  lists names, places, organisations, dates, contact details and rare details. Veil swaps each for a
-                  consistent placeholder like <code>[PERSON_1]</code>.
+                  Gemini Nano reads this document on your laptop and replaces each name, place, organisation and date with a
+                  placeholder like <code>[PERSON_1]</code>. Nothing is sent.
                 </p>
                 <button className="btn btn-device" disabled={busy} onClick={() => veil.pseudonymise(iv.id)}>
                   <DeviceIcon /> Pseudonymise on this device
@@ -156,29 +153,15 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
               <>
                 <div className={`guard ${guard.ok && !iv.deviceMissing ? "guard-ok" : guard.ok ? "guard-warn" : "guard-bad"}`}>
                   {guard.ok && iv.deviceMissing ? (
-                    <>
-                      <b>Only pattern checks ran.</b> No email/phone/postcode/reference-number patterns or hand-redacted values
-                      remain, but names, places and organisations have <u>not</u> been checked by a model. Redact them by hand
-                      before release.
-                    </>
+                    <span title="No email/phone/postcode/reference-number patterns or hand-redacted values remain, but names, places and organisations have not been checked by a model.">
+                      <b>Only pattern checks ran.</b> Redact names, places and organisations by hand before release.
+                    </span>
                   ) : guard.ok ? (
-                    <>
-                      <b>Airlock: nothing known left.</b> None of the {entries.filter((e) => e.enabled).length} identifiers found so far, and no
-                      email/phone/postcode/reference-number patterns, appear in the outgoing text. It can't see identifiers nobody
-                      flagged — read the right-hand side before you release it.
-                      {worth.length > 0 && (
-                        <span className="worth">
-                          <br />
-                          <b>Worth a look</b> — name-like, but nothing flagged them (click to redact):{" "}
-                          {worth.slice(0, 8).map((w) => (
-                            <button key={w} className="chip" title="Redact this everywhere in this interview" onClick={() => veil.redactFindings([w], iv.id)}>
-                              {w}
-                            </button>
-                          ))}
-                          {worth.length > 8 && <span className="muted"> +{worth.length - 8} more</span>}
-                        </span>
-                      )}
-                    </>
+                    <span
+                      title={`None of the ${entries.filter((e) => e.enabled).length} identifiers found so far, and no email/phone/postcode/reference-number pattern, is in the outgoing text. It can't see identifiers nobody flagged, so read the right-hand side before you release it.`}
+                    >
+                      <b>Airlock clear</b> <span className="explain">— none of the {entries.filter((e) => e.enabled).length} identifiers found are in the outgoing text</span>
+                    </span>
                   ) : (
                     <>
                       <b>Airlock would block this.</b> Still in plain text:{" "}
@@ -191,36 +174,45 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                     </>
                   )}
                 </div>
-
-                {evalRes && (
-                  <div className="evalcard">
-                    <div className="eval-num">{Math.round(evalRes.recall * 100)}%</div>
-                    <div>
-                      <b>
-                        {evalRes.caught} of {evalRes.total} identifiers removed
-                      </b>{" "}
-                      <span className="muted">(answer key for this fictional sample, policy types only)</span>
-                      <div className="small">
-                        Precision {Math.round(evalRes.precision * 100)}% — {evalRes.spans - Math.round(evalRes.precision * evalRes.spans)} of {evalRes.spans} replacements
-                        aren't in the answer key{evalRes.falsePositives.length ? ` (e.g. ${evalRes.falsePositives.slice(0, 3).map((x) => `“${x}”`).join(", ")})` : ""}.
-                      </div>
-                      {evalRes.missed.length > 0 && (
-                        <div className="small">
-                          Missed:{" "}
-                          {evalRes.missed.slice(0, 8).map((m) => (
-                            <button key={m.text} className="chip linkish" title="Redact it" onClick={() => veil.redactManual(m.text, m.type, iv.id)}>
-                              {m.text}
-                            </button>
-                          ))}
-                          {evalRes.missed.length > 8 && <span className="muted"> +{evalRes.missed.length - 8} more</span>}
-                        </div>
-                      )}
-                    </div>
+                {guard.ok && worth.length > 0 && (
+                  <div className="worth-row">
+                    <span title="Name-like text that no detector flagged. Click one to redact it everywhere in this document.">Worth a look:</span>
+                    {worth.slice(0, 5).map((w) => (
+                      <button key={w} className="chip" title="Redact this everywhere in this document" onClick={() => veil.redactFindings([w], iv.id)}>
+                        {w}
+                      </button>
+                    ))}
+                    {worth.length > 5 && <span> +{worth.length - 5}</span>}
                   </div>
                 )}
 
+                {evalRes && (
+                  <details className="evalcard">
+                    <summary>
+                      Answer key: <b>{evalRes.caught} of {evalRes.total}</b> identifiers removed · {Math.round(evalRes.precision * 100)}% of replacements correct
+                    </summary>
+                    <div className="eval-more">
+                      <span>
+                        Scored against this sample's answer key (types the policy redacts).
+                        {evalRes.falsePositives.length ? ` Not in the key: ${evalRes.falsePositives.slice(0, 3).map((x) => `“${x}”`).join(", ")}.` : ""}
+                      </span>
+                      {evalRes.missed.length > 0 && (
+                        <span>
+                          Missed:{" "}
+                          {evalRes.missed.slice(0, 8).map((m) => (
+                            <button key={m.text} className="chip" title="Redact it" onClick={() => veil.redactManual(m.text, m.type, iv.id)}>
+                              {m.text}
+                            </button>
+                          ))}
+                          {evalRes.missed.length > 8 && <span> +{evalRes.missed.length - 8} more</span>}
+                        </span>
+                      )}
+                    </div>
+                  </details>
+                )}
+
                 <div className="transcript transcript-out">
-                  <div className="out-title">Interview: <TokenText text={title} codebook={study.codebook} showReal={false} /></div>
+                  <div className="out-title">Title: <TokenText text={title} codebook={study.codebook} showReal={false} /></div>
                   <TokenText text={redacted} codebook={study.codebook} showReal={false} />
                 </div>
 
@@ -261,16 +253,16 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                       setTab("analysis");
                     }}
                   >
-                    <CloudIcon /> {veil.online ? "Release to cloud analysis" : "Queue for cloud (offline)"}
+                    <CloudIcon /> {veil.online ? "Send to cloud analysis" : "Queue for cloud (offline)"}
                   </button>
                 </div>
               </>
             )}
 
             {entries.length > 0 && (
-              <details className="codebook" open={reviewed}>
+              <details className="codebook">
                 <summary>
-                  Codebook <span className="muted">— real values never leave this device</span>
+                  Codebook <span className="muted">· {entries.length} entries, kept on this device</span>
                 </summary>
                 <table>
                   <tbody>
@@ -329,9 +321,13 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
           {iv.error && <div className="notice notice-error">{iv.error}</div>}
           {!iv.analysis && iv.status !== "analysing" && (
             <div className="cta-block">
-              <p>Pseudonymise this interview first, check the outgoing text, then release it to the cloud model.</p>
-              <button className="btn" onClick={() => setTab("pseudo")}>
-                Go to step 1
+              <p>
+                {reviewed
+                  ? "Check the outgoing text, then send it to the cloud from the Pseudonymise tab."
+                  : "Pseudonymise this document first, check the outgoing text, then send it to the cloud."}
+              </p>
+              <button className="btn btn-ghost" onClick={() => setTab("pseudo")}>
+                Back to Pseudonymise
               </button>
             </div>
           )}
@@ -341,7 +337,7 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                 <SourceBadge source={iv.analysisSource} mode="only_in_cloud" />
                 <label className="switch">
                   <input type="checkbox" checked={showReal} onChange={(e) => setShowReal(e.target.checked)} />
-                  <span>{showReal ? "Showing real names — re-identified on this device" : "Showing exactly what the cloud saw"}</span>
+                  <span>{showReal ? "Real names, restored on this device" : "Exactly what the cloud saw"}</span>
                 </label>
               </div>
               <div className="card">
@@ -397,7 +393,7 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
             <div className="card memo">
               <div className="memo-head">
                 <h3>Quick memo</h3>
-                <span className="muted small">Hybrid: runs on Gemini Nano when it's ready (free, works offline), otherwise in the cloud — safe either way, because it only ever sees pseudonymised text.</span>
+                <span className="muted small">On Gemini Nano when available, otherwise the cloud. It only sees pseudonymised text.</span>
                 <button className="btn btn-small" onClick={() => veil.memo(iv.id)}>
                   Write memo
                 </button>

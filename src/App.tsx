@@ -76,6 +76,9 @@ export function App({
       <div className="body">
         <nav className="sidebar">
           <input className="study-name" value={study.name} onChange={(e) => veil.setName(e.target.value)} aria-label="Study name" />
+          <details className="side-group settings-group">
+            <summary>Study settings</summary>
+            <div className="side-body">
           <label className="field">
             <span>Redaction policy</span>
             <select value={study.policy} onChange={(e) => veil.setPolicy(e.target.value as PolicyName)}>
@@ -96,10 +99,12 @@ export function App({
               onChange={(e) => veil.setQuestions(e.target.value)}
             />
           </label>
+            </div>
+          </details>
           <div className="list-head">
-            <span>Interviews</span>
-            <button className="btn btn-small" onClick={() => setAdding(true)}>
-              + Add
+            <span>Documents</span>
+            <button className="btn btn-ghost btn-small" onClick={() => setAdding(true)}>
+              Add
             </button>
           </div>
           <ul className="iv-list">
@@ -134,10 +139,9 @@ export function App({
           )}
           <span className="grow" />
           {study.interviews.length > 0 && (
-            <div className="exports">
-              <div className="list-head">
-                <span>Export</span>
-              </div>
+            <details className="side-group exports-group">
+              <summary>Export</summary>
+              <div className="side-body exports">
               <button className="linkish small" onClick={() => download(`veil-audit-${slug(study.name)}.html`, auditReportHtml(study, veil.ledger), "text/html")}>
                 Ethics audit report (no identifiable data)
               </button>
@@ -179,7 +183,8 @@ export function App({
               >
                 Encrypted backup of everything
               </button>
-            </div>
+              </div>
+            </details>
           )}
           <input
             id="restore-file"
@@ -202,39 +207,30 @@ export function App({
               }
             }}
           />
-          <div className="side-foot small muted">
+          <details className="side-group side-foot">
+            <summary>Samples and benchmarks</summary>
+            <div className="side-body">
             <button className="linkish" onClick={veil.loadSample}>
               Load sample study
-            </button>{" "}
-            ·{" "}
-            {hasRecordedRun && (
+            </button>{hasRecordedRun && (
               <>
                 <button className="linkish" onClick={() => veil.loadReplay()} title="Detections recorded from real Gemini Nano (Chrome 158)">
                   Recorded Nano run
-                </button>{" "}
-                ·{" "}
-              </>
+                </button></>
             )}
             <button className="linkish" onClick={veil.loadHoldout} title="Four more fictional interviews that were never used to tune Veil">
               Held-out set
-            </button>{" "}
-            ·{" "}
-            <button className="linkish" onClick={veil.loadScenarios} title="A court judgment, an HR investigation file and a hospital discharge summary">
-              3 more scenarios
-            </button>{" "}
-            ·{" "}
-            <button className="linkish" onClick={veil.loadTab} title="Text Anonymization Benchmark — 8 public ECHR judgments with expert annotations">
+            </button><button className="linkish" onClick={veil.loadScenarios} title="A court judgment, an HR investigation file and a hospital discharge summary">
+              Beyond interviews (HR, clinical, legal, note)
+            </button><button className="linkish" onClick={veil.loadTab} title="Text Anonymization Benchmark — 8 public ECHR judgments with expert annotations">
               TAB benchmark
-            </button>{" "}
-            ·{" "}
-            <button className="linkish" onClick={veil.newStudy}>
+            </button><button className="linkish" onClick={veil.newStudy}>
               New study
-            </button>{" "}
-            ·{" "}
-            <button className="linkish" onClick={() => document.getElementById("restore-file")?.click()}>
+            </button><button className="linkish" onClick={() => document.getElementById("restore-file")?.click()}>
               Restore a backup
             </button>
-          </div>
+            </div>
+          </details>
         </nav>
 
         <main className="main">
@@ -293,7 +289,7 @@ function DeviceChip({ veil, onSetup }: { veil: Veil; onSetup: () => void }) {
     );
   return (
     <button className="chip-status warn" onClick={onSetup} title="Chrome desktop 139+ with the Prompt API is needed. Veil fails closed: raw text is never sent to the cloud.">
-      <LockIcon /> On-device model unavailable — check setup
+      <LockIcon /> Gemini Nano unavailable
     </button>
   );
 }
@@ -309,10 +305,8 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
           <em>Send the cloud only the story.</em>
         </h1>
         <p className="lede">
-          Interview transcripts, HR files, clinical letters, case papers: the documents people most want AI help with are the
-          ones they can't paste into a cloud model. Veil pseudonymises them on your laptop with Gemini Nano, shows
-          you exactly what will leave, blocks any known identifier that slipped through, flags name-like text nothing caught, and only then hands the cloud model a
-          pseudonymised copy for analysis. Results come back with real names restored — locally.
+          Interviews, HR files, clinical letters: the documents people most want AI help with are the ones they can't
+          upload. Gemini Nano finds the names and places on your laptop; the cloud model only ever reads a pseudonymised copy.
         </p>
         <div className="actions">
           {!study.interviews.length ? (
@@ -333,7 +327,7 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
             </>
           ) : (
             <button className="btn" onClick={() => onOpen(study.interviews[0].id)}>
-              Open {study.interviews[0].title.slice(0, 40)}
+              Open the study ({study.interviews.length} {study.interviews.length === 1 ? "document" : "documents"})
             </button>
           )}
           {hasRecordedRun && veil.device !== "available" && study.interviews.length > 0 && !study.replay && (
@@ -346,7 +340,7 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
 
       {study.interviews.every((iv) => iv.truth) && (
         <div className="starters">
-          <span className="muted small">Try it on</span>
+          <span className="muted">Try it on</span>
           {veil.device === "available" && (
             <button
               className="starter live"
@@ -397,33 +391,28 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
         <li>
           <span className="how-n device">1</span>
           <div>
-            <b>Pseudonymise — on device</b>
+            <b>On your laptop</b>
             <p>
-              Gemini Nano in Chrome, via Firebase AI Logic in <code>ONLY_ON_DEVICE</code> mode, finds names, places,
-              organisations, dates and rare details chunk by chunk. Pattern detectors catch emails, phones, postcodes and
-              reference numbers. No on-device model? Veil fails closed — it never falls back to the cloud with raw text.
+              Gemini Nano in Chrome finds names, places, organisations and dates. Without it, Veil never falls back to the
+              cloud with raw text.
             </p>
           </div>
         </li>
         <li>
           <span className="how-n">2</span>
           <div>
-            <b>Airlock — on device</b>
+            <b>The airlock</b>
             <p>
-              Every outgoing payload is re-scanned against the study codebook and identifier patterns. One hit and the
-              request is blocked. The log shows every call, its mode, where it actually ran and the exact text sent.
+              Every request is re-checked before it leaves. A known identifier blocks it; the log shows exactly what was sent.
             </p>
           </div>
         </li>
         <li>
           <span className="how-n cloud">3</span>
           <div>
-            <b>Analyse — in the cloud</b>
+            <b>In the cloud</b>
             <p>
-              Gemini (<code>ONLY_IN_CLOUD</code>) does long-context thematic analysis per interview and across the study.
-              Light tasks like memos use <code>PREFER_ON_DEVICE</code> — free and offline with Nano, cloud otherwise, safe
-              because they only ever see pseudonymised text. Placeholders are swapped back for real names on your screen
-              only.
+              Gemini writes the thematic analysis across all documents. Real names are put back on your screen only.
             </p>
           </div>
         </li>
