@@ -374,11 +374,13 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
             ["s-hr", "HR investigation file", "Grievance + capability review"],
             ["s-clin", "Hospital discharge summary", "Cardiology, NHS-style"],
             ["s-legal", "Court judgment", "Real ECHR judgment (TAB)"],
+            ["s-note", "Handwritten note", "Photo, read on device"],
           ].map(([id, name, sub]) => (
             <button
               key={id}
               className="starter"
               onClick={() => {
+                if (id === "s-note" && veil.device === "available") return void veil.addSampleNote(onOpen);
                 if (veil.device !== "available") veil.loadReplay("scenarios");
                 else veil.loadScenarios();
                 onOpen(id);

@@ -1069,7 +1069,7 @@ textarea.rq {
   color: var(--device);
 }
 .guard .worth .chip { margin: 2px 4px 0 0; font-size: 12px; }
-.starters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 22px 0 0; }
+.starters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 22px 0 0; }
 .starters > .muted { grid-column: 1 / -1; }
 @media (max-width: 900px) { .starters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .starters > .muted { margin-right: 4px; }
@@ -1078,3 +1078,6 @@ textarea.rq {
 .starter b { font-size: 14px; }
 .starter span { font-size: 12px; color: var(--muted, #777); }
 .starter.live { border-color: var(--device); background: var(--device-bg); }
+.note-photo { margin: 0 0 10px; padding: 10px 14px 0; }
+.note-photo img { display: block; width: 100%; max-height: 260px; object-fit: contain; border-radius: 8px; background: #5c4f42; }
+.note-photo figcaption { font-size: 12px; color: var(--muted); margin-top: 6px; }

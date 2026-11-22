@@ -8,7 +8,24 @@ interface SampleFile {
   title: string;
   transcript: string;
   identifiers: GroundTruth[];
+  photo?: string;
 }
+
+/** Answer key for public/samples/field-note.jpg (a fictional handwritten note). */
+export const FIELD_NOTE_TRUTH: GroundTruth[] = [
+  { text: "14 Nov 2024", type: "DATE" },
+  { text: "Hollins Lane Community Centre", type: "ORG" },
+  { text: "Ashworth", type: "LOCATION" },
+  { text: "Margaret Doyle", type: "PERSON" },
+  { text: "72", type: "QUASI" },
+  { text: "retired nurse", type: "QUASI" },
+  { text: "Kerry", type: "PERSON" },
+  { text: "Wexford Road", type: "LOCATION" },
+  { text: "Dr Patel", type: "PERSON" },
+  { text: "Ashworth Medical Practice", type: "ORG" },
+  { text: "07700 900318", type: "CONTACT" },
+  { text: "Tom Hughes", type: "PERSON" },
+];
 
 const files = import.meta.glob<SampleFile>("../sample-data/*.json", { eager: true, import: "default" });
 /** Four more fictional interviews (US/UK/Ireland, non-health topics) that were never used to tune Veil. */
@@ -25,6 +42,7 @@ function toInterviews(set: Record<string, SampleFile>): Interview[] {
       raw: f.transcript,
       truth: f.identifiers,
       status: "raw" as const,
+      ...(f.photo ? { photo: f.photo } : {}),
     }));
 }
 
@@ -69,9 +87,9 @@ export function tabStudy(policy: PolicyName): Study {
 const scenarios = import.meta.glob<SampleFile>("../sample-data/scenarios/*.json", { eager: true, import: "default" });
 
 export function scenariosStudy(policy: PolicyName): Study {
-  const order = ["s-legal", "s-hr", "s-clin"];
+  const order = ["s-legal", "s-hr", "s-clin", "s-note"];
   const ivs = toInterviews(scenarios).sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
-  return { id: uid(), name: "Beyond interviews: court judgment, HR file, discharge summary", policy, codebook: [], interviews: ivs };
+  return { id: uid(), name: "Beyond interviews: court judgment, HR file, discharge summary, handwritten note", policy, codebook: [], interviews: ivs };
 }
 
 const evalSets: Record<string, Record<string, SampleFile>> = {

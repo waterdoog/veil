@@ -200,6 +200,9 @@ export function AddInterview({ veil, onDone }: { veil: Veil; onDone: (id?: strin
           <button className="btn btn-ghost" onClick={() => imgRef.current?.click()}>
             <DeviceIcon /> Photo of notes
           </button>
+          <button className="btn btn-ghost" title="A fictional handwritten field note, read by Gemini Nano on this device" onClick={() => veil.addSampleNote((id) => onDone(id))}>
+            Try a sample note
+          </button>
           <span className="grow" />
           <button className="btn" disabled={!text.trim()} onClick={() => onDone(veil.addText(title.trim() || "Untitled interview", text))}>
             Add

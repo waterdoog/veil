@@ -1251,6 +1251,174 @@
    "source": "pattern",
    "enabled": true,
    "origin": "s-clin"
+  },
+  {
+   "real": "07700900318",
+   "token": "[CONTACT_12]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "2024 Collins Lane",
+   "token": "[LOCATION_16]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Kerry",
+   "token": "[LOCATION_17]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Wexford",
+   "token": "[LOCATION_18]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Ashworth Medical Practice",
+   "token": "[ORG_14]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Dr Patel",
+   "token": "[PERSON_23]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Field notes",
+   "token": "[QUASI_7]",
+   "type": "QUASI",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "14 Nov 2024",
+   "token": "[DATE_30]",
+   "type": "DATE",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Collins Lane Community Centre",
+   "token": "[LOCATION_19]",
+   "type": "LOCATION",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Ashworth",
+   "token": "[LOCATION_20]",
+   "type": "LOCATION",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Margaret Doyle",
+   "token": "[PERSON_24]",
+   "type": "PERSON",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "retired nurse",
+   "token": "[HEALTH_14]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Kerry",
+   "token": "[PERSON_25]",
+   "type": "PERSON",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Wexford Road",
+   "token": "[LOCATION_21]",
+   "type": "LOCATION",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "PIP review",
+   "token": "[QUASI_8]",
+   "type": "QUASI",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Tom Hughes",
+   "token": "[PERSON_26]",
+   "type": "PERSON",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Patel",
+   "token": "[PERSON_27]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Margaret",
+   "token": "[PERSON_24]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Doyle",
+   "token": "[PERSON_24]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Tom",
+   "token": "[PERSON_26]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
+  },
+  {
+   "real": "Hughes",
+   "token": "[PERSON_26]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-note"
   }
  ],
  "calls": [
@@ -1270,6 +1438,12 @@
    "interviewId": "s-clin",
    "purpose": "pseudonymise",
    "bytesIn": 5269,
+   "source": "on_device"
+  },
+  {
+   "interviewId": "s-note",
+   "purpose": "pseudonymise",
+   "bytesIn": 381,
    "source": "on_device"
   }
  ]

@@ -1,0 +1,48 @@
+{
+ "id": "s-note",
+ "title": "Handwritten field note (fictional) \u2014 read from a photo",
+ "transcript": "Field notes - 14 Nov 2024\nCollins Lane Community Centre, Ashworth\nSpoke to Margaret Doyle (72), retired nurse.\nLives with daughter Kerry on Wexford Road.\nSays Dr Patel at Ashworth Medical Practice\nstopped her repeat prescription in Sept.\nVery anxious about PIP review - 'they'll take the car'\nFollow up: ring Kerry 07700900318 after 3pm\nNext: interview Tom Hughes (warden) Thursday",
+ "identifiers": [
+  {
+   "text": "14 Nov 2024",
+   "type": "DATE"
+  },
+  {
+   "text": "Ashworth",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Margaret Doyle",
+   "type": "PERSON"
+  },
+  {
+   "text": "72",
+   "type": "QUASI"
+  },
+  {
+   "text": "retired nurse",
+   "type": "QUASI"
+  },
+  {
+   "text": "Kerry",
+   "type": "PERSON"
+  },
+  {
+   "text": "Wexford Road",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Dr Patel",
+   "type": "PERSON"
+  },
+  {
+   "text": "Ashworth Medical Practice",
+   "type": "ORG"
+  },
+  {
+   "text": "Tom Hughes",
+   "type": "PERSON"
+  }
+ ],
+ "photo": "/samples/field-note.jpg"
+}

@@ -23,6 +23,8 @@ export interface Interview {
   deviceMissing?: boolean;
   /** Set when the researcher confirms a manual review (required for release when Nano was unavailable). */
   attested?: boolean;
+  /** For notes read from a photo: a downscaled copy (data URL), kept on this device with the text. */
+  photo?: string;
 }
 
 /** May this interview's pseudonymised text be sent to a cloud model? */

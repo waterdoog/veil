@@ -8,7 +8,8 @@ import { extendAcronyms, extendNames, extendOrgs, findPatterns } from "./core/pa
 import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/types";
 import type { RuntimeConfig } from "./firebase";
 import { emptyStudy, releasable, uid, type Interview, type Study } from "./model";
-import { evalStudy, holdoutStudy, quickStudy, sampleStudy, scenariosStudy, tabStudy } from "./sample";
+import { evalStudy, FIELD_NOTE_TRUTH, holdoutStudy, quickStudy, sampleStudy, scenariosStudy, tabStudy } from "./sample";
+import type { GroundTruth } from "./core/evaluate";
 import { recordedStudy } from "./replay";
 import { getLocal, setLocal } from "./store/local";
 import { saveInterview, saveSynthesis } from "./store/cloud";
@@ -333,16 +334,19 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
 
   /** Photo of handwritten notes -> text, entirely on-device. */
   const addImage = useCallback(
-    async (file: File) => {
+    async (file: File, opts: { title?: string; truth?: GroundTruth[]; onCreated?: (id: string) => void } = {}) => {
       if (!backend) return;
       const id = uid();
-      const iv: Interview = { id, title: `Field notes — ${file.name}`, raw: "", status: "pseudonymising", progress: { done: 0, total: 1, stage: "Reading photo on this device" } };
+      const photo = await thumbnail(file).catch(() => undefined);
+      const iv: Interview = { id, title: opts.title ?? `Field notes — ${file.name}`, raw: "", truth: opts.truth, photo, status: "pseudonymising", progress: { done: 0, total: 1, stage: "Reading photo on this device" } };
       setStudy((s) => ({ ...s, interviews: [...s.interviews, iv] }));
+      opts.onCreated?.(id);
       const done = log({ interviewId: id, purpose: "read-image", mode: "only_on_device", bytesIn: file.size, payloadPreview: `${file.name} (${file.type}, ${Math.round(file.size / 1024)} KB)` });
       try {
         const r = await backend.readImage(file);
         done({ status: "ok", source: r.source });
-        patch(id, { raw: r.data.transcript, status: "review", progress: undefined });
+        // Answer keys only count identifiers that made it into the transcription.
+        patch(id, { raw: r.data.transcript, status: "review", progress: undefined, truth: opts.truth?.filter((t) => r.data.transcript.includes(t.text)) });
         addEntities([...r.data.entities.filter((e) => r.data.transcript.includes(e.text)), ...findPatterns(r.data.transcript)], id);
       } catch (err) {
         done({ status: "error", error: String(err) });
@@ -444,6 +448,11 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
     memo,
     synthesise,
     addImage,
+    /** Read the bundled fictional handwritten note with on-device Gemini Nano (image input). */
+    addSampleNote: async (onCreated?: (id: string) => void) => {
+      const blob = await (await fetch("/samples/field-note.jpg")).blob();
+      return addImage(new File([blob], "field-note.jpg", { type: "image/jpeg" }), { title: "Handwritten field note (fictional)", truth: FIELD_NOTE_TRUTH, onCreated });
+    },
     redactedOf,
     titleOf,
     ...actions,
@@ -451,3 +460,14 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
 }
 
 export type Veil = ReturnType<typeof useVeil>;
+
+/** A small JPEG copy of a photo, kept with the note on this device so the reviewer can compare. */
+async function thumbnail(file: File, max = 1200): Promise<string> {
+  const bmp = await createImageBitmap(file);
+  const k = Math.min(1, max / Math.max(bmp.width, bmp.height));
+  const c = document.createElement("canvas");
+  c.width = Math.round(bmp.width * k);
+  c.height = Math.round(bmp.height * k);
+  c.getContext("2d")!.drawImage(bmp, 0, 0, c.width, c.height);
+  return c.toDataURL("image/jpeg", 0.82);
+}

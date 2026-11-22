@@ -90,6 +90,12 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                 model. Review, the airlock and cloud analysis below run live.
               </div>
             )}
+            {iv.photo && (
+              <figure className="note-photo">
+                <img src={iv.photo} alt="Photo of the handwritten notes" />
+                <figcaption>Read by Gemini Nano on this device (image input, <code>ONLY_ON_DEVICE</code>). The photo never leaves it.</figcaption>
+              </figure>
+            )}
             {iv.progress && <Progress done={iv.progress.done} total={iv.progress.total} label={`${iv.progress.stage} with Gemini Nano…`} />}
             {iv.deviceMissing && (
               <div className="notice notice-warn">
