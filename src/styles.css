@@ -1077,3 +1077,4 @@ textarea.rq {
 .starter:hover { border-color: var(--device, #1f7a6c); }
 .starter b { font-size: 14px; }
 .starter span { font-size: 12px; color: var(--muted, #777); }
+.starter.live { border-color: var(--device); background: var(--device-bg); }

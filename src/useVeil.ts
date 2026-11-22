@@ -8,7 +8,7 @@ import { extendAcronyms, extendNames, extendOrgs, findPatterns } from "./core/pa
 import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/types";
 import type { RuntimeConfig } from "./firebase";
 import { emptyStudy, releasable, uid, type Interview, type Study } from "./model";
-import { evalStudy, holdoutStudy, sampleStudy, scenariosStudy, tabStudy } from "./sample";
+import { evalStudy, holdoutStudy, quickStudy, sampleStudy, scenariosStudy, tabStudy } from "./sample";
 import { recordedStudy } from "./replay";
 import { getLocal, setLocal } from "./store/local";
 import { saveInterview, saveSynthesis } from "./store/cloud";
@@ -33,7 +33,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       const name = new URLSearchParams(location.search).get("load");
       const policy = s?.policy ?? cfg.defaultPolicy;
       const rec = name === "replay" ? recordedStudy() : name === "replay-scenarios" ? recordedStudy("scenarios") : null;
-      const builtIn = { sample: sampleStudy, scenarios: scenariosStudy, holdout: holdoutStudy, tab: tabStudy }[name ?? ""];
+      const builtIn = { sample: sampleStudy, quick: quickStudy, scenarios: scenariosStudy, holdout: holdoutStudy, tab: tabStudy }[name ?? ""];
       const ev = rec ? rec.study : builtIn ? builtIn(policy) : name ? evalStudy(name, policy) : null;
       if (rec) setLedger(rec.ledger);
       if (ev) setStudy(ev);
@@ -377,7 +377,10 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
           interviews: s.interviews.filter((i) => i.id !== id),
           codebook: s.codebook.filter((e) => e.origin !== id || e.type !== "PERSON"),
         })),
+      /** Replace the current study, e.g. from a decrypted backup. */
+      restoreStudy: (st: Study) => setStudy({ ...st, interviews: st.interviews.map((i) => (i.status === "pseudonymising" || i.status === "analysing" ? { ...i, status: "review" as const, progress: undefined } : i)) }),
       loadSample: () => setStudy(sampleStudy(studyRef.current.policy)),
+      loadQuick: () => setStudy(quickStudy(studyRef.current.policy)),
       loadHoldout: () => setStudy(holdoutStudy(studyRef.current.policy)),
       loadTab: () => setStudy(tabStudy(studyRef.current.policy)),
       loadScenarios: () => setStudy(scenariosStudy(studyRef.current.policy)),

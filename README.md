@@ -1,6 +1,6 @@
 # Veil — pseudonymise on your device, analyse in the cloud
 
-**Veil lets qualitative researchers use a cloud AI model on interview transcripts while the work of finding and removing participants' identities happens on their own laptop.**
+**Veil lets people use a cloud AI model on confidential documents — research interviews, HR investigation files, clinical letters, court judgments — while finding and removing the identities in them happens on their own laptop.**
 
 Gemini Nano, running in Chrome through **Firebase AI Logic hybrid inference**, finds names, places, organisations, dates, contact details and rare identifying details *on the device*. Veil swaps each for a consistent placeholder (`[PERSON_1]`, `[ORG_4]`), shows the researcher exactly what will leave, re-scans every outgoing payload and blocks it if any known identifier slipped through (and flags name-like text nothing caught), and only then sends the pseudonymised text to cloud Gemini for long-context thematic analysis. The results come back with placeholders, and Veil puts the real names back — on the researcher's screen only.
 
@@ -64,6 +64,7 @@ flowchart LR
 - **Review like a researcher.** Highlights in the raw text; click a highlight to keep that text; select any text to redact it by hand; a codebook table with on/off switches. Merge two placeholders that turn out to be the same person or place. Two policies: *Standard* keeps health details (often the research data itself) and *Strict* removes them too and adds a second on-device pass.
 - **The airlock.** Right before *any* cloud request, Veil re-scans the payload against every codebook value and identifier pattern — including the interview title, which is user-written and often contains a name. One hit and the request is blocked, with a one-click "Redact these". The airlock only knows what was found, so a second, **model-independent** check flags name-like phrases still in the outgoing text that nothing caught ("Keith Holloway", "Northgate Home & Living") as *worth a look*, one click to redact. On our recorded Nano runs it surfaces 12 of the 18 names, organisations and places that Nano and the rules missed (interviews 4/7, TAB 6/6, record-style documents 2/5), at about 2–7 warnings per document. It never blocks; the human review step stays.
 - **Cloud analysis, re-identified locally.** Reflexive thematic analysis (themes, verbatim quotes with timestamps, tensions, follow-up questions) per interview, plus a cross-interview synthesis. A switch flips between "real names (re-identified on this device)" and "exactly what the cloud saw".
+- **Encrypted backup.** Raw text and the codebook key live only in this browser, so *Encrypted backup of everything* writes the whole study encrypted with a passphrase (PBKDF2-SHA-256, 310k iterations → AES-256-GCM, Web Crypto) and *Restore a backup* brings it back on any machine. Nothing is uploaded.
 - **Offline.** Pseudonymisation works with no connection. Cloud requests made offline are queued and sent when the connection returns; Firestore's offline cache syncs results.
 - **Ethics audit pack.** One click exports (a) an audit report for an ethics committee with no identifiable data — policy, how each interview was checked, identifiers replaced per type, airlock blocks, and a SHA-256 of every payload that left the device; (b) a **REFI-QDA project (`.qdpx`)** — pseudonymised transcripts with every cloud-coded quote as a coded selection, validated against the official QDA-XML 1.0 schema — that NVivo, ATLAS.ti, MAXQDA and QDA Miner import, plus the pseudonymised dataset as Markdown and the coded quotes as CSV; (c) the codebook key, behind a warning, for secure storage.
 - **Research questions.** A study's research questions steer the cloud analysis and synthesis — and go through the codebook and airlock, since they often name a site.
@@ -139,7 +140,7 @@ What never touches Firebase or any server: raw transcripts, photos of notes, and
 
 **No Gemini Nano? 60 seconds:** [?load=replay](https://veil-hybrid-29fb6.web.app/?load=replay) (sample interviews) or [?load=replay-scenarios](https://veil-hybrid-29fb6.web.app/?load=replay-scenarios) (HR file, hospital letter, court judgment) — detections recorded from real Gemini Nano in Chrome 158, clearly labelled; the airlock, cloud analysis and exports run live.
 
-**With Gemini Nano:**
+**With Gemini Nano:** [?load=quick](https://veil-hybrid-29fb6.web.app/?load=quick) pseudonymises one page live in about 13 seconds. For the full study:
 
 **Hosted:** https://veil-hybrid-29fb6.web.app — desktop Chrome 139+ with Gemini Nano for the live on-device path. **No Nano?** The first button on the page loads the sample study with a recorded real Gemini Nano run; everything else runs live.
 

@@ -91,3 +91,17 @@ export function evalStudy(name: string, policy: PolicyName): Study | null {
 export function allAnswerKeys() {
   return [...Object.values(files), ...Object.values(holdout)].flatMap((f) => f.identifiers);
 }
+
+/** One page of the first sample interview — for watching live on-device pseudonymisation finish in seconds. */
+export function quickStudy(policy: PolicyName): Study {
+  const p01 = Object.values(files).find((f) => f.id === "p01")!;
+  const cut = p01.transcript.indexOf("\n[00:01:58]");
+  const raw = cut > 0 ? p01.transcript.slice(0, cut) : p01.transcript.slice(0, 1600);
+  return {
+    id: uid(),
+    name: "Quick live test — one page of a fictional interview",
+    policy,
+    codebook: [],
+    interviews: [{ id: "q01", title: "Primary school teacher — first page", raw, truth: p01.identifiers.filter((i) => raw.includes(i.text)), status: "raw" }],
+  };
+}

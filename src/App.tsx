@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { AiBackend } from "./ai/backend";
 import type { RuntimeConfig } from "./firebase";
 import { POLICIES, type PolicyName } from "./core/types";
 import { useVeil, type Veil } from "./useVeil";
 import { auditReportHtml, codebookJson, codedQuotesCsv, pseudonymisedMarkdown } from "./core/report";
 import { studyToQdpx } from "./core/qdpx";
+import { decryptBackup, encryptBackup } from "./core/backup";
+import type { Study } from "./model";
 import { hasRecordedRun } from "./replay";
 import { CloudIcon, DeviceIcon, LockIcon } from "./ui/bits";
 import { InterviewView } from "./ui/InterviewView";
@@ -34,6 +36,16 @@ export function App({
   useEffect(() => {
     if (view !== "home" && view !== "synthesis" && !current) setView("home");
   }, [view, current]);
+
+  // A shared ?load=replay link lands straight on a document, raw on the left and what the cloud sees on the right.
+  const landing = useRef(new URLSearchParams(location.search).get("load"));
+  useEffect(() => {
+    if (!landing.current?.startsWith("replay") || !study.replay || !study.interviews.length) return;
+    setView((study.interviews.find((i) => i.id === "s-hr") ?? study.interviews[0]).id);
+    landing.current = null;
+    // Drop the parameter so a reload keeps the reviewer's own changes instead of reloading the recording.
+    history.replaceState(null, "", location.pathname);
+  }, [study]);
 
   return (
     <div className="app">
@@ -151,8 +163,45 @@ export function App({
               >
                 Codebook key (contains real names)
               </button>
+              <button
+                className="linkish small"
+                title="The whole study, raw text and key included, encrypted on this device with your passphrase (AES-256-GCM)"
+                onClick={async () => {
+                  const pass = prompt("Passphrase for the encrypted backup (at least 8 characters). Without it the file can't be opened — Veil can't recover it.");
+                  if (!pass) return;
+                  if (prompt("Type the passphrase again") !== pass) return alert("The passphrases didn't match. Nothing was saved.");
+                  try {
+                    download(`veil-${slug(study.name)}.veilbackup`, await encryptBackup(study, pass), "application/json");
+                  } catch (e) {
+                    alert((e as Error).message);
+                  }
+                }}
+              >
+                Encrypted backup of everything
+              </button>
             </div>
           )}
+          <input
+            id="restore-file"
+            type="file"
+            accept=".veilbackup,application/json"
+            hidden
+            onChange={async (ev) => {
+              const f = ev.target.files?.[0];
+              ev.target.value = "";
+              if (!f) return;
+              const pass = prompt(`Passphrase for ${f.name}`);
+              if (!pass) return;
+              try {
+                const st = await decryptBackup<Study>(await f.text(), pass);
+                if (study.interviews.length && !confirm(`Replace the current study "${study.name}" with "${st.name}"?`)) return;
+                veil.restoreStudy(st);
+                setView("home");
+              } catch (e) {
+                alert((e as Error).message);
+              }
+            }}
+          />
           <div className="side-foot small muted">
             <button className="linkish" onClick={veil.loadSample}>
               Load sample study
@@ -180,6 +229,10 @@ export function App({
             ·{" "}
             <button className="linkish" onClick={veil.newStudy}>
               New study
+            </button>{" "}
+            ·{" "}
+            <button className="linkish" onClick={() => document.getElementById("restore-file")?.click()}>
+              Restore a backup
             </button>
           </div>
         </nav>
@@ -256,10 +309,10 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
           <em>Send the cloud only the story.</em>
         </h1>
         <p className="lede">
-          Qualitative researchers promise ethics committees that identifiable transcripts stay under their control, then
-          spend hours pseudonymising by hand before they can use any AI. Veil does it on your laptop with Gemini Nano, shows
+          Interview transcripts, HR files, clinical letters, case papers: the documents people most want AI help with are the
+          ones they can't paste into a cloud model. Veil pseudonymises them on your laptop with Gemini Nano, shows
           you exactly what will leave, blocks any known identifier that slipped through, flags name-like text nothing caught, and only then hands the cloud model a
-          pseudonymised copy for thematic analysis. Results come back with real names restored — locally. The same works for court judgments, HR files and clinical letters.
+          pseudonymised copy for analysis. Results come back with real names restored — locally.
         </p>
         <div className="actions">
           {!study.interviews.length ? (
@@ -294,6 +347,18 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
       {study.interviews.every((iv) => iv.truth) && (
         <div className="starters">
           <span className="muted small">Try it on</span>
+          {veil.device === "available" && (
+            <button
+              className="starter live"
+              onClick={() => {
+                veil.loadQuick();
+                onOpen("q01");
+              }}
+            >
+              <b>Live in ~15 seconds</b>
+              <span>One page, pseudonymised by Gemini Nano on this device</span>
+            </button>
+          )}
           <button
             className="starter"
             onClick={() => {

@@ -436,3 +436,15 @@ describe("independent name-like warnings", () => {
     expect(nameLike(out, kept)).toEqual(["Keith Holloway", "Northgate Home & Living"]);
   });
 });
+
+import { decryptBackup, encryptBackup } from "../src/core/backup";
+describe("encrypted backup", () => {
+  it("round-trips with the passphrase and fails without it", async () => {
+    const study = { name: "S", interviews: [{ id: "p1", raw: "Sarah Jenkins lives in Leeds" }] };
+    const file = await encryptBackup(study, "correct horse");
+    expect(file).not.toContain("Sarah");
+    expect(await decryptBackup(file, "correct horse")).toEqual(study);
+    await expect(decryptBackup(file, "wrong horse!")).rejects.toThrow(/Wrong passphrase/);
+    await expect(encryptBackup(study, "short")).rejects.toThrow(/8 characters/);
+  });
+});
