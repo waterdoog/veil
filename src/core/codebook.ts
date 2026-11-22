@@ -22,6 +22,7 @@ const STOP = new Set([
   // Interjections and public holidays the on-device model sometimes tags (seen in real Nano runs).
   "january", "february", "march", "april", "june", "july", "august", "september", "october", "november",
   "december", "spring", "summer", "autumn", "winter",
+  "hr", "human resources", "occupational health", "a&e", "gp surgery", "the council", "payroll",
   "oh", "um", "uh", "yeah", "okay", "ok", "right", "well", "hi", "hello", "bye", "god", "christmas", "easter",
   "new year", "boxing day", "halloween", "bank holiday", "thanksgiving", "excel", "zoom", "teams", "whatsapp", "google",
   // Benefit names describe a situation shared by millions; they are research data, not identifiers.

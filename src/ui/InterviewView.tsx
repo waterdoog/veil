@@ -387,7 +387,7 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                 <>
                   {iv.memoSource && <SourceBadge source={iv.memoSource} mode="prefer_on_device" />}
                   <p className="memo-text">
-                    <TokenText text={iv.memo} codebook={study.codebook} showReal={showReal} />
+                    <TokenText text={plainMemo(iv.memo)} codebook={study.codebook} showReal={showReal} />
                   </p>
                 </>
               )}
@@ -397,4 +397,14 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
       )}
     </div>
   );
+}
+
+/** Models often answer in Markdown; show it as clean text (headings and bold markers removed, bullets kept). */
+function plainMemo(t: string): string {
+  return t
+    .replace(/^#{1,6}\s*/gm, "")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/^\s*[-*]\s+/gm, "• ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
 }
