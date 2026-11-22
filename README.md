@@ -4,6 +4,8 @@
 
 Gemini Nano, running in Chrome through **Firebase AI Logic hybrid inference**, finds names, places, organisations, dates, contact details and rare identifying details *on the device*. Veil swaps each for a consistent placeholder (`[PERSON_1]`, `[ORG_4]`), shows the researcher exactly what will leave, re-scans every outgoing payload and blocks it if anything identifying slipped through, and only then sends the pseudonymised text to cloud Gemini for long-context thematic analysis. The results come back with placeholders, and Veil puts the real names back — on the researcher's screen only.
 
+![Pseudonymising an interview on device: highlights on the raw transcript, placeholders in what the cloud will see](docs/1-pseudonymise-on-device.jpg)
+
 Built for [#BuildHybridAI 2026](https://firebasehybridaihackathon.devpost.com/) · Web (Chrome) · Apache-2.0
 
 ---
@@ -61,16 +63,23 @@ flowchart LR
 
 ### Measured on real Gemini Nano
 
-Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), the six fictional sample interviews (≈11,000 words), scored against their answer keys. Numbers are recall: the share of answer-key identifiers fully replaced.
+Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), scored against answer keys of every identifier in fictional interviews. **Recall** = share of answer-key identifiers fully replaced; **precision** = share of replacements that are answer-key identifiers.
 
-| Build | Policy | Identifiers removed | Per interview | Airlock |
-|---|---|---|---|---|
-| Nano + patterns (first build) | Standard | 214 / 265 = **80.8%** | 79–83% | passed 6/6 |
-| + name and institution expansion | Standard | 226 / 265 = **85.3%** | 82–89% | passed 6/6 |
-| + named-institution and age detectors | Standard | 235 / 265 = **88.7%** | 82–92% | passed 6/6 |
-| same, second on-device pass | Strict (also removes health terms) | 276 / 338 = **81.7%** | 79–87% | passed 6/6 |
+| Set | Build | Recall | Precision |
+|---|---|---|---|
+| **Held-out** — 4 interviews (US/UK/Ireland, UX/education/social care), never used for tuning | first look | 115 / 149 = **77.2%** | 96.8% |
+| Held-out | after general fixes informed by those misses (titled names, $ amounts, ages, org acronyms) | 131 / 149 = **87.9%** | 97.1% |
+| Development — 6 Long COVID interviews, used for tuning | first build | 214 / 265 = 80.8% | — |
+| Development | current | 238 / 265 = **89.8%** | 90.2% |
+| Development, Strict policy (also health terms, second on-device pass) | | 276 / 338 = 81.7% | — |
 
-The whole six-interview study pseudonymises in about 4 minutes on a MacBook (Standard), entirely on device. What Nano still misses is mostly quasi-identifiers — a rare hobby, an unusual job description — which is exactly why Veil keeps a human review step and shows each miss. Each improvement above came from reading the misses of the previous real-Nano run. Precision (false positives) is not yet measured; the reviewer can switch any over-redaction off with one click.
+The six-interview study pseudonymises in about 4–5 minutes on a MacBook, entirely on device; the airlock found no known identifier in any outgoing payload in any run. What Nano still misses is mostly quasi-identifiers — a rare hobby, an unusual job description, a small place name — which is why Veil keeps the human review step and shows every miss. Nano is not deterministic: a few items caught in one run are missed in the next.
+
+**No Gemini Nano in your browser?** Click **Replay a recorded Nano run**: the sample study loads with the detections real Gemini Nano made in Chrome 158 (clearly labelled as recorded), and review, the airlock and cloud analysis run live.
+
+| Cloud analysis, re-identified on this device | Exactly what the cloud saw |
+|---|---|
+| ![](docs/2-cloud-analysis-reidentified-locally.jpg) | ![](docs/3-what-the-cloud-saw.jpg) |
 
 ## Firebase products used
 

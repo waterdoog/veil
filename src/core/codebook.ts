@@ -19,6 +19,9 @@ const STOP = new Set([
   "long covid", "work", "home", "today", "yesterday", "monday", "tuesday", "wednesday",
   "thursday", "friday", "saturday", "sunday", "morning", "evening", "uk", "england", "dwp", "acas",
   "jobcentre", "universal credit", "a&e",
+  // Interjections and public holidays the on-device model sometimes tags (seen in real Nano runs).
+  "oh", "um", "uh", "yeah", "okay", "ok", "right", "well", "hi", "hello", "bye", "god", "christmas", "easter",
+  "new year", "boxing day", "halloween", "bank holiday", "thanksgiving", "excel", "zoom", "teams", "whatsapp", "google",
   // Benefit names describe a situation shared by millions; they are research data, not identifiers.
   "statutory sick pay", "ssp", "pip", "personal independence payment", "carer's allowance", "carers allowance",
   "esa", "employment and support allowance", "housing benefit", "child benefit", "medicaid", "medicare", "snap",

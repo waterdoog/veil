@@ -170,8 +170,8 @@ export class FirebaseBackend implements AiBackend {
   private redactor: GenerativeModel;
   private checker: GenerativeModel;
   private imageReader: GenerativeModel;
-  private analyst: GenerativeModel;
-  private synthesiser: GenerativeModel;
+  private analyst: GenerativeModel[];
+  private synthesiser: GenerativeModel[];
   private memoWriter: GenerativeModel;
 
   constructor(cloudModel: string) {
@@ -189,16 +189,19 @@ export class FirebaseBackend implements AiBackend {
         promptOptions: { responseConstraint: IMAGE_JSON_SCHEMA },
       },
     });
-    const cloud = (system: string, schema: Schema) => ({
+    const cloud = (system: string, schema: Schema, model = cloudModel) => ({
       mode: InferenceMode.ONLY_IN_CLOUD,
       inCloudParams: {
-        model: cloudModel,
+        model,
         systemInstruction: system,
-        generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature: 0.4 },
+        // A modest thinking budget keeps time-to-first-token short; the analysis prompt is well structured.
+        generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature: 0.4, thinkingConfig: { thinkingBudget: 1024 } },
       },
     });
-    this.analyst = getGenerativeModel(ai, cloud(ANALYST_SYSTEM, analysisSchema));
-    this.synthesiser = getGenerativeModel(ai, cloud(SYNTH_SYSTEM, synthesisSchema));
+    // The configured model first; if it is overloaded, Firebase AI Logic's default cloud model.
+    const models = [...new Set([cloudModel, FALLBACK_CLOUD_MODEL])];
+    this.analyst = models.map((m) => getGenerativeModel(ai, cloud(ANALYST_SYSTEM, analysisSchema, m)));
+    this.synthesiser = models.map((m) => getGenerativeModel(ai, cloud(SYNTH_SYSTEM, synthesisSchema, m)));
     this.memoWriter = getGenerativeModel(ai, {
       mode: InferenceMode.PREFER_ON_DEVICE,
       onDeviceParams: {
@@ -294,11 +297,11 @@ export class FirebaseBackend implements AiBackend {
   }
 
   async analyseInterview(prompt: string): Promise<AiResult<Analysis>> {
-    return cloudJson(this.analyst, prompt, normaliseAnalysis);
+    return cloudWithFallback(this.analyst, prompt, normaliseAnalysis);
   }
 
   async synthesise(prompt: string): Promise<AiResult<Synthesis>> {
-    return cloudJson(this.synthesiser, prompt, normaliseSynthesis);
+    return cloudWithFallback(this.synthesiser, prompt, normaliseSynthesis);
   }
 
   async memo(prompt: string, onText: (t: string) => void): Promise<AiResult<string>> {
@@ -313,13 +316,29 @@ export class FirebaseBackend implements AiBackend {
   }
 }
 
-/** Retry rate-limit / overload errors (429, 503) with exponential backoff; anything else fails at once. */
-async function withBackoff<T>(fn: () => Promise<T>, tries = 4): Promise<T> {
+const FALLBACK_CLOUD_MODEL = "gemini-3.5-flash-lite";
+const OVERLOADED = /\b(429|500|503)\b|RESOURCE_EXHAUSTED|UNAVAILABLE|overloaded|high demand/i;
+
+async function cloudWithFallback<T>(models: GenerativeModel[], prompt: string, normalise: (x: unknown) => T): Promise<AiResult<T>> {
+  let last: unknown;
+  for (const m of models) {
+    try {
+      return await cloudJson(m, prompt, normalise);
+    } catch (e) {
+      last = e;
+      if (!OVERLOADED.test(String(e))) throw e;
+    }
+  }
+  throw last;
+}
+
+/** Retry rate-limit / overload errors (429, 500 "high demand", 503) with exponential backoff; anything else fails at once. */
+async function withBackoff<T>(fn: () => Promise<T>, tries = 3): Promise<T> {
   for (let i = 0; ; i++) {
     try {
       return await fn();
     } catch (e) {
-      if (i >= tries - 1 || !/\b(429|503)\b|RESOURCE_EXHAUSTED|UNAVAILABLE|overloaded/i.test(String(e))) throw e;
+      if (i >= tries - 1 || !OVERLOADED.test(String(e))) throw e;
       await new Promise((r) => setTimeout(r, 1500 * 2 ** i + Math.random() * 500));
     }
   }
@@ -329,9 +348,13 @@ async function withBackoff<T>(fn: () => Promise<T>, tries = 4): Promise<T> {
 async function cloudJson<T>(model: GenerativeModel, prompt: string, normalise: (x: unknown) => T): Promise<AiResult<T>> {
   let lastErr: unknown;
   for (let attempt = 0; attempt < 2; attempt++) {
-    const r = await withBackoff(() => model.generateContent(prompt));
+    // Stream, so bytes keep flowing on long analyses (some proxies drop connections that are silent for ~30 s).
+    const r = await withBackoff(() => model.generateContentStream(prompt));
+    let text = "";
+    for await (const c of r.stream) text += c.text();
+    const final = await r.response;
     try {
-      return { data: normalise(parseJson(r.response.text())), source: src(r.response.inferenceSource) };
+      return { data: normalise(parseJson(text)), source: src(final.inferenceSource) };
     } catch (e) {
       lastErr = e;
     }
