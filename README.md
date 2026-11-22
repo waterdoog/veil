@@ -59,6 +59,19 @@ flowchart LR
 - **Setup check.** A built-in panel tells you whether this browser can run Gemini Nano (Chrome version, Prompt API, text and image availability) and gives the exact `chrome://` flags to copy.
 - **Measured, not claimed.** The bundled sample study (six entirely fictional interviews) ships with an answer key of every identifier, and Veil shows the share of identifiers removed for each interview, with the misses one click away.
 
+### Measured on real Gemini Nano
+
+Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), the six fictional sample interviews (≈11,000 words), scored against their answer keys. Numbers are recall: the share of answer-key identifiers fully replaced.
+
+| Build | Policy | Identifiers removed | Per interview | Airlock |
+|---|---|---|---|---|
+| Nano + patterns (first build) | Standard | 214 / 265 = **80.8%** | 79–83% | passed 6/6 |
+| + name and institution expansion | Standard | 226 / 265 = **85.3%** | 82–89% | passed 6/6 |
+| + named-institution and age detectors | Standard | 235 / 265 = **88.7%** | 82–92% | passed 6/6 |
+| same, second on-device pass | Strict (also removes health terms) | 276 / 338 = **81.7%** | 79–87% | passed 6/6 |
+
+The whole six-interview study pseudonymises in about 4 minutes on a MacBook (Standard), entirely on device. What Nano still misses is mostly quasi-identifiers — a rare hobby, an unusual job description — which is exactly why Veil keeps a human review step and shows each miss. Each improvement above came from reading the misses of the previous real-Nano run. Precision (false positives) is not yet measured; the reviewer can switch any over-redaction off with one click.
+
 ## Firebase products used
 
 | Product | How Veil uses it | Code |
@@ -74,7 +87,7 @@ What never touches Firebase or any server: raw transcripts, photos of notes, and
 
 ## Try it
 
-**Hosted:** _URL to be added after deploy_ — use desktop Chrome 139+.
+**Hosted:** https://veil-hybrid-29fb6.web.app — use desktop Chrome 139+.
 
 1. Enable `chrome://flags/#prompt-api-for-gemini-nano-multimodal-input`, restart Chrome.
 2. Open Veil and click **Set up on-device model** (one-time download, stays on your machine).
