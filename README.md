@@ -6,7 +6,7 @@ Gemini Nano, running in Chrome through **Firebase AI Logic hybrid inference**, f
 
 ![Pseudonymising an interview on device: highlights on the raw transcript, placeholders in what the cloud will see](docs/1-pseudonymise-on-device.jpg)
 
-Built for [#BuildHybridAI 2026](https://firebasehybridaihackathon.devpost.com/) · Web (Chrome) · Apache-2.0
+Built for [#BuildHybridAI 2026](https://firebasehybridaihackathon.devpost.com/) · Web (Chrome) · Apache-2.0 · **[2:42 demo video](https://youtu.be/O0s7t6teSX4)**
 
 ---
 
