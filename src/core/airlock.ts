@@ -62,7 +62,8 @@ export type Purpose =
   | "read-image"
   | "analyse-interview"
   | "synthesise-study"
-  | "quick-memo";
+  | "quick-memo"
+  | "airlock-test";
 
 export interface LedgerEntry {
   id: string;

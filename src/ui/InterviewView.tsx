@@ -17,6 +17,7 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
   const [showReal, setShowReal] = useState(true);
   const [sel, setSel] = useState<{ text: string; x: number; y: number } | null>(null);
   const [flash, setFlash] = useState<number | null>(null);
+  const [airlockTest, setAirlockTest] = useState<{ leaked: string; blocked: boolean } | null>(null);
   const rawRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (flash === null || tab !== "pseudo") return;
@@ -210,7 +211,26 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                     I have read the whole transcript and redacted every identifier by hand.
                   </label>
                 )}
+                {airlockTest && (
+                  <div className={`notice ${airlockTest.blocked ? "notice-error" : "notice-warn"}`}>
+                    {airlockTest.blocked ? (
+                      <>
+                        <b>Blocked.</b> We slipped “{airlockTest.leaked}” back into the outgoing text, as a careless edit would. The airlock
+                        stopped it before anything was sent (see the Airlock log).
+                      </>
+                    ) : (
+                      <>The test value wasn't caught — please report this.</>
+                    )}
+                  </div>
+                )}
                 <div className="actions">
+                  <button
+                    className="btn btn-ghost"
+                    title="Insert a real name into the outgoing text and see the airlock block it. Nothing is sent."
+                    onClick={async () => setAirlockTest(await veil.testAirlock(iv.id))}
+                  >
+                    Test the airlock
+                  </button>
                   <button className="btn btn-ghost" disabled={busy} onClick={() => veil.pseudonymise(iv.id)}>
                     Re-run on device
                   </button>

@@ -13,6 +13,7 @@ const PURPOSE: Record<LedgerEntry["purpose"], string> = {
   "analyse-interview": "Analyse interview",
   "synthesise-study": "Cross-interview synthesis",
   "quick-memo": "Quick memo",
+  "airlock-test": "Airlock test (nothing sent)",
 };
 
 export function Ledger({ entries, onClose }: { entries: LedgerEntry[]; onClose: () => void }) {

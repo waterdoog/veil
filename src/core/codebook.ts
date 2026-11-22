@@ -20,6 +20,8 @@ const STOP = new Set([
   "thursday", "friday", "saturday", "sunday", "morning", "evening", "uk", "england", "dwp", "acas",
   "jobcentre", "universal credit", "a&e",
   // Interjections and public holidays the on-device model sometimes tags (seen in real Nano runs).
+  "january", "february", "march", "april", "june", "july", "august", "september", "october", "november",
+  "december", "spring", "summer", "autumn", "winter",
   "oh", "um", "uh", "yeah", "okay", "ok", "right", "well", "hi", "hello", "bye", "god", "christmas", "easter",
   "new year", "boxing day", "halloween", "bank holiday", "thanksgiving", "excel", "zoom", "teams", "whatsapp", "google",
   // Benefit names describe a situation shared by millions; they are research data, not identifiers.

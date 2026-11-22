@@ -16,6 +16,17 @@ Interview research runs on consent forms and ethics approvals that promise parti
 
 The usual "local AI" answer doesn't solve it: a small on-device model can't do a good cross-interview thematic analysis of 60,000 characters of transcripts. The usual "cloud AI" answer can, but it means uploading identifiable data.
 
+## How this differs from what researchers use today
+
+| | Where identifiers are removed | AI analysis | Install |
+|---|---|---|---|
+| Dovetail, Condens, Marvin (research repositories) | Redaction runs **after upload**, in the vendor's cloud ([Dovetail](https://dovetail.com/changelog/automatic-redaction/), [Condens](https://condens.io/help/security-and-privacy/security-and-privacy-features/data-anonymization/), [Marvin](https://help.heymarvin.com/en/articles/10130399-how-do-i-mask-sensitive-and-personally-identifiable-information-pii-in-files)) | Yes, cloud | SaaS |
+| ATLAS.ti / NVivo AI | Text is sent to a cloud model under no-training terms ([ATLAS.ti](https://atlasti.com/ai-data-security-and-privacy)) | Yes, cloud | Desktop |
+| Microsoft Presidio, Private AI | Before sending — but you build/host the pipeline yourself ([Presidio](https://github.com/microsoft/presidio), [Private AI](https://docs.private-ai.com/what-is-privategpt)) | Bring your own | Python / container |
+| **Veil** | **On the researcher's laptop, before anything is uploaded** (Gemini Nano + patterns + review + airlock) | Yes — cloud Gemini on pseudonymised text only | Open a web page |
+
+Pseudonymised text is still personal data under GDPR — Veil reduces what reaches a cloud service and documents it for an ethics committee; it doesn't make data anonymous.
+
 ## The idea: split the trust, not just the workload
 
 Most hybrid apps use the on-device model as a cheaper or offline *substitute* for the cloud. Veil uses the two models for **different jobs that need different levels of trust, at the same time, even with perfect connectivity**:
@@ -73,6 +84,8 @@ Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), scored
 | Development | current | 238 / 265 = **89.8%** | 90.2% |
 | Development, Strict policy (also health terms, second on-device pass) | | 276 / 338 = 81.7% | — |
 
+**Baseline — Microsoft Presidio** (open-source PII detector, default configuration with spaCy `en_core_web_lg`, scored with the same code on the same interviews): held-out recall **60.4%** at **53.4%** precision; development 53.2% / 57.6%. Presidio finds people very well (51/51 on held-out) but almost none of the organisations, money amounts or quasi-identifiers that make an interview participant recognisable. Script: `planning/presidio_baseline.py` in our working repo; spans and scoring reproduced in `tests`-style code (`src/core/evaluate.ts`).
+
 The six-interview study pseudonymises in about 4–5 minutes on a MacBook, entirely on device; the airlock found no known identifier in any outgoing payload in any run. What Nano still misses is mostly quasi-identifiers — a rare hobby, an unusual job description, a small place name — which is why Veil keeps the human review step and shows every miss. Nano is not deterministic: a few items caught in one run are missed in the next.
 
 **No Gemini Nano in your browser?** Click **Replay a recorded Nano run**: the sample study loads with the detections real Gemini Nano made in Chrome 158 (clearly labelled as recorded), and review, the airlock and cloud analysis run live.
@@ -96,14 +109,15 @@ What never touches Firebase or any server: raw transcripts, photos of notes, and
 
 ## Try it
 
-**Hosted:** https://veil-hybrid-29fb6.web.app — use desktop Chrome 139+.
+**Hosted:** https://veil-hybrid-29fb6.web.app — desktop Chrome 139+ with Gemini Nano for the live on-device path. **No Nano?** The first button on the page loads the sample study with a recorded real Gemini Nano run; everything else runs live.
 
 1. Enable `chrome://flags/#prompt-api-for-gemini-nano-multimodal-input`, restart Chrome.
 2. Open Veil and click **Set up on-device model** (one-time download, stays on your machine).
 3. Click **Load the sample study** → open an interview → **Pseudonymise on this device**.
 4. Review the highlights, check the airlock, then **Release to cloud analysis**.
 5. Open **Cross-interview synthesis**, and the **Airlock log** to see where every call ran and what left the device.
-6. To see it fail closed, open Veil in a browser without Gemini Nano: pseudonymisation falls back to pattern detection + manual redaction, never to the cloud, and release stays locked until you confirm a manual review.
+6. Click **Test the airlock**: Veil slips a real name back into the outgoing text and shows the airlock blocking it (nothing is sent).
+7. To see it fail closed, open Veil in a browser without Gemini Nano: pseudonymisation falls back to pattern detection + manual redaction, never to the cloud, and release stays locked until you confirm a manual review.
 
 If the chip says "On-device model unavailable" in Chrome 139+: check `chrome://on-device-internals` for the model status, make sure the flag above is enabled, and on some machines also set `chrome://flags/#optimization-guide-on-device-model` to *Enabled BypassPerfRequirement*. Veil's **check setup** panel walks through each requirement. Chrome only downloads Gemini Nano when the profile drive has at least 22 GB free (the model itself is much smaller) and the machine has a supported GPU or enough RAM — see Chrome's Prompt API docs.
 

@@ -248,9 +248,15 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
         <div className="actions">
           {!study.interviews.length ? (
             <>
-              <button className="btn btn-device" onClick={veil.loadSample}>
-                Load the sample study (6 fictional interviews)
-              </button>
+              {hasRecordedRun && veil.device === "unavailable" ? (
+                <button className="btn btn-device" onClick={veil.loadReplay}>
+                  Start here: sample study with a recorded Gemini Nano run
+                </button>
+              ) : (
+                <button className="btn btn-device" onClick={veil.loadSample}>
+                  Load the sample study (6 fictional interviews)
+                </button>
+              )}
 
               <button className="btn btn-ghost" onClick={onAdd}>
                 Add your own transcript
@@ -261,7 +267,7 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
               Open {study.interviews[0].title.slice(0, 40)}
             </button>
           )}
-          {hasRecordedRun && veil.device !== "available" && (
+          {hasRecordedRun && veil.device !== "available" && study.interviews.length > 0 && !study.replay && (
             <button className="btn btn-ghost" onClick={veil.loadReplay} title="Detections made by real Gemini Nano on another machine; cloud analysis runs live">
               No Gemini Nano here? Replay a recorded Nano run
             </button>

@@ -294,6 +294,25 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
     }
   }, [backend, airlock, redactedOf, titleOf, questionsFor, userId]);
 
+  /**
+   * Show the airlock working: take the real outgoing payload, slip one real identifier back in (as a careless
+   * edit would), and run the airlock on it. Nothing is sent; the attempt is logged as blocked.
+   */
+  const testAirlock = useCallback(
+    async (id: string): Promise<{ leaked: string; blocked: boolean } | null> => {
+      const s = studyRef.current;
+      const iv = s.interviews.find((i) => i.id === id);
+      const victim = s.codebook.find((e) => e.enabled && e.type === "PERSON" && e.origin === id && e.real.includes(" "))
+        ?? s.codebook.find((e) => e.enabled && e.origin === id);
+      if (!iv || !victim) return null;
+      const payload = analysePrompt(titleOf(iv), redactedOf(iv) + `\n[note] Follow up with ${victim.real} next week.`);
+      const guard = guardPayload(payload, s.codebook, POLICIES[s.policy], id);
+      log({ purpose: "airlock-test", mode: "only_in_cloud", bytesIn: guard.bytes, payloadPreview: `…Follow up with ${victim.token} next week. ← real value inserted for this test`, guard, interviewId: id })({ status: guard.ok ? "ok" : "blocked" });
+      return { leaked: victim.real, blocked: !guard.ok };
+    },
+    [log, redactedOf, titleOf],
+  );
+
   /** Photo of handwritten notes -> text, entirely on-device. */
   const addImage = useCallback(
     async (file: File) => {
@@ -393,6 +412,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
     stopBatch,
     imageStatus: () => (backend ? backend.imageStatus() : Promise.resolve("unavailable" as DeviceStatus)),
     pseudonymise,
+    testAirlock,
     analyse,
     memo,
     synthesise,
