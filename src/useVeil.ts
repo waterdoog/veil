@@ -8,7 +8,7 @@ import { extendAcronyms, extendNames, extendOrgs, findPatterns } from "./core/pa
 import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/types";
 import type { RuntimeConfig } from "./firebase";
 import { emptyStudy, releasable, uid, type Interview, type Study } from "./model";
-import { holdoutStudy, sampleStudy } from "./sample";
+import { holdoutStudy, sampleStudy, tabStudy } from "./sample";
 import { recordedStudy } from "./replay";
 import { getLocal, setLocal } from "./store/local";
 import { saveInterview, saveSynthesis } from "./store/cloud";
@@ -361,6 +361,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
         })),
       loadSample: () => setStudy(sampleStudy(studyRef.current.policy)),
       loadHoldout: () => setStudy(holdoutStudy(studyRef.current.policy)),
+      loadTab: () => setStudy(tabStudy(studyRef.current.policy)),
       loadReplay: () => {
         const r = recordedStudy();
         if (!r) return;

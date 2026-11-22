@@ -1,0 +1,68 @@
+{
+ "id": "t03",
+ "title": "ECHR case 001-119229 (TAB test set)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 19840/09) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr Harry Shindler (“the applicant”), on 26 March 2009.\n\nThe applicant was represented by Ms C. Oliver, a lawyer practising in Rome. The United Kingdom Government (“the Government”) were represented by their Agent, Mr D. Walton, of the Foreign and Commonwealth Office.\n\nThe applicant alleged that his disenfranchisement as a result of his residence outside the United Kingdom constituted a violation of Article 3 of Protocol No. 1 to the Convention, taken alone and taken together with Article 14, and Article 2 of Protocol No. 4 to the Convention.\n\nOn 14 December 2010 the application was communicated to the Government. It was also decided to rule on the admissibility and merits of the application at the same time (Article 29 § 1).\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1921 and lives in Ascoli Piceno, Italy. He left the United Kingdom in 1982 following his retirement and moved to Italy with his wife, an Italian national.\n\nPursuant to primary legislation, British citizens residing overseas for less than fifteen years are permitted to vote in parliamentary elections in the United Kingdom (see paragraphs 10-11 below). The applicant does not meet the fifteen-year criterion and is therefore not entitled to vote. In particular, he was unable to vote in the general election of 5 May 2010.",
+ "identifiers": [
+  {
+   "text": "19840/09",
+   "type": "ID"
+  },
+  {
+   "text": "British",
+   "type": "QUASI"
+  },
+  {
+   "text": "Mr Harry Shindler",
+   "type": "PERSON"
+  },
+  {
+   "text": "26 March 2009",
+   "type": "DATE"
+  },
+  {
+   "text": "Ms C. Oliver",
+   "type": "PERSON"
+  },
+  {
+   "text": "Rome",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Mr D. Walton",
+   "type": "PERSON"
+  },
+  {
+   "text": "United Kingdom",
+   "type": "LOCATION"
+  },
+  {
+   "text": "14 December 2010",
+   "type": "DATE"
+  },
+  {
+   "text": "1921",
+   "type": "DATE"
+  },
+  {
+   "text": "Ascoli Piceno",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Italy",
+   "type": "LOCATION"
+  },
+  {
+   "text": "1982",
+   "type": "DATE"
+  },
+  {
+   "text": "retirement",
+   "type": "QUASI"
+  },
+  {
+   "text": "Italian",
+   "type": "QUASI"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

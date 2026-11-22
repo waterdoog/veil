@@ -335,3 +335,13 @@ describe("fixes from the held-out second look", () => {
     expect(out).not.toMatch(/Foley|Padraig/);
   });
 });
+
+describe("generic detectors from the TAB first look", () => {
+  it("case numbers, nationality, household composition", () => {
+    const f = findPatterns("Application no. 27961/02 by a British national, who has two children.").map((x) => `${x.type}:${x.text}`);
+    expect(f).toEqual(expect.arrayContaining(["ID:27961/02", "QUASI:British", "QUASI:two children"]));
+  });
+  it("leaves dates like 12/03 alone when they're not case numbers", () => {
+    expect(findPatterns("We met on 12/03/2024.").map((x) => x.text)).not.toContain("12/03");
+  });
+});

@@ -162,6 +162,10 @@ export function App({
               Held-out set
             </button>{" "}
             ·{" "}
+            <button className="linkish" onClick={veil.loadTab} title="Text Anonymization Benchmark — 8 public ECHR judgments with expert annotations">
+              TAB benchmark
+            </button>{" "}
+            ·{" "}
             <button className="linkish" onClick={veil.newStudy}>
               New study
             </button>

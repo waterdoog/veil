@@ -1,0 +1,96 @@
+{
+ "id": "t07",
+ "title": "ECHR case 001-90575 (TAB test set)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 28091/02) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr Graham Thorne (“the applicant”), on 25 October 2001.\n\nThe applicant was represented by Royds Rdw, solicitors in London. The United Kingdom Government (“the Government”) were represented by their Agent, Mr C. Whomersley of the Foreign and Commonwealth Office, London\n\nThe applicant complained under Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1 that, because he was a man, he was denied social security benefits equivalent to those received by widows.\n\nBy a partial decision of 12 November 2002 the Court decided to communicate the complaints concerning widows’ benefits which had been made within the applicable time-limits. Subsequently, it was decided to examine the merits of the application at the same time as its admissibility.\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1958 and lives in Kent.\n\nHis wife died on 25 January 2001. He made an oral claim for benefits on 16 February 2001. His formal claim for widows’ benefits, namely Widow’s Payment (“Wpt”) and Widowed Mother’s Allowance (“WMA”) was made subsequently, allegedly on 2 March 2001, and was rejected on 28 June 2001 on the ground that he was not entitled to widows’ benefits because he was not a woman. The applicant did not appeal as he considered or was advised that such a remedy would be bound to fail since no such social security benefits were payable to widowers under United Kingdom law.\n\nThe applicant was in receipt of child benefit at the time of his claim.\n\nUpon the introduction of the new benefit scheme, as of 8 April 2001 the applicant started receiving Widowed Parent’s Allowance instead of WMA.",
+ "identifiers": [
+  {
+   "text": "28091/02",
+   "type": "ID"
+  },
+  {
+   "text": "British",
+   "type": "QUASI"
+  },
+  {
+   "text": "Mr Graham Thorne",
+   "type": "PERSON"
+  },
+  {
+   "text": "25 October 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "Royds Rdw",
+   "type": "ORG"
+  },
+  {
+   "text": "United Kingdom Government",
+   "type": "ORG"
+  },
+  {
+   "text": "Mr C. Whomersley",
+   "type": "PERSON"
+  },
+  {
+   "text": "widows",
+   "type": "QUASI"
+  },
+  {
+   "text": "12 November 2002",
+   "type": "DATE"
+  },
+  {
+   "text": "1958",
+   "type": "DATE"
+  },
+  {
+   "text": "Kent",
+   "type": "LOCATION"
+  },
+  {
+   "text": "25 January 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "16 February 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "Widow’s Payment",
+   "type": "QUASI"
+  },
+  {
+   "text": "Wpt",
+   "type": "QUASI"
+  },
+  {
+   "text": "Widowed Mother’s Allowance",
+   "type": "QUASI"
+  },
+  {
+   "text": "WMA",
+   "type": "QUASI"
+  },
+  {
+   "text": "2 March 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "28 June 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "widowers",
+   "type": "QUASI"
+  },
+  {
+   "text": "8 April 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "Widowed Parent’s Allowance",
+   "type": "QUASI"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

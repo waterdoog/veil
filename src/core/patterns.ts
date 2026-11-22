@@ -26,6 +26,15 @@ const PATTERNS: { type: EntityType; re: RegExp }[] = [
   { type: "ID", re: /\b\d{3}[\s-]\d{3}[\s-]\d{4}\b/g },
   { type: "ID", re: /\b(?=[A-Z0-9-]*\d)[A-Z]{1,4}-?\d{5,}\b/g },
   { type: "ID", re: /\b\d{6,}\b/g },
+  // Case / application / file numbers: "27961/02", "2019/1234".
+  { type: "ID", re: /\b\d{3,6}\/\d{2,4}\b/g },
+  // Nationality — a quasi-identifier in small samples.
+  {
+    type: "QUASI",
+    re: /\b(?:British|English|Scottish|Welsh|Irish|Northern Irish|American|Canadian|Australian|Indian|Pakistani|Bangladeshi|Nigerian|Ghanaian|Kenyan|Somali|Polish|Romanian|Lithuanian|Italian|Spanish|Portuguese|French|German|Dutch|Turkish|Greek|Russian|Ukrainian|Chinese|Japanese|Korean|Filipino|Vietnamese|Brazilian|Mexican|Syrian|Iraqi|Iranian|Afghan|Jamaican|Ethiopian|Eritrean|Sudanese|Albanian|Bulgarian|Hungarian|Czech|Slovak|Austrian|Swiss|Swedish|Norwegian|Danish|Finnish)\b(?=\s+(?:national|citizen|woman|man|nurse|doctor|family|origin|passport|parents|mother|father|husband|wife|-born)|[,.;)])/g,
+  },
+  // Household composition: "two children", "no children", "three kids".
+  { type: "QUASI", re: /\b(?:no|one|two|three|four|five|six|seven|\d)\s+(?:children|kids|sons|daughters|grandchildren|stepchildren)\b/gi },
   // National Insurance numbers.
   { type: "ID", re: /\b[A-CEGHJ-PR-TW-Z]{2}\s?\d{2}\s?\d{2}\s?\d{2}\s?[A-D]\b/g },
   // Specific dates: "12th of March 1989", "14 November 2022", "January 2023", "12/03/2024".

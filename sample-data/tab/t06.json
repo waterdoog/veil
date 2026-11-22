@@ -1,0 +1,72 @@
+{
+ "id": "t06",
+ "title": "ECHR case 001-91096 (TAB test set)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 28095/02) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr Dennis Twomey (“the applicant”), on 1 March 2001.\n\nThe applicant was represented by Royds Rdw, solicitors in London. The United Kingdom Government (“the Government”) were represented by their Agent, Mr C. Whomersley of the Foreign and Commonwealth Office, London.\n\nThe applicant complained under Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1 that, because he was a man, he was denied social security benefits equivalent to those received by widows.\n\nOn 4 November 2003 the Court decided to communicate the complaints concerning widows’ benefits relating to the period after the date on which the applicant lodged his relevant claim and declared the remainder of the application inadmissible. Subsequently, it was decided to examine the merits of the application at the same time as its admissibility.\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1948 and lives in Wiltshire.\n\nHis wife died on 10 December 1999 leaving dependant children. His relevant claim for widows’ benefits was made on 2 October 2000 and was rejected on 29 September 2000 on the ground that he was not entitled to widows’ benefits because he was not a woman. The applicant applied for reconsideration and on 10 October 2000 he was informed that the decision remained unchanged. On 16 October 2000 he appealed unsuccessfully. The applicant did not appeal further as he considered or was advised that such a remedy would be bound to fail since no such social security benefits were payable to widowers under United Kingdom law.",
+ "identifiers": [
+  {
+   "text": "28095/02",
+   "type": "ID"
+  },
+  {
+   "text": "British",
+   "type": "QUASI"
+  },
+  {
+   "text": "Mr Dennis Twomey",
+   "type": "PERSON"
+  },
+  {
+   "text": "1 March 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "Royds Rdw",
+   "type": "ORG"
+  },
+  {
+   "text": "Mr C. Whomersley",
+   "type": "PERSON"
+  },
+  {
+   "text": "widows",
+   "type": "QUASI"
+  },
+  {
+   "text": "4 November 2003",
+   "type": "DATE"
+  },
+  {
+   "text": "1948",
+   "type": "DATE"
+  },
+  {
+   "text": "Wiltshire",
+   "type": "LOCATION"
+  },
+  {
+   "text": "10 December 1999",
+   "type": "DATE"
+  },
+  {
+   "text": "2 October 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "29 September 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "10 October 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "16 October 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "widowers",
+   "type": "QUASI"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

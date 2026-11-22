@@ -1,0 +1,76 @@
+{
+ "id": "t05",
+ "title": "ECHR case 001-82370 (TAB test set)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 47289/99) against the United Kingdom of Great Britain and Northern Ireland lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Daryl Shaun Arkwell (“the applicant”) on 2 October 1998.\n\nThe applicant was represented before the Court by Ms J. Starling, a solicitor practising in London. The United Kingdom Government (“the Government”) were represented by their Agent, Mr C. Whomersley of the Foreign and Commonwealth Office.\n\nThe applicant complained under Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1 that, because he was a man, he was denied social security benefits equivalent to those received by widows.\n\nOn 11 May 1999 the Court decided to communicate this application. On 7 March 2000, after obtaining the parties' observations, the Court declared this application admissible.\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1957 and lives in Gloucestershire.\n\nHis wife died in March 1998, leaving two children born in 1984 and 1988. His claim for widows' benefits was made on 14 March 1998 and was rejected on 15 September 1998 on the ground that he was not entitled to widows' benefits because he was not a woman. The applicant did not appeal further as he considered or was advised that such a remedy would be bound to fail since no security benefits were payable to widowers under United Kingdom law.\n\nCOMPLAINTS\n\nThe applicant complained that British social security legislation discriminated against him on grounds of sex, in breach of Article 14 of the Convention taken in conjunction with both Article 8 of the Convention and Article 1 of Protocol No. 1.",
+ "identifiers": [
+  {
+   "text": "47289/99",
+   "type": "ID"
+  },
+  {
+   "text": "Mr Daryl Shaun Arkwell",
+   "type": "PERSON"
+  },
+  {
+   "text": "2 October 1998",
+   "type": "DATE"
+  },
+  {
+   "text": "Ms J. Starling",
+   "type": "PERSON"
+  },
+  {
+   "text": "Mr C. Whomersley",
+   "type": "PERSON"
+  },
+  {
+   "text": "widows",
+   "type": "QUASI"
+  },
+  {
+   "text": "11 May 1999",
+   "type": "DATE"
+  },
+  {
+   "text": "7 March 2000",
+   "type": "DATE"
+  },
+  {
+   "text": "1957",
+   "type": "DATE"
+  },
+  {
+   "text": "Gloucestershire",
+   "type": "LOCATION"
+  },
+  {
+   "text": "March 1998",
+   "type": "DATE"
+  },
+  {
+   "text": "two children",
+   "type": "QUASI"
+  },
+  {
+   "text": "1984",
+   "type": "DATE"
+  },
+  {
+   "text": "1988",
+   "type": "DATE"
+  },
+  {
+   "text": "14 March 1998",
+   "type": "DATE"
+  },
+  {
+   "text": "15 September 1998",
+   "type": "DATE"
+  },
+  {
+   "text": "widowers",
+   "type": "QUASI"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

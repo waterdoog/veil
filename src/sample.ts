@@ -13,6 +13,8 @@ interface SampleFile {
 const files = import.meta.glob<SampleFile>("../sample-data/*.json", { eager: true, import: "default" });
 /** Four more fictional interviews (US/UK/Ireland, non-health topics) that were never used to tune Veil. */
 const holdout = import.meta.glob<SampleFile>("../sample-data/holdout/*.json", { eager: true, import: "default" });
+/** Eight short European Court of Human Rights judgments from the public Text Anonymization Benchmark (MIT). */
+const tab = import.meta.glob<SampleFile>("../sample-data/tab/*.json", { eager: true, import: "default" });
 
 function toInterviews(set: Record<string, SampleFile>): Interview[] {
   return Object.values(set)
@@ -50,6 +52,16 @@ export function sampleStudy(policy: PolicyName): Study {
     policy,
     codebook: [],
     interviews: sampleInterviews(),
+  };
+}
+
+export function tabStudy(policy: PolicyName): Study {
+  return {
+    id: uid(),
+    name: "Public benchmark: TAB (8 ECHR judgments, real public court texts)",
+    policy,
+    codebook: [],
+    interviews: toInterviews(tab),
   };
 }
 

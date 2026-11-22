@@ -1,0 +1,52 @@
+{
+ "id": "t02",
+ "title": "ECHR case 001-85661 (TAB test set)",
+ "transcript": "PROCEDURE\n\nThe case originated in an application (no. 14549/02) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Rodney Cummins (“the applicant”) on 6 March 2002.\n\nThe applicant was unrepresented before the Court. The United Kingdom Government (“the Government”) were represented by their Agent, Mr C. Whomersley of the Foreign and Commonwealth Office, London.\n\nThe applicant complained under Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1 that, because he was a man, he was denied social security benefits equivalent to those received by widows.\n\nBy a partial decision of 12 November 2002 the Court decided to communicate the complaints concerning widows’ benefits and declared the remainder of the application inadmissible. Subsequently, it was decided to examine the merits of the application at the same time as its admissibility.\n\nTHE FACTS\n\nI. THE CIRCUMSTANCES OF THE CASE\n\nThe applicant was born in 1948 and lives in Gosport.\n\nHis wife died on 29 March 2001. His claim for widows’ benefits was made on 29 June 2001 and was rejected on 31 December 2001 on the ground that he was not entitled to widows’ benefits because he was not a woman. The applicant appealed. On 7 May 2002 his appeal was heard and dismissed. The applicant did not appeal further as he considered or was advised that such a remedy would be bound to fail since no such social security benefits were payable to widowers under United Kingdom law.",
+ "identifiers": [
+  {
+   "text": "14549/02",
+   "type": "ID"
+  },
+  {
+   "text": "Mr Rodney Cummins",
+   "type": "PERSON"
+  },
+  {
+   "text": "6 March 2002",
+   "type": "DATE"
+  },
+  {
+   "text": "Mr C. Whomersley",
+   "type": "PERSON"
+  },
+  {
+   "text": "12 November 2002",
+   "type": "DATE"
+  },
+  {
+   "text": "1948",
+   "type": "DATE"
+  },
+  {
+   "text": "Gosport",
+   "type": "LOCATION"
+  },
+  {
+   "text": "29 March 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "29 June 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "31 December 2001",
+   "type": "DATE"
+  },
+  {
+   "text": "7 May 2002",
+   "type": "DATE"
+  }
+ ],
+ "source": "Text Anonymization Benchmark (Pilan et al. 2022), MIT licence, annotator1"
+}

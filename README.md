@@ -84,7 +84,27 @@ Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), scored
 | Development | current | 238 / 265 = **89.8%** | 90.2% |
 | Development, Strict policy (also health terms, second on-device pass) | | 276 / 338 = 81.7% | — |
 
-**Baseline — Microsoft Presidio** (open-source PII detector, default configuration with spaCy `en_core_web_lg`, scored with the same code on the same interviews): held-out recall **60.4%** at **53.4%** precision; development 53.2% / 57.6%. Presidio finds people very well (51/51 on held-out) but almost none of the organisations, money amounts or quasi-identifiers that make an interview participant recognisable. Reproduce with [`eval/`](eval/README.md).
+**Baseline — Microsoft Presidio** (open-source PII detector, spaCy `en_core_web_lg`, scored with the same code on the same interviews; reproduce with [`eval/`](eval/README.md)):
+
+| Held-out set | Recall | Precision |
+|---|---|---|
+| Presidio, default recognisers | 60.4% | 53.4% |
+| Presidio, organisations + money switched on | 81.2% | 66.7% |
+| **Veil** (Gemini Nano on device), first look | 77.2% | **96.8%** |
+| **Veil**, current | **87.9%** | **97.1%** |
+
+**Public benchmark — TAB** ([Text Anonymization Benchmark](https://github.com/NorskRegnesentral/text-anonymization-benchmark), MIT; 8 short European Court of Human Rights judgments from the test split, expert annotations of direct + quasi identifiers; real public court texts, a different domain from interviews):
+
+| TAB, 8 documents | Recall | Precision |
+|---|---|---|
+| Presidio, default | 75.0% | 73.4% |
+| Presidio, organisations + money on | 78.8% | 57.7% |
+| **Veil**, first look | 65.2% | 69.2% |
+| **Veil**, after adding case-number, nationality and household detectors | **78.0%** | **82.5%** |
+
+On formal legal text Veil at first look was *worse* than Presidio; the misses (application numbers like "27961/02", nationalities, "two children") were generic gaps, now fixed — note the second row is no longer a blind test.
+
+A well-configured Presidio finds about as many identifiers as Veil did at first look, but a third of what it redacts isn't an identifier — that's review work and lost research data — and it misses most quasi-identifiers (4 of 13). Presidio also needs a Python server; Veil runs in the browser with nothing to install.
 
 The six-interview study pseudonymises in about 4–5 minutes on a MacBook, entirely on device; the airlock found no known identifier in any outgoing payload in any run. What Nano still misses is mostly quasi-identifiers — a rare hobby, an unusual job description, a small place name — which is why Veil keeps the human review step and shows every miss. Nano is not deterministic: a few items caught in one run are missed in the next.
 
@@ -121,7 +141,7 @@ What never touches Firebase or any server: raw transcripts, photos of notes, and
 
 If the chip says "On-device model unavailable" in Chrome 139+: check `chrome://on-device-internals` for the model status, make sure the flag above is enabled, and on some machines also set `chrome://flags/#optimization-guide-on-device-model` to *Enabled BypassPerfRequirement*. Veil's **check setup** panel walks through each requirement. Chrome only downloads Gemini Nano when the profile drive has at least 22 GB free (the model itself is much smaller) and the machine has a supported GPU or enough RAM — see Chrome's Prompt API docs.
 
-The sample interviews in [`sample-data/`](sample-data) are entirely fictional, generated for testing; phone numbers use Ofcom's drama range and emails use `example.com`.
+The sample and held-out interviews in [`sample-data/`](sample-data) are entirely fictional, generated for testing; phone numbers use Ofcom's drama range and emails use `example.com`. `sample-data/tab/` holds 8 real, public ECHR judgments from the Text Anonymization Benchmark (MIT licence) with its expert annotations.
 
 ## Run locally
 
