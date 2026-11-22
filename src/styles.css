@@ -1044,3 +1044,11 @@ blockquote.jump {
 blockquote.jump:hover {
   background: #eceafb;
 }
+select.merge {
+  font: 11.5px var(--sans);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  max-width: 110px;
+}

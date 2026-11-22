@@ -3,7 +3,7 @@ import type { AiBackend, DeviceStatus } from "./ai/backend";
 import { analysePrompt, memoPrompt, synthPrompt } from "./ai/prompts";
 import { guardPayload, guardSections, sha256, type GuardResult, type LedgerEntry, type Purpose } from "./core/airlock";
 import { chunkTranscript } from "./core/chunk";
-import { applyCodebook, mergeEntities, norm } from "./core/codebook";
+import { applyCodebook, mergeEntities, mergeTokens, norm } from "./core/codebook";
 import { extendNames, findPatterns } from "./core/patterns";
 import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/types";
 import type { RuntimeConfig } from "./firebase";
@@ -301,6 +301,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       setName: (name: string) => setStudy((s) => ({ ...s, name })),
       setPolicy: (p: PolicyName) => setStudy((s) => ({ ...s, policy: p })),
       setAttested: (id: string, v: boolean) => patch(id, { attested: v }),
+      mergeToken: (from: string, to: string) => setStudy((s) => ({ ...s, codebook: mergeTokens(s.codebook, from, to) })),
       addText: (title: string, raw: string) => {
         const id = uid();
         setStudy((s) => ({ ...s, interviews: [...s.interviews, { id, title, raw, status: "raw" }] }));

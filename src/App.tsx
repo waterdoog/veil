@@ -3,7 +3,7 @@ import type { AiBackend } from "./ai/backend";
 import type { RuntimeConfig } from "./firebase";
 import { POLICIES, type PolicyName } from "./core/types";
 import { useVeil, type Veil } from "./useVeil";
-import { auditReportHtml, codebookJson, pseudonymisedMarkdown } from "./core/report";
+import { auditReportHtml, codebookJson, codedQuotesCsv, pseudonymisedMarkdown } from "./core/report";
 import { CloudIcon, DeviceIcon, LockIcon } from "./ui/bits";
 import { InterviewView } from "./ui/InterviewView";
 import { AddInterview, Ledger, SetupPanel, SynthesisView } from "./ui/Panels";
@@ -105,6 +105,9 @@ export function App({
               </button>
               <button className="linkish small" onClick={() => download(`veil-pseudonymised-${slug(study.name)}.md`, pseudonymisedMarkdown(study), "text/markdown")}>
                 Pseudonymised dataset (.md)
+              </button>
+              <button className="linkish small" onClick={() => download(`veil-coded-quotes-${slug(study.name)}.csv`, codedQuotesCsv(study), "text/csv")}>
+                Coded quotes (.csv for NVivo / ATLAS.ti)
               </button>
               <button
                 className="linkish small"

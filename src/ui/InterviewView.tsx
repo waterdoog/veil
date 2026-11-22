@@ -237,6 +237,21 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                         <td>
                           <span className={`token hl-${e.type}`}>{e.token}</span>
                         </td>
+                        <td>
+                          <select
+                            className="merge"
+                            value=""
+                            aria-label={`Merge ${e.token} into another placeholder`}
+                            onChange={(ev) => ev.target.value && veil.mergeToken(e.token, ev.target.value)}
+                          >
+                            <option value="">same as…</option>
+                            {[...new Set(entries.filter((o) => o.type === e.type && o.token !== e.token).map((o) => o.token))].map((t) => (
+                              <option key={t} value={t}>
+                                {t} {entries.find((o) => o.token === t)?.real}
+                              </option>
+                            ))}
+                          </select>
+                        </td>
                         <td className="muted small">
                           {e.source === "nano" ? "Nano" : e.source === "pattern" ? "pattern" : "you"}
                           {!policy.redact.includes(e.type) && e.source !== "manual" ? " · kept by policy" : ""}

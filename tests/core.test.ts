@@ -209,3 +209,27 @@ describe("docx import", () => {
     expect(text).toBe("[00:00:05] INT: Thanks for joining, Maya.\n[00:00:09] P: I work at Northgate & Co.");
   });
 });
+
+import { normaliseAnalysis } from "../src/ai/backend";
+describe("cloud output normalisation", () => {
+  it("fills missing fields instead of crashing the UI", () => {
+    const a = normaliseAnalysis({ summary: "s", themes: [{ name: "n", quotes: [{ quote: "q" }] }] });
+    expect(a.tensions).toEqual([]);
+    expect(a.themes[0].description).toBe("");
+    expect(a.themes[0].quotes[0]).toEqual({ quote: "q", timestamp: undefined });
+  });
+});
+
+import { mergeTokens } from "../src/core/codebook";
+import { codedQuotesCsv } from "../src/core/report";
+describe("merge + csv", () => {
+  it("merging two placeholders makes them one", () => {
+    let cb = mergeEntities([], [e("St Jude's Hospital", "ORG"), e("the Jude", "ORG")], "p1");
+    cb = mergeTokens(cb, "[ORG_2]", "[ORG_1]");
+    expect(applyCodebook("St Jude's Hospital, aka the Jude.", cb, std, "p1").redacted).toBe("[ORG_1], aka [ORG_1].");
+  });
+  it("exports coded quotes as CSV with escaping", () => {
+    const csv = codedQuotesCsv({ name: "s", policy: "standard", codebook: [], interviews: [{ id: "p1", title: "t", raw: "", status: "analysed", analysis: { summary: "", participant_context: "", tensions: [], follow_up_questions: [], themes: [{ name: "Fatigue", description: "a, b", quotes: [{ quote: 'He said "rest"', timestamp: "00:01:00" }] }] } }] });
+    expect(csv.split("\n")[1]).toBe('interview,p1,Fatigue,"a, b","He said ""rest""",00:01:00');
+  });
+});

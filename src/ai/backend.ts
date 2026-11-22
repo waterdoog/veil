@@ -243,6 +243,8 @@ export class FirebaseBackend implements AiBackend {
       for (const h of halves) {
         const rr = await this.redactor.generateContent(redactPrompt(h));
         data = data.concat(parseEntities(rr.response.text()));
+        // All three calls are ONLY_ON_DEVICE; report a cloud source if any of them claims one.
+        if (src(rr.response.inferenceSource) === "in_cloud") return { data, source: "in_cloud" };
       }
     }
     return { data, source: src(r.response.inferenceSource) };
@@ -260,21 +262,33 @@ export class FirebaseBackend implements AiBackend {
     await this.imageReader.initializeDeviceModel();
     const part = await fileToPart(file);
     const r = await this.imageReader.generateContent(["Transcribe these notes and list identifying spans.", part]);
-    const d = parseJson(r.response.text()) as { transcript?: string };
-    return {
-      data: { transcript: String(d.transcript ?? ""), entities: cleanEntities(d) },
-      source: src(r.response.inferenceSource),
-    };
+    const text = r.response.text();
+    let transcript = "";
+    let entities: Entity[] = [];
+    try {
+      const d = parseJson(text) as { transcript?: string };
+      transcript = String(d.transcript ?? "");
+      entities = cleanEntities(d);
+    } catch {
+      // Cut off mid-JSON: keep whatever transcript text and complete entities arrived.
+      const m = text.match(/"transcript"\s*:\s*"((?:[^"\\]|\\.)*)/);
+      try {
+        transcript = m ? JSON.parse(`"${m[1]}"`) : "";
+      } catch {
+        transcript = m ? m[1].replace(/\\n/g, "\n") : "";
+      }
+      entities = parseEntities(text);
+    }
+    if (!transcript) throw new Error("Gemini Nano couldn't read text from this photo. Try a sharper, closer shot.");
+    return { data: { transcript, entities }, source: src(r.response.inferenceSource) };
   }
 
   async analyseInterview(prompt: string): Promise<AiResult<Analysis>> {
-    const r = await this.analyst.generateContent(prompt);
-    return { data: parseJson(r.response.text()) as Analysis, source: src(r.response.inferenceSource) };
+    return cloudJson(this.analyst, prompt, normaliseAnalysis);
   }
 
   async synthesise(prompt: string): Promise<AiResult<Synthesis>> {
-    const r = await this.synthesiser.generateContent(prompt);
-    return { data: parseJson(r.response.text()) as Synthesis, source: src(r.response.inferenceSource) };
+    return cloudJson(this.synthesiser, prompt, normaliseSynthesis);
   }
 
   async memo(prompt: string, onText: (t: string) => void): Promise<AiResult<string>> {
@@ -289,6 +303,60 @@ export class FirebaseBackend implements AiBackend {
   }
 }
 
+/** Cloud call expecting JSON: one retry on unparseable output, then a clear error. Shapes are normalised. */
+async function cloudJson<T>(model: GenerativeModel, prompt: string, normalise: (x: unknown) => T): Promise<AiResult<T>> {
+  let lastErr: unknown;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const r = await model.generateContent(prompt);
+    try {
+      return { data: normalise(parseJson(r.response.text())), source: src(r.response.inferenceSource) };
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  throw new Error(`The cloud model returned malformed JSON twice (${String(lastErr)}). Try again.`);
+}
+
+const str = (x: unknown) => (typeof x === "string" ? x : "");
+const arr = (x: unknown): unknown[] => (Array.isArray(x) ? x : []);
+const strs = (x: unknown) => arr(x).map(str).filter(Boolean);
+
+export function normaliseAnalysis(x: unknown): Analysis {
+  const o = (x ?? {}) as Record<string, unknown>;
+  return {
+    summary: str(o.summary),
+    participant_context: str(o.participant_context),
+    themes: arr(o.themes).map((t) => {
+      const tt = (t ?? {}) as Record<string, unknown>;
+      return {
+        name: str(tt.name),
+        description: str(tt.description),
+        quotes: arr(tt.quotes).map((q) => ({ quote: str((q as Record<string, unknown>)?.quote), timestamp: str((q as Record<string, unknown>)?.timestamp) || undefined })),
+      };
+    }),
+    tensions: strs(o.tensions),
+    follow_up_questions: strs(o.follow_up_questions),
+  };
+}
+
+export function normaliseSynthesis(x: unknown): Synthesis {
+  const o = (x ?? {}) as Record<string, unknown>;
+  return {
+    overview: str(o.overview),
+    themes: arr(o.themes).map((t) => {
+      const tt = (t ?? {}) as Record<string, unknown>;
+      return {
+        name: str(tt.name),
+        description: str(tt.description),
+        interviews: strs(tt.interviews),
+        quotes: arr(tt.quotes).map((q) => ({ quote: str((q as Record<string, unknown>)?.quote), interview: str((q as Record<string, unknown>)?.interview) })),
+      };
+    }),
+    divergences: strs(o.divergences),
+    implications: strs(o.implications),
+  };
+}
+
 async function languageModelAvailability(expectedInputs: object[]): Promise<DeviceStatus> {
   const LM = (globalThis as unknown as { LanguageModel?: { availability(o?: object): Promise<string> } }).LanguageModel;
   if (!LM) return "unavailable";
@@ -300,12 +368,27 @@ async function languageModelAvailability(expectedInputs: object[]): Promise<Devi
   }
 }
 
+/**
+ * Photos from phones can be huge or in formats the on-device model rejects. Re-encode on a canvas
+ * as JPEG, longest side ≤ 1536 px, before handing it to Gemini Nano. Stays in memory on this device.
+ */
 async function fileToPart(file: File): Promise<Part> {
+  let blob: Blob = file;
+  try {
+    const bmp = await createImageBitmap(file);
+    const scale = Math.min(1, 1536 / Math.max(bmp.width, bmp.height));
+    const canvas = new OffscreenCanvas(Math.round(bmp.width * scale), Math.round(bmp.height * scale));
+    canvas.getContext("2d")!.drawImage(bmp, 0, 0, canvas.width, canvas.height);
+    bmp.close();
+    blob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.9 });
+  } catch {
+    if (!/^image\/(png|jpeg)$/.test(file.type)) throw new Error("Use a PNG or JPEG photo.");
+  }
   const data = await new Promise<string>((resolve, reject) => {
     const fr = new FileReader();
     fr.onload = () => resolve(String(fr.result).split(",")[1] ?? "");
     fr.onerror = () => reject(fr.error);
-    fr.readAsDataURL(file);
+    fr.readAsDataURL(blob);
   });
-  return { type: "inlineData", inlineData: { data, mimeType: file.type } } as Part;
+  return { type: "inlineData", inlineData: { data, mimeType: blob.type || "image/jpeg" } } as Part;
 }

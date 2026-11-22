@@ -12,14 +12,16 @@ service cloud.firestore {
     match /users/{uid}/studies/{studyId} {
       allow write: if isOwner(uid);
     }
-    // Belt and braces on top of the client-side airlock: refuse interview text that still
-    // carries an email address or a UK mobile number.
+    // Last-ditch backstop behind the client-side airlock (which runs before anything is sent):
+    // refuse interview text that still carries an email, a UK mobile, a US SSN or a (xxx) US phone.
     match /users/{uid}/studies/{studyId}/interviews/{interviewId} {
       allow delete: if isOwner(uid);
       allow create, update: if isOwner(uid)
         && request.resource.data.redacted is string
         && !request.resource.data.redacted.matches('(?s).*[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.][A-Za-z]{2,}.*')
-        && !request.resource.data.redacted.matches('(?s).*(^|[^0-9])07[0-9]{3} ?[0-9]{3} ?[0-9]{3}([^0-9]|$).*');
+        && !request.resource.data.redacted.matches('(?s).*(^|[^0-9])07[0-9]{3} ?[0-9]{3} ?[0-9]{3}([^0-9]|$).*')
+        && !request.resource.data.redacted.matches('(?s).*(^|[^0-9])[0-9]{3}-[0-9]{2}-[0-9]{4}([^0-9]|$).*')
+        && !request.resource.data.redacted.matches('(?s).*[(][0-9]{3}[)] ?[0-9]{3}[-. ][0-9]{4}.*');
     }
   }
 }

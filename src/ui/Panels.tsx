@@ -223,7 +223,7 @@ export function AddInterview({ veil, onDone }: { veil: Veil; onDone: (id?: strin
         <input
           ref={imgRef}
           type="file"
-          accept="image/png,image/jpeg"
+          accept="image/*"
           hidden
           onChange={async (e) => {
             const f = e.target.files?.[0];

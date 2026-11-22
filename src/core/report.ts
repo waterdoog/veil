@@ -120,3 +120,15 @@ export function codebookJson(study: ReportStudy): string {
     1,
   );
 }
+
+const csvCell = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
+
+/** Coded quotes (pseudonymised) as CSV, for import into NVivo, ATLAS.ti, MAXQDA or a spreadsheet. */
+export function codedQuotesCsv(study: ReportStudy): string {
+  const rows: string[][] = [["source", "interview", "theme", "theme_description", "quote", "timestamp"]];
+  for (const iv of study.interviews) {
+    for (const t of iv.analysis?.themes ?? []) for (const q of t.quotes) rows.push(["interview", iv.id, t.name, t.description, q.quote, q.timestamp ?? ""]);
+  }
+  for (const t of study.synthesis?.themes ?? []) for (const q of t.quotes) rows.push(["synthesis", q.interview, t.name, t.description, q.quote, ""]);
+  return rows.map((r) => r.map(csvCell).join(",")).join("\n") + "\n";
+}

@@ -164,3 +164,13 @@ export function realFor(token: string, codebook: CodebookEntry[]): string | unde
   for (const e of codebook) if (e.token === token && (!out || e.real.length > out.length)) out = e.real;
   return out;
 }
+
+/**
+ * Merge one placeholder into another ("St Jude's" and "the hospital" are the same place).
+ * Every entry with `from` becomes `to`, taking the target's type so colours and policy stay consistent.
+ */
+export function mergeTokens(codebook: CodebookEntry[], from: string, to: string): CodebookEntry[] {
+  const target = codebook.find((e) => e.token === to);
+  if (!target || from === to) return codebook;
+  return codebook.map((e) => (e.token === from ? { ...e, token: to, type: target.type } : e));
+}
