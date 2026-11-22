@@ -122,3 +122,54 @@ export function Progress({ done, total, label }: { done: number; total: number; 
     </div>
   );
 }
+
+/** Transcript rendered one line per element, so a quote's timestamp can be scrolled to and highlighted. */
+export function LinedTranscript({
+  text,
+  spans,
+  onToggle,
+  flash,
+}: {
+  text: string;
+  spans: Span[];
+  onToggle?: (token: string, real: string) => void;
+  flash?: number | null;
+}) {
+  const lines = text.split("\n");
+  let offset = 0;
+  return (
+    <>
+      {lines.map((line, i) => {
+        const start = offset;
+        const end = start + line.length;
+        offset = end + 1;
+        const local = spans
+          .filter((s) => s.start < end && s.end > start)
+          .map((s) => ({ ...s, start: Math.max(0, s.start - start), end: Math.min(line.length, s.end - start) }));
+        return (
+          <div key={i} data-line={i} className={`tline ${flash === i ? "flash" : ""}`}>
+            {line ? <HighlightedText text={line} spans={local} onToggle={onToggle} /> : " "}
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
+/** Find the transcript line a quote came from: by timestamp first, then by its opening words. */
+export function findQuoteLine(raw: string, quote: { quote: string; timestamp?: string }, rehydrated: string): number | null {
+  const lines = raw.split("\n");
+  if (quote.timestamp) {
+    const ts = quote.timestamp.replace(/[[\]]/g, "").trim();
+    const i = lines.findIndex((l) => l.includes(`[${ts}]`) || l.startsWith(ts));
+    if (i >= 0) return i;
+  }
+  const words = rehydrated.replace(/[“”"…]|\.\.\./g, " ").trim().split(/\s+/);
+  for (const n of [8, 5, 3]) {
+    if (words.length < n) continue;
+    const probe = words.slice(0, n).join(" ").toLowerCase();
+    const i = lines.findIndex((l) => l.toLowerCase().replace(/\s+/g, " ").includes(probe));
+    if (i >= 0) return i;
+  }
+  return null;
+}

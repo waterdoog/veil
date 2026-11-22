@@ -3,9 +3,10 @@ import type { AiBackend } from "./ai/backend";
 import type { RuntimeConfig } from "./firebase";
 import { POLICIES, type PolicyName } from "./core/types";
 import { useVeil, type Veil } from "./useVeil";
+import { auditReportHtml, codebookJson, pseudonymisedMarkdown } from "./core/report";
 import { CloudIcon, DeviceIcon, LockIcon } from "./ui/bits";
 import { InterviewView } from "./ui/InterviewView";
-import { AddInterview, Ledger, SynthesisView } from "./ui/Panels";
+import { AddInterview, Ledger, SetupPanel, SynthesisView } from "./ui/Panels";
 
 export function App({
   backend,
@@ -24,6 +25,7 @@ export function App({
   const [view, setView] = useState<string>("home");
   const [ledgerOpen, setLedgerOpen] = useState(false);
   const [adding, setAdding] = useState(false);
+  const [setupOpen, setSetupOpen] = useState(false);
   const { study } = veil;
   const current = study.interviews.find((i) => i.id === view);
 
@@ -41,7 +43,7 @@ export function App({
         </button>
         <span className="tagline">Pseudonymise on your device. Analyse in the cloud.</span>
         <span className="grow" />
-        <DeviceChip veil={veil} />
+        <DeviceChip veil={veil} onSetup={() => setSetupOpen(true)} />
         <span className={`chip-status ${veil.online ? "" : "off"}`} title={`Cloud model: ${cfg.cloudModel} via Firebase AI Logic`}>
           <CloudIcon /> {veil.online ? cfg.cloudModel : "offline — cloud queued"}
         </span>
@@ -93,6 +95,28 @@ export function App({
             </button>
           )}
           <span className="grow" />
+          {study.interviews.length > 0 && (
+            <div className="exports">
+              <div className="list-head">
+                <span>Export</span>
+              </div>
+              <button className="linkish small" onClick={() => download(`veil-audit-${slug(study.name)}.html`, auditReportHtml(study, veil.ledger), "text/html")}>
+                Ethics audit report (no identifiable data)
+              </button>
+              <button className="linkish small" onClick={() => download(`veil-pseudonymised-${slug(study.name)}.md`, pseudonymisedMarkdown(study), "text/markdown")}>
+                Pseudonymised dataset (.md)
+              </button>
+              <button
+                className="linkish small"
+                onClick={() => {
+                  if (confirm("The codebook links placeholders to real names. Download it only to storage your ethics approval allows. Continue?"))
+                    download(`veil-codebook-${slug(study.name)}.json`, codebookJson(study), "application/json");
+                }}
+              >
+                Codebook key (contains real names)
+              </button>
+            </div>
+          )}
           <div className="side-foot small muted">
             <button className="linkish" onClick={veil.loadSample}>
               Load sample study
@@ -105,12 +129,13 @@ export function App({
         </nav>
 
         <main className="main">
-          {view === "home" && <Home veil={veil} onAdd={() => setAdding(true)} onOpen={setView} />}
+          {view === "home" && <Home veil={veil} onAdd={() => setAdding(true)} onOpen={setView} onSetup={() => setSetupOpen(true)} />}
           {view === "synthesis" && <SynthesisView veil={veil} />}
           {current && <InterviewView key={current.id} veil={veil} iv={current} />}
         </main>
       </div>
 
+      {setupOpen && <SetupPanel veil={veil} onClose={() => setSetupOpen(false)} />}
       {ledgerOpen && <Ledger entries={veil.ledger} onClose={() => setLedgerOpen(false)} />}
       {adding && (
         <AddInterview
@@ -138,7 +163,7 @@ function StatusDot({ status }: { status: string }) {
   return <span className={`dot dot-${status}`} title={label[status]} aria-label={label[status]} />;
 }
 
-function DeviceChip({ veil }: { veil: Veil }) {
+function DeviceChip({ veil, onSetup }: { veil: Veil; onSetup: () => void }) {
   if (veil.downloadPct !== null)
     return (
       <span className="chip-status device">
@@ -147,9 +172,9 @@ function DeviceChip({ veil }: { veil: Veil }) {
     );
   if (veil.device === "available")
     return (
-      <span className="chip-status device" title="Raw text is processed by Gemini Nano in Chrome">
+      <button className="chip-status device" onClick={onSetup} title="Raw text is processed by Gemini Nano in Chrome">
         <DeviceIcon /> Gemini Nano ready
-      </span>
+      </button>
     );
   if (veil.device === "downloadable" || veil.device === "downloading")
     return (
@@ -158,13 +183,13 @@ function DeviceChip({ veil }: { veil: Veil }) {
       </button>
     );
   return (
-    <span className="chip-status warn" title="Chrome desktop 139+ with the Prompt API is needed. Veil fails closed: raw text is never sent to the cloud.">
-      <LockIcon /> On-device model unavailable
-    </span>
+    <button className="chip-status warn" onClick={onSetup} title="Chrome desktop 139+ with the Prompt API is needed. Veil fails closed: raw text is never sent to the cloud.">
+      <LockIcon /> On-device model unavailable — check setup
+    </button>
   );
 }
 
-function Home({ veil, onAdd, onOpen }: { veil: Veil; onAdd: () => void; onOpen: (id: string) => void }) {
+function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void; onOpen: (id: string) => void; onSetup: () => void }) {
   const { study } = veil;
   return (
     <div className="home">
@@ -248,11 +273,28 @@ function Home({ veil, onAdd, onOpen }: { veil: Veil; onAdd: () => void; onOpen: 
             <p>
               Use Chrome on desktop (version 139 or later) with <code>chrome://flags/#prompt-api-for-gemini-nano-multimodal-input</code>{" "}
               enabled, then reload. Without it you can still use Veil with pattern detection and manual redaction — raw text
-              is never sent to the cloud.
+              is never sent to the cloud.{" "}
+              <button className="btn btn-ghost btn-small" onClick={onSetup}>
+                Check my setup
+              </button>
             </p>
           )}
         </div>
       )}
     </div>
   );
+}
+
+function slug(s: string) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "study";
+}
+
+/** Saves a file generated in the browser. Nothing is uploaded. */
+function download(name: string, text: string, type: string) {
+  const url = URL.createObjectURL(new Blob([text], { type }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

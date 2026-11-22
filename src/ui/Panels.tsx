@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { LedgerEntry } from "../core/airlock";
 import type { Veil } from "../useVeil";
 import { releasable } from "../model";
+import { docxToText } from "../core/docx";
 import { DeviceIcon, Progress, SourceBadge, TokenText } from "./bits";
 
 const PURPOSE: Record<LedgerEntry["purpose"], string> = {
@@ -192,7 +193,7 @@ export function AddInterview({ veil, onDone }: { veil: Veil; onDone: (id?: strin
         <textarea className="input" rows={10} placeholder="Paste a transcript…" value={text} onChange={(e) => setText(e.target.value)} />
         <div className="actions">
           <button className="btn btn-ghost" onClick={() => fileRef.current?.click()}>
-            Upload .txt / .vtt
+            Upload .txt / .vtt / .docx
           </button>
           <button className="btn btn-ghost" onClick={() => imgRef.current?.click()}>
             <DeviceIcon /> Photo of notes
@@ -205,12 +206,17 @@ export function AddInterview({ veil, onDone }: { veil: Veil; onDone: (id?: strin
         <input
           ref={fileRef}
           type="file"
-          accept=".txt,.vtt,.md,text/plain"
+          accept=".txt,.vtt,.md,.docx,text/plain"
           hidden
           onChange={async (e) => {
             const f = e.target.files?.[0];
             if (!f) return;
-            setText(vttToText(await f.text()));
+            try {
+              setText(/\.docx$/i.test(f.name) ? await docxToText(await f.arrayBuffer()) : vttToText(await f.text()));
+            } catch (err) {
+              setText("");
+              alert(`Couldn't read ${f.name}: ${String(err)}`);
+            }
             if (!title) setTitle(f.name.replace(/\.[^.]+$/, ""));
           }}
         />
@@ -227,6 +233,89 @@ export function AddInterview({ veil, onDone }: { veil: Veil; onDone: (id?: strin
             await pending;
           }}
         />
+      </div>
+    </div>
+  );
+}
+
+function chromeVersion(): number | null {
+  const m = navigator.userAgent.match(/Chrome\/(\d+)/);
+  return m && !/Edg\/|OPR\//.test(navigator.userAgent) ? Number(m[1]) : null;
+}
+
+const FLAGS = [
+  { url: "chrome://flags/#prompt-api-for-gemini-nano-multimodal-input", why: "Prompt API with text + image input (required)" },
+  { url: "chrome://flags/#optimization-guide-on-device-model", why: "Only if the model still shows as unavailable on your machine" },
+  { url: "chrome://on-device-internals", why: "See the model's download state and your device's eligibility" },
+];
+
+/** Explains, step by step, whether this browser can run Gemini Nano — and what to do if not. */
+export function SetupPanel({ veil, onClose }: { veil: Veil; onClose: () => void }) {
+  const [img, setImg] = useState<string>("checking…");
+  const [copied, setCopied] = useState<string | null>(null);
+  const v = chromeVersion();
+  const hasLM = typeof (globalThis as { LanguageModel?: unknown }).LanguageModel !== "undefined";
+  useEffect(() => {
+    veil.imageStatus().then(setImg);
+  }, [veil.device]); // eslint-disable-line react-hooks/exhaustive-deps
+  const row = (ok: boolean | null, label: string, detail: string) => (
+    <li className={`check ${ok === null ? "" : ok ? "ok" : "bad"}`}>
+      <span className="check-mark">{ok === null ? "…" : ok ? "✓" : "✕"}</span>
+      <div>
+        <b>{label}</b>
+        <div className="small muted">{detail}</div>
+      </div>
+    </li>
+  );
+  return (
+    <div className="modal-bg" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-label="On-device model setup">
+        <h3>On-device model check</h3>
+        <ul className="checks">
+          {row(v !== null && v >= 139, "Desktop Chrome 139 or later", v ? `You're on Chrome ${v}.` : "This doesn't look like Chrome. Gemini Nano runs only in desktop Chrome.")}
+          {row(window.isSecureContext, "Secure page", window.isSecureContext ? "HTTPS or localhost." : "The Prompt API needs HTTPS or localhost.")}
+          {row(hasLM, "Prompt API present", hasLM ? "window.LanguageModel is available." : "Enable the flag below and restart Chrome.")}
+          {row(
+            veil.device === "available" ? true : veil.device === "unknown" ? null : veil.device === "unavailable" ? false : null,
+            "Gemini Nano for text",
+            {
+              available: "Ready. Transcripts are pseudonymised on this device.",
+              downloadable: "Supported here — download it once with the button below.",
+              downloading: "Downloading…",
+              unavailable: "Not available on this device/browser. Veil will fail closed: patterns + manual review only.",
+              unknown: "Checking…",
+            }[veil.device],
+          )}
+          {row(img === "available" ? true : img === "unavailable" ? false : null, "Image input (photos of notes)", img === "available" ? "Ready." : img === "unavailable" ? "Needs the multimodal flag below." : `Status: ${img}.`)}
+        </ul>
+        {(veil.device === "downloadable" || veil.device === "downloading") && (
+          <button className="btn btn-device" onClick={veil.prepareDevice} disabled={veil.downloadPct !== null}>
+            <DeviceIcon /> {veil.downloadPct !== null ? `Downloading ${Math.round(veil.downloadPct * 100)}%` : "Download Gemini Nano (one-time, stays on this device)"}
+          </button>
+        )}
+        <p className="small muted">Chrome doesn't let web pages open chrome:// links. Copy one and paste it into the address bar:</p>
+        <ul className="flags">
+          {FLAGS.map((f) => (
+            <li key={f.url}>
+              <code>{f.url}</code>
+              <button
+                className="btn btn-ghost btn-small"
+                onClick={() => {
+                  navigator.clipboard?.writeText(f.url).then(() => setCopied(f.url), () => setCopied(null));
+                }}
+              >
+                {copied === f.url ? "Copied" : "Copy"}
+              </button>
+              <div className="small muted">{f.why}</div>
+            </li>
+          ))}
+        </ul>
+        <div className="actions">
+          <span className="grow" />
+          <button className="btn" onClick={onClose}>
+            Done
+          </button>
+        </div>
       </div>
     </div>
   );

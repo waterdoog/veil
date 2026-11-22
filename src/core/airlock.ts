@@ -76,4 +76,13 @@ export interface LedgerEntry {
   guard?: GuardResult;
   ms?: number;
   error?: string;
+  /** Interview the call was about (absent for study-level calls). */
+  interviewId?: string;
+  /** SHA-256 of the full payload handed to the model, for the audit report. */
+  sha256?: string;
+}
+
+export async function sha256(text: string): Promise<string> {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }

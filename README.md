@@ -52,6 +52,10 @@ flowchart LR
 - **The airlock.** Right before *any* cloud request, Veil re-scans the payload against every codebook value and identifier pattern — including the interview title, which is user-written and often contains a name. One hit and the request is blocked, with a one-click "Redact these".
 - **Cloud analysis, re-identified locally.** Reflexive thematic analysis (themes, verbatim quotes with timestamps, tensions, follow-up questions) per interview, plus a cross-interview synthesis. A switch flips between "real names (re-identified on this device)" and "exactly what the cloud saw".
 - **Offline.** Pseudonymisation works with no connection. Cloud requests made offline are queued and sent when the connection returns; Firestore's offline cache syncs results.
+- **Ethics audit pack.** One click exports (a) an audit report for an ethics committee with no identifiable data — policy, how each interview was checked, identifiers replaced per type, airlock blocks, and a SHA-256 of every payload that left the device; (b) the pseudonymised dataset as Markdown; (c) the codebook key, behind a warning, for secure storage.
+- **Quotes link back.** Click any quote in the cloud analysis to jump to that moment in the raw transcript.
+- **Bring your own transcripts.** Paste text or upload `.txt`, `.vtt` (Zoom/Teams captions) or `.docx` — parsed in the browser, never uploaded. UK and US identifier formats are detected (phones, postcodes/ZIP+4, NHS/SSN-style numbers, street addresses).
+- **Setup check.** A built-in panel tells you whether this browser can run Gemini Nano (Chrome version, Prompt API, text and image availability) and gives the exact `chrome://` flags to copy.
 - **Measured, not claimed.** The bundled sample study (six entirely fictional interviews) ships with an answer key of every identifier, and Veil shows the share of identifiers removed for each interview, with the misses one click away.
 
 ## Firebase products used
@@ -88,7 +92,7 @@ The sample interviews in [`sample-data/`](sample-data) are entirely fictional, g
 npm install
 cp .env.example .env   # fill in your Firebase web app config
 npm run dev            # http://localhost:5180
-npm test               # unit tests for pseudonymisation, airlock, chunking, evaluation
+npm test               # unit tests: pseudonymisation, airlock, chunking, evaluation, exports, .docx
 ```
 
 Firebase setup:

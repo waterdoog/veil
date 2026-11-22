@@ -14,6 +14,9 @@ export class SimBackend implements AiBackend {
   async deviceStatus() {
     return this.status;
   }
+  async imageStatus() {
+    return this.status;
+  }
   async prepareDevice(onProgress: (p: number) => void) {
     for (let i = 1; i <= 10; i++) {
       await sleep(80);

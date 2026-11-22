@@ -6,7 +6,9 @@ import { analysePrompt } from "../ai/prompts";
 import { POLICIES, type EntityType } from "../core/types";
 import type { Interview } from "../model";
 import type { Veil } from "../useVeil";
-import { CloudIcon, DeviceIcon, HighlightedText, LockIcon, Progress, SourceBadge, TokenText, TYPE_LABEL } from "./bits";
+import { useEffect, useRef } from "react";
+import { rehydrate } from "../core/codebook";
+import { CloudIcon, DeviceIcon, findQuoteLine, LinedTranscript, LockIcon, Progress, SourceBadge, TokenText, TYPE_LABEL } from "./bits";
 
 const MANUAL_TYPES: EntityType[] = ["PERSON", "ORG", "LOCATION", "DATE", "ID", "QUASI"];
 
@@ -14,6 +16,20 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
   const [tab, setTab] = useState<"pseudo" | "analysis">(iv.analysis ? "analysis" : "pseudo");
   const [showReal, setShowReal] = useState(true);
   const [sel, setSel] = useState<{ text: string; x: number; y: number } | null>(null);
+  const [flash, setFlash] = useState<number | null>(null);
+  const rawRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (flash === null || tab !== "pseudo") return;
+    rawRef.current?.querySelector(`[data-line="${flash}"]`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    const t = setTimeout(() => setFlash(null), 2400);
+    return () => clearTimeout(t);
+  }, [flash, tab]);
+  const jumpTo = (q: { quote: string; timestamp?: string }) => {
+    const line = findQuoteLine(iv.raw, q, rehydrate(q.quote, study.codebook));
+    if (line === null) return;
+    setTab("pseudo");
+    setFlash(line);
+  };
   const { study, policy } = veil;
 
   const { redacted, spans } = useMemo(() => applyCodebook(iv.raw, study.codebook, policy, iv.id), [iv.raw, study.codebook, policy, iv.id]);
@@ -74,8 +90,8 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
               </div>
             )}
             {iv.error && <div className="notice notice-error">{iv.error}</div>}
-            <div className="transcript" onMouseUp={onMouseUp}>
-              <HighlightedText text={iv.raw} spans={spans} onToggle={veil.toggleEntry} />
+            <div className="transcript" onMouseUp={onMouseUp} ref={rawRef}>
+              <LinedTranscript text={iv.raw} spans={spans} onToggle={veil.toggleEntry} flash={flash} />
             </div>
             {sel && (
               <div className="seltool" style={{ left: sel.x, top: sel.y }}>
@@ -279,9 +295,9 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                       <TokenText text={t.description} codebook={study.codebook} showReal={showReal} />
                     </p>
                     {t.quotes.map((q, i) => (
-                      <blockquote key={i}>
+                      <blockquote key={i} className="jump" onClick={() => jumpTo(q)} title="Show this moment in the transcript">
                         <TokenText text={q.quote} codebook={study.codebook} showReal={showReal} />
-                        {q.timestamp && <cite>{q.timestamp}</cite>}
+                        <cite>{q.timestamp ? `${q.timestamp} · ` : ""}show in transcript →</cite>
                       </blockquote>
                     ))}
                   </div>

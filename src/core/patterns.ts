@@ -10,10 +10,15 @@ const PATTERNS: { type: EntityType; re: RegExp }[] = [
   // UK mobiles and landlines, with or without +44 and spaces/dashes.
   { type: "CONTACT", re: /(?:\+44\s?\(?0?\)?\s?|\b0)(?:\d[\s-]?){9,10}\b/g },
   { type: "CONTACT", re: /\bhttps?:\/\/[^\s)]+/gi },
+  // US phone numbers: (415) 555-0132, 415-555-0132, +1 415 555 0132.
+  { type: "CONTACT", re: /(?:\+1[\s.-]?)?(?:\(\d{3}\)\s?|\b\d{3}[\s.-])\d{3}[\s.-]\d{4}\b/g },
+  // US Social Security numbers and ZIP+4.
+  { type: "ID", re: /\b\d{3}-\d{2}-\d{4}\b/g },
+  { type: "LOCATION", re: /\b\d{5}-\d{4}\b/g },
   // Street addresses, e.g. "14 Ashbourne Terrace", "42 Alder Grove".
   {
     type: "LOCATION",
-    re: /\b\d{1,4}[a-z]?\s+(?:[A-Z][a-z'’]+\s+){1,3}(?:Street|St|Road|Rd|Terrace|Close|Lane|Avenue|Ave|Grove|Way|Drive|Place|Crescent|Court|Gardens|Row|Walk|Mews|Hill|Square|Park|View|Rise)\b/g,
+    re: /\b\d{1,4}[a-z]?\s+(?:[A-Z][a-z'’]+\s+){1,3}(?:Street|St|Road|Rd|Terrace|Close|Lane|Avenue|Ave|Grove|Way|Drive|Place|Crescent|Court|Gardens|Row|Walk|Mews|Hill|Square|Park|View|Rise|Boulevard|Blvd|Parkway|Pkwy|Highway|Hwy)\b/g,
   },
   // UK postcodes, e.g. "LS6 2QT", "M1 1AE".
   { type: "LOCATION", re: /\b[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}\b/g },

@@ -51,6 +51,8 @@ export type DeviceStatus = "unknown" | "unavailable" | "downloadable" | "downloa
 /** Everything the app asks a model to do. One implementation talks to Firebase AI Logic; tests use a fake. */
 export interface AiBackend {
   deviceStatus(): Promise<DeviceStatus>;
+  /** Availability of the multimodal (text + image) on-device model, for reading photos of notes. */
+  imageStatus(): Promise<DeviceStatus>;
   /** Must be called from a user gesture (Chrome's user-activation rule). */
   prepareDevice(onProgress: (p: number) => void): Promise<void>;
   findIdentifiers(chunk: string): Promise<AiResult<Entity[]>>;
@@ -215,6 +217,10 @@ export class FirebaseBackend implements AiBackend {
    */
   async deviceStatus(): Promise<DeviceStatus> {
     return languageModelAvailability([{ type: "text", languages: ["en"] }]);
+  }
+
+  async imageStatus(): Promise<DeviceStatus> {
+    return languageModelAvailability([{ type: "text", languages: ["en"] }, { type: "image" }]);
   }
 
   async prepareDevice(onProgress: (p: number) => void): Promise<void> {

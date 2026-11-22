@@ -175,3 +175,37 @@ describe("surname linking", () => {
     expect(applyCodebook(raw, cb, std, "p1").redacted).toBe("I saw [PERSON_1] at the surgery. [PERSON_1] said rest. [PERSON_1] again.");
   });
 });
+
+describe("US identifiers", () => {
+  it("finds US phone numbers, SSNs, ZIP+4 and boulevard addresses", () => {
+    const t = "Call (415) 555-0132 or 212-555-0199. SSN 078-05-1120, ZIP 94103-1234, I live at 1200 Mission Boulevard.";
+    const f = findPatterns(t).map((x) => x.text);
+    expect(f).toEqual(expect.arrayContaining(["(415) 555-0132", "212-555-0199", "078-05-1120", "94103-1234", "1200 Mission Boulevard"]));
+  });
+});
+
+import { auditReportHtml, pseudonymisedMarkdown } from "../src/core/report";
+describe("exports", () => {
+  const raw = "I'm Chloe Bramwell from Brackenbridge Primary, call 07700 900123.";
+  const cb = mergeEntities([], [e("Chloe Bramwell", "PERSON"), e("Brackenbridge Primary", "ORG"), ...findPatterns(raw)], "p1");
+  const study = { name: "Study of Chloe Bramwell", policy: "standard" as const, codebook: cb, interviews: [{ id: "p1", title: "Chloe Bramwell interview", raw, status: "review" }] };
+  it("audit report contains no real values", () => {
+    const html = auditReportHtml(study, [{ id: "x", at: 0, purpose: "analyse-interview", mode: "only_in_cloud", source: "in_cloud", status: "ok", bytesIn: 900, payloadPreview: "", interviewId: "p1", sha256: "ab".repeat(32) }]);
+    for (const v of ["Chloe", "Bramwell", "Brackenbridge", "07700"]) expect(html).not.toContain(v);
+    expect(html).toContain("sha256 abab");
+  });
+  it("pseudonymised dataset contains no real values", () => {
+    const md = pseudonymisedMarkdown(study);
+    for (const v of ["Chloe", "Bramwell", "Brackenbridge", "07700"]) expect(md).not.toContain(v);
+    expect(md).toContain("[PERSON_1]");
+  });
+});
+
+import { docxToText } from "../src/core/docx";
+describe("docx import", () => {
+  it("extracts paragraph text from a .docx", async () => {
+    const buf = readFileSync(new URL("./fixtures/sample.docx", import.meta.url));
+    const text = await docxToText(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
+    expect(text).toBe("[00:00:05] INT: Thanks for joining, Maya.\n[00:00:09] P: I work at Northgate & Co.");
+  });
+});

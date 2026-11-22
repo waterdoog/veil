@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { AiBackend, DeviceStatus } from "./ai/backend";
 import { analysePrompt, memoPrompt, synthPrompt } from "./ai/prompts";
-import { guardPayload, guardSections, type GuardResult, type LedgerEntry, type Purpose } from "./core/airlock";
+import { guardPayload, guardSections, sha256, type GuardResult, type LedgerEntry, type Purpose } from "./core/airlock";
 import { chunkTranscript } from "./core/chunk";
 import { applyCodebook, mergeEntities, norm } from "./core/codebook";
 import { extendNames, findPatterns } from "./core/patterns";
@@ -101,7 +101,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       patch(id, { status: "pseudonymising", deviceMissing: false, error: undefined, progress: { done: 0, total: chunks.length, stage: "Finding identifiers" } });
       try {
         for (let n = 0; n < chunks.length; n++) {
-          const done = log({ purpose: "pseudonymise", mode: "only_on_device", bytesIn: chunks[n].length, payloadPreview: chunks[n].slice(0, 400) });
+          const done = log({ interviewId: id, purpose: "pseudonymise", mode: "only_on_device", bytesIn: chunks[n].length, payloadPreview: chunks[n].slice(0, 400) });
           try {
             const r = await backend.findIdentifiers(chunks[n]);
             addEntities(r.data.filter((e) => chunks[n].includes(e.text)), id);
@@ -125,7 +125,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
           const residual: Entity[] = [];
           for (let n = 0; n < rchunks.length; n++) {
             patch(id, { progress: { done: n, total: rchunks.length, stage: "Second check" } });
-            const done = log({ purpose: "second-pass", mode: "only_on_device", bytesIn: rchunks[n].length, payloadPreview: rchunks[n].slice(0, 400) });
+            const done = log({ interviewId: id, purpose: "second-pass", mode: "only_on_device", bytesIn: rchunks[n].length, payloadPreview: rchunks[n].slice(0, 400) });
             const r = await backend.findResidual(rchunks[n]);
             done({ status: "ok", source: r.source });
             residual.push(...r.data.filter((e) => iv.raw.includes(e.text) && !/^\[[A-Z]+_\d+\]$/.test(e.text)));
@@ -143,10 +143,19 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
 
   /** Runs every outbound request through the airlock. Returns null (blocked) or the guard result. */
   const airlock = useCallback(
-    (purpose: Purpose, mode: LedgerEntry["mode"], payload: string, scope?: string | GuardResult) => {
+    async (purpose: Purpose, mode: LedgerEntry["mode"], payload: string, scope?: string | GuardResult) => {
       const s = studyRef.current;
       const guard = typeof scope === "object" ? scope : guardPayload(payload, s.codebook, POLICIES[s.policy], scope);
-      const done = log({ purpose, mode, bytesIn: guard.bytes, payloadPreview: payload.slice(0, 1200), guard });
+      const hash = await sha256(payload);
+      const done = log({
+        purpose,
+        mode,
+        bytesIn: guard.bytes,
+        payloadPreview: payload.slice(0, 1200),
+        guard,
+        sha256: hash,
+        interviewId: typeof scope === "string" ? scope : undefined,
+      });
       if (!guard.ok) done({ status: "blocked" });
       return { guard, done };
     },
@@ -181,7 +190,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       const redacted = redactedOf(iv);
       const title = titleOf(iv);
       const payload = analysePrompt(title, redacted);
-      const { guard, done } = airlock("analyse-interview", "only_in_cloud", payload, id);
+      const { guard, done } = await airlock("analyse-interview", "only_in_cloud", payload, id);
       if (!guard.ok) {
         patch(id, { status: "blocked", blockedBy: guard.findings.map((f) => f.text) });
         return;
@@ -211,7 +220,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
         return;
       }
       const payload = memoPrompt(redactedOf(iv).slice(0, 12000));
-      const { guard, done } = airlock("quick-memo", "prefer_on_device", payload, id);
+      const { guard, done } = await airlock("quick-memo", "prefer_on_device", payload, id);
       if (!guard.ok) {
         patch(id, { status: "blocked", blockedBy: guard.findings.map((f) => f.text) });
         return;
@@ -242,7 +251,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       s.codebook,
       POLICIES[s.policy],
     );
-    const { guard, done } = airlock("synthesise-study", "only_in_cloud", payload, sectionGuard);
+    const { guard, done } = await airlock("synthesise-study", "only_in_cloud", payload, sectionGuard);
     if (!guard.ok) {
       setStudy((x) => ({ ...x, synthStatus: "blocked", synthError: `Blocked: ${guard.findings.map((f) => f.text).join(", ")}` }));
       return;
@@ -266,7 +275,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       const id = uid();
       const iv: Interview = { id, title: `Field notes — ${file.name}`, raw: "", status: "pseudonymising", progress: { done: 0, total: 1, stage: "Reading photo on this device" } };
       setStudy((s) => ({ ...s, interviews: [...s.interviews, iv] }));
-      const done = log({ purpose: "read-image", mode: "only_on_device", bytesIn: file.size, payloadPreview: `${file.name} (${file.type}, ${Math.round(file.size / 1024)} KB)` });
+      const done = log({ interviewId: id, purpose: "read-image", mode: "only_on_device", bytesIn: file.size, payloadPreview: `${file.name} (${file.type}, ${Math.round(file.size / 1024)} KB)` });
       try {
         const r = await backend.readImage(file);
         done({ status: "ok", source: r.source });
@@ -344,6 +353,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
     downloadPct,
     online,
     prepareDevice,
+    imageStatus: () => (backend ? backend.imageStatus() : Promise.resolve("unavailable" as DeviceStatus)),
     pseudonymise,
     analyse,
     memo,
