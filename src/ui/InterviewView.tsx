@@ -367,7 +367,9 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                     {t.quotes.map((q, i) => (
                       <blockquote key={i} className="jump" onClick={() => jumpTo(q)} title="Show this moment in the transcript">
                         <TokenText text={q.quote} codebook={study.codebook} showReal={showReal} />
-                        <cite>{q.timestamp ? `${q.timestamp} · ` : ""}show in transcript →</cite>
+                        <cite>
+                          {q.timestamp && /^\[?\d{1,2}:\d{2}/.test(q.timestamp) ? `${q.timestamp} · ` : ""}show in transcript →
+                        </cite>
                       </blockquote>
                     ))}
                   </div>

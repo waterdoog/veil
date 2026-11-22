@@ -1532,3 +1532,18 @@ textarea.rq,
     font-size: 30px;
   }
 }
+@media (max-width: 760px) {
+  .topbar {
+    gap: 8px;
+    padding: 0 12px;
+  }
+  .topbar .chip-status {
+    padding: 3px 7px;
+  }
+  .topbar .btn {
+    padding: 3px 8px;
+  }
+  .topbar .brand span {
+    display: none;
+  }
+}
