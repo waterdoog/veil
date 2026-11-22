@@ -82,6 +82,8 @@ export interface LedgerEntry {
   interviewId?: string;
   /** SHA-256 of the full payload handed to the model, for the audit report. */
   sha256?: string;
+  /** Replayed from a recorded run (not executed in this browser). */
+  recorded?: boolean;
 }
 
 export async function sha256(text: string): Promise<string> {

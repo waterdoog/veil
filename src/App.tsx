@@ -4,6 +4,7 @@ import type { RuntimeConfig } from "./firebase";
 import { POLICIES, type PolicyName } from "./core/types";
 import { useVeil, type Veil } from "./useVeil";
 import { auditReportHtml, codebookJson, codedQuotesCsv, pseudonymisedMarkdown } from "./core/report";
+import { hasRecordedRun } from "./replay";
 import { CloudIcon, DeviceIcon, LockIcon } from "./ui/bits";
 import { InterviewView } from "./ui/InterviewView";
 import { AddInterview, Ledger, SetupPanel, SynthesisView } from "./ui/Panels";
@@ -149,6 +150,14 @@ export function App({
               Load sample study
             </button>{" "}
             ·{" "}
+            {hasRecordedRun && (
+              <>
+                <button className="linkish" onClick={veil.loadReplay} title="Detections recorded from real Gemini Nano (Chrome 158)">
+                  Recorded Nano run
+                </button>{" "}
+                ·{" "}
+              </>
+            )}
             <button className="linkish" onClick={veil.loadHoldout} title="Four more fictional interviews that were never used to tune Veil">
               Held-out set
             </button>{" "}
@@ -242,6 +251,7 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
               <button className="btn btn-device" onClick={veil.loadSample}>
                 Load the sample study (6 fictional interviews)
               </button>
+
               <button className="btn btn-ghost" onClick={onAdd}>
                 Add your own transcript
               </button>
@@ -249,6 +259,11 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
           ) : (
             <button className="btn" onClick={() => onOpen(study.interviews[0].id)}>
               Open {study.interviews[0].title.slice(0, 40)}
+            </button>
+          )}
+          {hasRecordedRun && veil.device !== "available" && (
+            <button className="btn btn-ghost" onClick={veil.loadReplay} title="Detections made by real Gemini Nano on another machine; cloud analysis runs live">
+              No Gemini Nano here? Replay a recorded Nano run
             </button>
           )}
         </div>

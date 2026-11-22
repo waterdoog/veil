@@ -42,6 +42,8 @@ export interface Study {
   synthesisSource?: Source;
   synthStatus?: "idle" | "running" | "done" | "blocked" | "error";
   synthError?: string;
+  /** Set when the detections come from a recorded Gemini Nano run rather than this browser. */
+  replay?: { capturedAt: string; browser: string };
 }
 
 export const uid = () => Math.random().toString(36).slice(2, 10);

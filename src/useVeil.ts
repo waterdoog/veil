@@ -9,6 +9,7 @@ import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/
 import type { RuntimeConfig } from "./firebase";
 import { emptyStudy, releasable, uid, type Interview, type Study } from "./model";
 import { holdoutStudy, sampleStudy } from "./sample";
+import { recordedStudy } from "./replay";
 import { getLocal, setLocal } from "./store/local";
 import { saveInterview, saveSynthesis } from "./store/cloud";
 
@@ -341,6 +342,12 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
         })),
       loadSample: () => setStudy(sampleStudy(studyRef.current.policy)),
       loadHoldout: () => setStudy(holdoutStudy(studyRef.current.policy)),
+      loadReplay: () => {
+        const r = recordedStudy();
+        if (!r) return;
+        setStudy(r.study);
+        setLedger(r.ledger);
+      },
       newStudy: () => setStudy(emptyStudy(studyRef.current.policy)),
       toggleEntry: (token: string, real: string) =>
         setStudy((s) => ({

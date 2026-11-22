@@ -1,0 +1,2669 @@
+{
+"capturedAt": "2026-11-22T03:00:31.169Z",
+"browser": "Chrome 158",
+"policy": "standard",
+"codebook": [
+{
+"real": "chloe.bramwell@example.org",
+"token": "[CONTACT_1]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "07700 900412",
+"token": "[CONTACT_2]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "999 482 7103",
+"token": "[CONTACT_3]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "14 Ashbourne Terrace",
+"token": "[LOCATION_1]",
+"type": "LOCATION",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "900412",
+"token": "[ID_1]",
+"type": "ID",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "12th of March 1989",
+"token": "[DATE_1]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "14th of November 2022",
+"token": "[DATE_2]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "9th of January 2023",
+"token": "[DATE_3]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "4th of September 2023",
+"token": "[DATE_4]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "18th of October 2023",
+"token": "[DATE_5]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Pennine Valley University",
+"token": "[ORG_1]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Brackenbridge Primary School",
+"token": "[ORG_2]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Millgate Medical Practice",
+"token": "[ORG_3]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Long COVID Clinic",
+"token": "[ORG_4]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Cragside General Hospital",
+"token": "[ORG_5]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Northern Teachers' Union",
+"token": "[ORG_6]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Dr. Samira Okafor",
+"token": "[PERSON_1]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Dr. Alistair Finch",
+"token": "[PERSON_2]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Dr. Finch",
+"token": "[PERSON_2]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "thirty-four",
+"token": "[QUASI_1]",
+"type": "QUASI",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£36,500 a year",
+"token": "[FINANCIAL_1]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£1,240 a month",
+"token": "[FINANCIAL_2]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£109.40 a week",
+"token": "[FINANCIAL_3]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£950 a month",
+"token": "[FINANCIAL_4]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£280 a month",
+"token": "[FINANCIAL_5]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£25",
+"token": "[FINANCIAL_6]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Chloe Bramwell",
+"token": "[PERSON_3]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Brackenbridge",
+"token": "[LOCATION_2]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Low Moor",
+"token": "[LOCATION_3]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Gareth",
+"token": "[PERSON_4]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Theo",
+"token": "[PERSON_5]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Maisie",
+"token": "[PERSON_6]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Tarnham",
+"token": "[LOCATION_4]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "SENCO lead for deaf and hard-of-hearing pupils",
+"token": "[QUASI_2]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "British Sign Language Level 3 qualification",
+"token": "[QUASI_3]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Patricia Hargreaves",
+"token": "[PERSON_7]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Trish",
+"token": "[PERSON_8]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Mark Tomlinson",
+"token": "[PERSON_9]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "OH-2023-8841",
+"token": "[ID_2]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "WellWork Solutions",
+"token": "[ORG_7]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Denise Kowalski",
+"token": "[PERSON_10]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Mark",
+"token": "[PERSON_9]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£36,500",
+"token": "[FINANCIAL_7]",
+"type": "FINANCIAL",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£1,240",
+"token": "[FINANCIAL_8]",
+"type": "FINANCIAL",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£109.40",
+"token": "[FINANCIAL_9]",
+"type": "FINANCIAL",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "£950",
+"token": "[FINANCIAL_10]",
+"type": "FINANCIAL",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Personal Independence Payment—PIP",
+"token": "[ID_3]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Brackenbridge Primary",
+"token": "[ORG_8]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Cragside General clinic",
+"token": "[ORG_9]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Occupational Health",
+"token": "[ORG_10]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Samira Okafor",
+"token": "[PERSON_11]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Okafor",
+"token": "[PERSON_11]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Alistair Finch",
+"token": "[PERSON_2]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Finch",
+"token": "[PERSON_2]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Samira",
+"token": "[PERSON_11]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Alistair",
+"token": "[PERSON_2]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Chloe",
+"token": "[PERSON_3]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Bramwell",
+"token": "[PERSON_3]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Patricia",
+"token": "[PERSON_7]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Hargreaves",
+"token": "[PERSON_7]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Tomlinson",
+"token": "[PERSON_9]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Denise",
+"token": "[PERSON_10]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Kowalski",
+"token": "[PERSON_10]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "Cragside",
+"token": "[ORG_11]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "OH",
+"token": "[ORG_12]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p01"
+},
+{
+"real": "darren.fletcher73@example.com",
+"token": "[CONTACT_4]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "07700 900418",
+"token": "[CONTACT_5]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "999 482 7105",
+"token": "[CONTACT_6]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "42 Alder Grove",
+"token": "[LOCATION_5]",
+"type": "LOCATION",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "PF-88412",
+"token": "[ID_4]",
+"type": "ID",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "900418",
+"token": "[ID_5]",
+"type": "ID",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "3rd of May 1973",
+"token": "[DATE_6]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "January 2023",
+"token": "[DATE_7]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "July 2023",
+"token": "[DATE_8]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "March 2023",
+"token": "[DATE_9]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "November 2022",
+"token": "[DATE_10]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Northshire Health Research Group",
+"token": "[ORG_13]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "University of Northshire",
+"token": "[ORG_14]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Pennine Freight & Logistics Ltd",
+"token": "[ORG_15]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Oakwood Medical Practice",
+"token": "[ORG_16]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Long COVID Rehab Clinic",
+"token": "[ORG_17]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "St. Jude's General Hospital",
+"token": "[ORG_18]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Midlands Transport & Warehouse Union",
+"token": "[ORG_19]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Dr. Helen Osei",
+"token": "[PERSON_12]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Dr. Alan Bradshaw",
+"token": "[PERSON_13]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Dr. Bradshaw",
+"token": "[PERSON_13]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Dr. Osei",
+"token": "[PERSON_12]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "fifty-one",
+"token": "[QUASI_4]",
+"type": "QUASI",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "£34,500 a year",
+"token": "[FINANCIAL_11]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "£980 a month",
+"token": "[FINANCIAL_12]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "£393.45 a month",
+"token": "[FINANCIAL_13]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "£4,200",
+"token": "[FINANCIAL_14]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Darren Fletcher",
+"token": "[PERSON_14]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Millfield estate in Brampton-on-Trent",
+"token": "[LOCATION_6]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Marston Industrial Park",
+"token": "[LOCATION_7]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "B-Shift Despatch",
+"token": "[QUASI_5]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "V-Lift 4000",
+"token": "[QUASI_6]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "POTS—Postural Orthostatic Tachycardia Syndrome",
+"token": "[HEALTH_1]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Post-Exertional Malaise",
+"token": "[HEALTH_2]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Ivabradine",
+"token": "[HEALTH_3]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Amitriptyline",
+"token": "[HEALTH_4]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Gareth Pritchard",
+"token": "[PERSON_15]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "B-Shift",
+"token": "[ORG_20]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Dave Kowalski",
+"token": "[PERSON_16]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Priya Nair",
+"token": "[PERSON_17]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "POTS",
+"token": "[HEALTH_5]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Gareth",
+"token": "[PERSON_15]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Pennine Freight",
+"token": "[ORG_21]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "MTWU",
+"token": "[ORG_22]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "employee ID PF-88412",
+"token": "[ID_6]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Statutory Sick Pay—£109.40 a week",
+"token": "[FINANCIAL_15]",
+"type": "FINANCIAL",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "UC-9042-771B",
+"token": "[ID_7]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Brampton Jobcentre",
+"token": "[LOCATION_8]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Sandra",
+"token": "[PERSON_18]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Callum",
+"token": "[PERSON_19]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Leeds",
+"token": "[LOCATION_9]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Megan",
+"token": "[PERSON_20]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Darren",
+"token": "[PERSON_14]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Helen Osei",
+"token": "[PERSON_12]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Osei",
+"token": "[PERSON_12]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Alan Bradshaw",
+"token": "[PERSON_13]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Bradshaw",
+"token": "[PERSON_13]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Helen",
+"token": "[PERSON_12]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Alan",
+"token": "[PERSON_13]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Fletcher",
+"token": "[PERSON_14]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Pritchard",
+"token": "[PERSON_15]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Dave",
+"token": "[PERSON_16]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Kowalski",
+"token": "[PERSON_16]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Priya",
+"token": "[PERSON_17]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "Nair",
+"token": "[PERSON_17]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "St. Jude",
+"token": "[ORG_23]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "PF",
+"token": "[ORG_24]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p02"
+},
+{
+"real": "priya.nair@example.com",
+"token": "[CONTACT_7]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "999 482 1039",
+"token": "[CONTACT_8]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "14 Larkspur Close",
+"token": "[LOCATION_10]",
+"type": "LOCATION",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "19th of September",
+"token": "[DATE_11]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "October 2023",
+"token": "[DATE_12]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "6th of January",
+"token": "[DATE_13]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "University of Westbridge",
+"token": "[ORG_25]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "ClearLedger Ltd",
+"token": "[ORG_26]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Meadowbrook Surgery",
+"token": "[ORG_27]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Westbridge Long COVID Clinic",
+"token": "[ORG_28]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "St Jude's Infirmary",
+"token": "[ORG_29]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Dr. Hannah Al-",
+"token": "[PERSON_21]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Dr. Simon Okafor",
+"token": "[PERSON_22]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "27-year-old",
+"token": "[QUASI_7]",
+"type": "QUASI",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "I'm 27",
+"token": "[QUASI_8]",
+"type": "QUASI",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "£240",
+"token": "[FINANCIAL_16]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "£38,500",
+"token": "[FINANCIAL_17]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "£1,150 a month",
+"token": "[FINANCIAL_18]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Priya",
+"token": "[PERSON_23]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Priya Nair",
+"token": "[PERSON_23]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Eastgate",
+"token": "[LOCATION_11]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Millford",
+"token": "[LOCATION_12]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Core Payments Squad",
+"token": "[QUASI_9]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "COBOL-to-Rust migration scripts",
+"token": "[QUASI_10]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Callum Brooks",
+"token": "[PERSON_24]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Dr. Hannah Al-Mansoor",
+"token": "[PERSON_25]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "LC-2023-8841",
+"token": "[ID_8]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "propranolol",
+"token": "[HEALTH_6]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "fexofenadine",
+"token": "[HEALTH_7]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Gareth Pritchard",
+"token": "[PERSON_26]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "ClearLedger",
+"token": "[ORG_30]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Jira",
+"token": "[ORG_31]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Toby Chen",
+"token": "[PERSON_27]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Callum",
+"token": "[PERSON_24]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "27-year-old software developer",
+"token": "[QUASI_11]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "1980s Casio synthesizers",
+"token": "[QUASI_12]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "eBay",
+"token": "[CONTACT_9]",
+"type": "CONTACT",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Christmas",
+"token": "[DATE_14]",
+"type": "DATE",
+"source": "nano",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Hannah Al-",
+"token": "[PERSON_28]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Al-",
+"token": "[PERSON_28]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Simon Okafor",
+"token": "[PERSON_29]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Okafor",
+"token": "[PERSON_29]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Hannah",
+"token": "[PERSON_28]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Simon",
+"token": "[PERSON_29]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Nair",
+"token": "[PERSON_23]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Brooks",
+"token": "[PERSON_24]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Gareth",
+"token": "[PERSON_26]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Pritchard",
+"token": "[PERSON_26]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Toby",
+"token": "[PERSON_27]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Chen",
+"token": "[PERSON_27]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Meadowbrook",
+"token": "[ORG_32]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "Westbridge Long COVID",
+"token": "[ORG_33]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "St Jude",
+"token": "[ORG_34]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p03"
+},
+{
+"real": "tracey.henderson81@example.com",
+"token": "[CONTACT_10]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "999 482 1037",
+"token": "[CONTACT_11]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "42 Larkspur Close",
+"token": "[LOCATION_13]",
+"type": "LOCATION",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "PIP-88412",
+"token": "[ID_9]",
+"type": "ID",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "14th of November 2021",
+"token": "[DATE_15]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "March 2022",
+"token": "[DATE_16]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "September 2023",
+"token": "[DATE_17]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "12th of May",
+"token": "[DATE_18]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Northshire University",
+"token": "[ORG_35]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Bramley Brook Medical Practice",
+"token": "[ORG_36]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Mrs. Paton",
+"token": "[PERSON_30]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Dr. Patel",
+"token": "[PERSON_31]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Dr. O'",
+"token": "[PERSON_32]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "I'm 45",
+"token": "[QUASI_13]",
+"type": "QUASI",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "£480 a week",
+"token": "[FINANCIAL_19]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "£180 a week",
+"token": "[FINANCIAL_20]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "£165 a week",
+"token": "[FINANCIAL_21]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "£290 a month",
+"token": "[FINANCIAL_22]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "£72.65 a week",
+"token": "[FINANCIAL_23]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Tracey Henderson",
+"token": "[PERSON_33]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Ketteridge",
+"token": "[LOCATION_14]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Millfield area",
+"token": "[LOCATION_15]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Callum",
+"token": "[PERSON_34]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Maisie",
+"token": "[PERSON_35]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Gary",
+"token": "[PERSON_36]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Scissors & Sheen",
+"token": "[ORG_37]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Brenda Kowalski",
+"token": "[PERSON_37]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "High Street",
+"token": "[LOCATION_16]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "1940s vintage bridal styling",
+"token": "[QUASI_14]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "St. Mary",
+"token": "[ORG_38]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Jade",
+"token": "[PERSON_38]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Brenda",
+"token": "[PERSON_37]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "PIP-88412-TH",
+"token": "[ID_10]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Dr. O'Connor",
+"token": "[PERSON_39]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Postural Tachycardia Syndrome—PoTS",
+"token": "[HEALTH_8]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "vitamin D",
+"token": "[HEALTH_9]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Paton",
+"token": "[PERSON_40]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Patel",
+"token": "[PERSON_41]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Tracey",
+"token": "[PERSON_33]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Henderson",
+"token": "[PERSON_33]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "Kowalski",
+"token": "[PERSON_37]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p04"
+},
+{
+"real": "g.whitaker62@example.com",
+"token": "[CONTACT_12]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "999 482 1903",
+"token": "[CONTACT_13]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "14 Birchwood Close",
+"token": "[LOCATION_17]",
+"type": "LOCATION",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "3rd of March 2022",
+"token": "[DATE_19]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "18th of September 2023",
+"token": "[DATE_20]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "1st of April 2024",
+"token": "[DATE_21]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "University of Callowhill",
+"token": "[ORG_39]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Northbridge General Hospital",
+"token": "[ORG_40]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Westmere Valley NHS Trust",
+"token": "[ORG_41]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Westmere Horological and Barometer Society",
+"token": "[ORG_42]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Oakfield Medical Practice",
+"token": "[ORG_43]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "St. Jude's Post-COVID Assessment Clinic",
+"token": "[ORG_44]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Dr. Hannah Okafor",
+"token": "[PERSON_42]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "sixty-two",
+"token": "[QUASI_15]",
+"type": "QUASI",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "£11.45",
+"token": "[FINANCIAL_24]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "£1,120 a month",
+"token": "[FINANCIAL_25]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "£81.90 a week",
+"token": "[FINANCIAL_26]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "£240 a month",
+"token": "[FINANCIAL_27]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Graham Whitaker",
+"token": "[PERSON_43]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Acute Logistics and Portering Team B",
+"token": "[QUASI_16]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Millbrook",
+"token": "[LOCATION_18]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "1950s",
+"token": "[QUASI_17]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Merchant Navy",
+"token": "[ORG_45]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Chloe",
+"token": "[PERSON_44]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Sharon Patel",
+"token": "[PERSON_45]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Tariq Mahmood",
+"token": "[PERSON_46]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Ward Four",
+"token": "[LOCATION_19]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "OH-2022-8841",
+"token": "[ID_11]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Brenda",
+"token": "[PERSON_47]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Claire",
+"token": "[PERSON_48]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Band 2",
+"token": "[ORG_46]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "£11.45 an hour",
+"token": "[FINANCIAL_28]",
+"type": "FINANCIAL",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Salbutamol inhaler",
+"token": "[HEALTH_10]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "NHS number, 999 482 1903",
+"token": "[ID_12]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "heart failure",
+"token": "[HEALTH_11]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "chronic fatigue and brain fog",
+"token": "[HEALTH_12]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Kelmscott",
+"token": "[LOCATION_20]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "1954 Kelvin Hughes barometer",
+"token": "[QUASI_18]",
+"type": "QUASI",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Sharon",
+"token": "[PERSON_45]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Hannah Okafor",
+"token": "[PERSON_49]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Okafor",
+"token": "[PERSON_49]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Hannah",
+"token": "[PERSON_49]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Graham",
+"token": "[PERSON_43]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Whitaker",
+"token": "[PERSON_43]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Patel",
+"token": "[PERSON_45]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Tariq",
+"token": "[PERSON_46]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Mahmood",
+"token": "[PERSON_46]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Northbridge",
+"token": "[ORG_47]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "Oakfield",
+"token": "[ORG_48]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p05"
+},
+{
+"real": "gareth.pritchard85@example.com",
+"token": "[CONTACT_14]",
+"type": "CONTACT",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "14 Meadowsweet Lane",
+"token": "[LOCATION_21]",
+"type": "LOCATION",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "DCI-88412",
+"token": "[ID_13]",
+"type": "ID",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "2409182",
+"token": "[ID_14]",
+"type": "ID",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "14th of March 2022",
+"token": "[DATE_22]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "3rd of October 2022",
+"token": "[DATE_23]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "19th of June 2023",
+"token": "[DATE_24]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "28th of November 2023",
+"token": "[DATE_25]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "12th of February 2024",
+"token": "[DATE_26]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "16th of September 2024",
+"token": "[DATE_27]",
+"type": "DATE",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "University of Wessex",
+"token": "[ORG_49]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "St Jude's General Hospital",
+"token": "[ORG_50]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Civil and Public Sector Union",
+"token": "[ORG_51]",
+"type": "ORG",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Dr. Sunita Rao",
+"token": "[PERSON_50]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Dr. Alistair Finch",
+"token": "[PERSON_51]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "thirty-nine",
+"token": "[QUASI_19]",
+"type": "QUASI",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "£44,200",
+"token": "[FINANCIAL_29]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "£35,360",
+"token": "[FINANCIAL_30]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "£1,350 a month",
+"token": "[FINANCIAL_31]",
+"type": "FINANCIAL",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Sarah",
+"token": "[PERSON_52]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Working with Long COVID study",
+"token": "[ORG_52]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Gareth",
+"token": "[PERSON_53]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Gareth Pritchard",
+"token": "[PERSON_53]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Basingham",
+"token": "[LOCATION_22]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Claire",
+"token": "[PERSON_54]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Theo",
+"token": "[PERSON_55]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Maya",
+"token": "[PERSON_56]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Maya's second birthday",
+"token": "[DATE_28]",
+"type": "DATE",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Sandra Kettle",
+"token": "[PERSON_57]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Equality Act",
+"token": "[ORG_53]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "NHS number 999 482 7103",
+"token": "[ID_15]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Postural Orthostatic Tachycardia Syndrome",
+"token": "[HEALTH_13]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Dev Patel",
+"token": "[PERSON_58]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Larkhill",
+"token": "[LOCATION_23]",
+"type": "LOCATION",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "290 a month",
+"token": "[FINANCIAL_32]",
+"type": "FINANCIAL",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "sumatriptan",
+"token": "[HEALTH_14]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "naltrexone",
+"token": "[HEALTH_15]",
+"type": "HEALTH",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Brenda Hargreaves",
+"token": "[PERSON_59]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "ET/2409182/2024",
+"token": "[ID_16]",
+"type": "ID",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "HR",
+"token": "[ORG_54]",
+"type": "ORG",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Brenda",
+"token": "[PERSON_59]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Dev",
+"token": "[PERSON_58]",
+"type": "PERSON",
+"source": "nano",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Sunita Rao",
+"token": "[PERSON_60]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Rao",
+"token": "[PERSON_60]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Alistair Finch",
+"token": "[PERSON_61]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Finch",
+"token": "[PERSON_61]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Sunita",
+"token": "[PERSON_60]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Alistair",
+"token": "[PERSON_61]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Pritchard",
+"token": "[PERSON_53]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Sandra",
+"token": "[PERSON_57]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Kettle",
+"token": "[PERSON_57]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Patel",
+"token": "[PERSON_58]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+},
+{
+"real": "Hargreaves",
+"token": "[PERSON_59]",
+"type": "PERSON",
+"source": "pattern",
+"enabled": true,
+"origin": "p06"
+}
+],
+"calls": [
+{
+"interviewId": "p01",
+"purpose": "pseudonymise",
+"bytesIn": 11033,
+"source": "on_device"
+},
+{
+"interviewId": "p02",
+"purpose": "pseudonymise",
+"bytesIn": 8994,
+"source": "on_device"
+},
+{
+"interviewId": "p03",
+"purpose": "pseudonymise",
+"bytesIn": 10173,
+"source": "on_device"
+},
+{
+"interviewId": "p04",
+"purpose": "pseudonymise",
+"bytesIn": 10915,
+"source": "on_device"
+},
+{
+"interviewId": "p05",
+"purpose": "pseudonymise",
+"bytesIn": 11164,
+"source": "on_device"
+},
+{
+"interviewId": "p06",
+"purpose": "pseudonymise",
+"bytesIn": 10039,
+"source": "on_device"
+}
+]
+}

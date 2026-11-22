@@ -81,6 +81,13 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
               </span>
               <span className="muted">{spans.length} spans replaced</span>
             </header>
+            {study.replay && (
+              <div className="notice">
+                <b>Recorded run.</b> These highlights were produced by real Gemini Nano in {study.replay.browser} on{" "}
+                {new Date(study.replay.capturedAt).toLocaleDateString()} and replayed here, because this browser can't run the
+                model. Review, the airlock and cloud analysis below run live.
+              </div>
+            )}
             {iv.progress && <Progress done={iv.progress.done} total={iv.progress.total} label={`${iv.progress.stage} with Gemini Nano…`} />}
             {iv.deviceMissing && (
               <div className="notice notice-warn">

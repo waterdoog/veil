@@ -3,6 +3,7 @@ import type { LedgerEntry } from "../core/airlock";
 import type { Veil } from "../useVeil";
 import { releasable } from "../model";
 import { docxToText } from "../core/docx";
+import { hasRecordedRun } from "../replay";
 import { DeviceIcon, Progress, SourceBadge, TokenText } from "./bits";
 
 const PURPOSE: Record<LedgerEntry["purpose"], string> = {
@@ -57,7 +58,7 @@ export function Ledger({ entries, onClose }: { entries: LedgerEntry[]; onClose: 
               <span className="led-time">{new Date(e.at).toLocaleTimeString()}</span>
               <span className="led-purpose">{PURPOSE[e.purpose]}</span>
               <code className="led-mode">{e.mode}</code>
-              {e.status === "blocked" ? <span className="badge badge-bad">blocked</span> : e.status === "running" ? <span className="badge">running…</span> : e.status === "error" ? <span className="badge badge-bad">error</span> : <SourceBadge source={e.source} />}
+              {e.recorded ? <span className="badge" title="Replayed from a recorded run">recorded · Gemini Nano</span> : e.status === "blocked" ? <span className="badge badge-bad">blocked</span> : e.status === "running" ? <span className="badge">running…</span> : e.status === "error" ? <span className="badge badge-bad">error</span> : <SourceBadge source={e.source} />}
             </button>
             {open === e.id && (
               <div className="led-detail">
@@ -292,6 +293,17 @@ export function SetupPanel({ veil, onClose }: { veil: Veil; onClose: () => void 
         {(veil.device === "downloadable" || veil.device === "downloading") && (
           <button className="btn btn-device" onClick={veil.prepareDevice} disabled={veil.downloadPct !== null}>
             <DeviceIcon /> {veil.downloadPct !== null ? `Downloading ${Math.round(veil.downloadPct * 100)}%` : "Download Gemini Nano (one-time, stays on this device)"}
+          </button>
+        )}
+        {veil.device === "unavailable" && hasRecordedRun && (
+          <button
+            className="btn btn-ghost"
+            onClick={() => {
+              veil.loadReplay();
+              onClose();
+            }}
+          >
+            Can't enable it? Replay a recorded Gemini Nano run on the sample study
           </button>
         )}
         <p className="small muted">Chrome doesn't let web pages open chrome:// links. Copy one and paste it into the address bar:</p>
