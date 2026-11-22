@@ -34,6 +34,16 @@ const PATTERNS: { type: EntityType; re: RegExp }[] = [
     re: /\b(?:\d{1,2}(?:st|nd|rd|th)?\s+(?:of\s+)?(?:January|February|March|April|May|June|July|August|September|October|November|December)(?:,?\s+\d{4})?|(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{4})?|(?:January|February|March|April|June|July|August|September|October|November|December)\s+\d{4})\b/g,
   },
   { type: "DATE", re: /\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/g },
+  // Named institutions: capitalised phrases ending in an institution word, "University of X".
+  {
+    type: "ORG",
+    re: /\b(?:(?:[A-Z][\w'’.-]*|&|of|and|for)\s+){0,5}?[A-Z][\w'’.-]*\s+(?:Clinic|Union|University|Group|Trust|Hospital|Infirmary|Surgery|Practice|School|College|Council|Ltd|Limited|Foundation|Society|Association|Partnership)\b|\bUniversity of [A-Z][a-z]+(?:\s[A-Z][a-z]+)?/g,
+  },
+  // Stated ages ("I'm 27", "aged sixty-two") — a quasi-identifier.
+  {
+    type: "QUASI",
+    re: /\b(?:I'm|I am|I’m|aged|age of|turned|turning)\s+(?:\d{2}|(?:twenty|thirty|forty|fifty|sixty|seventy|eighty)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?)\b/gi,
+  },
   // Money amounts.
   { type: "FINANCIAL", re: /£\s?\d[\d,]*(?:\.\d{2})?(?:\s?(?:k|K|grand|a (?:month|week|year)))?/g },
 ];
@@ -44,7 +54,10 @@ export function findPatterns(text: string): Entity[] {
   for (const { type, re } of PATTERNS) {
     re.lastIndex = 0;
     for (const m of text.matchAll(re)) {
-      const t = m[0].trim().replace(/[.,;:]+$/, "");
+      let t = m[0].trim().replace(/[.,;:]+$/, "");
+      if (type === "ORG") t = t.replace(/^(?:The|the|At|at|And|and|To|to|In|in|From|from|With|with)\s+/, "");
+      // Word ages ("sixty-two") are distinctive on their own; a bare "27" is not, so keep "I'm 27" as the span.
+      if (type === "QUASI" && !/\d$/.test(t)) t = t.replace(/^(?:I'm|I am|I’m|aged|age of|turned|turning)\s+/i, "");
       if (t.length < 3) continue;
       const key = type + "|" + t.toLowerCase();
       if (seen.has(key)) continue;
@@ -75,6 +88,19 @@ export function extendNames(text: string, firstNames: string[], fullNames: strin
       out.push({ text: m[0], type: "PERSON", source: "pattern" });
     }
   }
+  // "Chloe Bramwell" known -> people are also called just "Chloe" or "Bramwell" later on.
+  // (Real Gemini Nano runs showed bare first names were the most common miss.)
+  for (const full of fullNames) {
+    const parts = full.trim().split(/\s+/).filter((w) => !/^(Dr|Mr|Mrs|Ms|Miss|Prof|Nurse)\.?$/.test(w));
+    if (parts.length < 2) continue;
+    for (const w of [parts[0], parts[parts.length - 1]]) {
+      if (!/^[A-Z][a-z'’-]{2,}$/.test(w) || NOT_SURNAME.has(w) || seen.has(w)) continue;
+      if (new RegExp(`\\b${w}\\b`).test(text)) {
+        seen.add(w);
+        out.push({ text: w, type: "PERSON", source: "pattern" });
+      }
+    }
+  }
   for (const f of firstNames) {
     if (!/^[A-Z][a-z'’-]+$/.test(f)) continue;
     const re = new RegExp(`\\b${f}\\s+((?:[A-Z][a-z'’-]+-)?[A-Z][a-z'’-]{2,})\\b`, "g");
@@ -84,6 +110,28 @@ export function extendNames(text: string, firstNames: string[], fullNames: strin
       if (seen.has(full)) continue;
       seen.add(full);
       out.push({ text: full, type: "PERSON", source: "pattern" });
+    }
+  }
+  return out;
+}
+
+const INSTITUTION_TAIL =
+  /\s+(?:General Hospital|University Hospital|Hospital|Infirmary|Medical Practice|Medical Centre|Health Centre|Surgery|Clinic|Primary School|Secondary School|Academy|School|College|Ltd|Limited|plc|Group|Trust|Council)$/;
+
+/**
+ * "St Jude's General Hospital" known -> the same place is often just "St Jude's" later on.
+ * Returns the stem as an ORG entity when it also appears on its own in the text.
+ */
+export function extendOrgs(text: string, orgNames: string[]): Entity[] {
+  const out: Entity[] = [];
+  const seen = new Set<string>();
+  for (const o of orgNames) {
+    const stem = o.trim().replace(INSTITUTION_TAIL, "");
+    if (stem === o.trim() || stem.length < 4 || !/^[A-Z]/.test(stem) || seen.has(stem)) continue;
+    const esc = stem.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    if (new RegExp(`(?<![\\p{L}\\p{N}])${esc}(?![\\p{L}\\p{N}])`, "u").test(text.replace(o, ""))) {
+      seen.add(stem);
+      out.push({ text: stem, type: "ORG", source: "pattern" });
     }
   }
   return out;

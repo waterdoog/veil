@@ -75,11 +75,13 @@ export function mergeEntities(codebook: CodebookEntry[], entities: Entity[], ori
         const ep = norm(e.real).split(" ");
         // "sarah" ~ "sarah jenkins", or "sarah jenkins" ~ "sarah" (first name seen first)
         const firstLink = (parts.length === 1 && ep[0] === parts[0]) || (ep.length === 1 && parts[0] === ep[0]);
+        // "bramwell" ~ "chloe bramwell" (bare surname of a known full name)
+        const surnameLink = parts.length === 1 && ep.length > 1 && ep[ep.length - 1] === parts[0] && !TITLES.has(ep[0].replace(/\.$/, ""));
         // "dr patel" ~ "sanjay patel" (same surname, one side has a title)
         const lastLink =
           (titled(parts) && !titled(ep) && ep.length > 1 && ep[ep.length - 1] === parts[1]) ||
           (titled(ep) && !titled(parts) && parts.length > 1 && parts[parts.length - 1] === ep[1]);
-        if (firstLink || lastLink) {
+        if (firstLink || lastLink || surnameLink) {
           token = e.token;
           break;
         }

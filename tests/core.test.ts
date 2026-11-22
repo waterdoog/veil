@@ -252,3 +252,31 @@ describe("salvage tolerance", () => {
     expect(r.entities.map((e) => `${e.type}:${e.text}`)).toEqual(["PERSON:Maya", "LOCATION:Leeds"]);
   });
 });
+
+import { extendOrgs } from "../src/core/patterns";
+describe("expansions learned from the real Nano run", () => {
+  it("a known full name also covers the bare first name and surname", () => {
+    const raw = "I'm Chloe Bramwell. Later Chloe said Bramwell family stuff. Mrs Bramwell too.";
+    let cb = mergeEntities([], [e("Chloe Bramwell", "PERSON")], "p1");
+    cb = mergeEntities(cb, extendNames(raw, [], ["Chloe Bramwell"]), "p1");
+    expect(applyCodebook(raw, cb, std, "p1").redacted).toBe("I'm [PERSON_1]. Later [PERSON_1] said [PERSON_1] family stuff. [PERSON_1] too.");
+  });
+  it("an institution's short name is caught once its full name is known", () => {
+    const raw = "I was admitted to St Jude's General Hospital. Back at St Jude's they said rest.";
+    const ext = extendOrgs(raw, ["St Jude's General Hospital"]).map((x) => x.text);
+    expect(ext).toEqual(["St Jude's"]);
+    const cb = mergeEntities(mergeEntities([], [e("St Jude's General Hospital", "ORG")], "p1"), extendOrgs(raw, ["St Jude's General Hospital"]), "p1");
+    expect(applyCodebook(raw, cb, std, "p1").redacted).toBe("I was admitted to [ORG_1]. Back at [ORG_2]'s they said rest.");
+  });
+});
+
+describe("institution and age detectors", () => {
+  it("finds named institutions and stated ages", () => {
+    const t = "I'm 27 and I joined the Midlands Transport & Warehouse Union. The Long COVID Rehab Clinic at the University of Northshire, aged sixty-two.";
+    const f = findPatterns(t).map((x) => `${x.type}:${x.text}`);
+    expect(f).toEqual(expect.arrayContaining(["ORG:Midlands Transport & Warehouse Union", "ORG:Long COVID Rehab Clinic", "ORG:University of Northshire", "QUASI:I'm 27", "QUASI:sixty-two"]));
+  });
+  it("does not flag ordinary sentences", () => {
+    expect(findPatterns("Then I went to the clinic and the union rep was there.").filter((x) => x.type === "ORG")).toEqual([]);
+  });
+});
