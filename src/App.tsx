@@ -4,6 +4,7 @@ import type { RuntimeConfig } from "./firebase";
 import { POLICIES, type PolicyName } from "./core/types";
 import { useVeil, type Veil } from "./useVeil";
 import { auditReportHtml, codebookJson, codedQuotesCsv, pseudonymisedMarkdown } from "./core/report";
+import { studyToQdpx } from "./core/qdpx";
 import { hasRecordedRun } from "./replay";
 import { CloudIcon, DeviceIcon, LockIcon } from "./ui/bits";
 import { InterviewView } from "./ui/InterviewView";
@@ -131,8 +132,15 @@ export function App({
               <button className="linkish small" onClick={() => download(`veil-pseudonymised-${slug(study.name)}.md`, pseudonymisedMarkdown(study), "text/markdown")}>
                 Pseudonymised dataset (.md)
               </button>
+              <button
+                className="linkish small"
+                title="REFI-QDA project: pseudonymised transcripts with every coded quote, for NVivo, ATLAS.ti, MAXQDA or QDA Miner"
+                onClick={() => download(`veil-${slug(study.name)}.qdpx`, studyToQdpx(study).bytes, "application/zip")}
+              >
+                Coded project (.qdpx for NVivo / ATLAS.ti / MAXQDA)
+              </button>
               <button className="linkish small" onClick={() => download(`veil-coded-quotes-${slug(study.name)}.csv`, codedQuotesCsv(study), "text/csv")}>
-                Coded quotes (.csv for NVivo / ATLAS.ti)
+                Coded quotes (.csv)
               </button>
               <button
                 className="linkish small"
@@ -152,7 +160,7 @@ export function App({
             ·{" "}
             {hasRecordedRun && (
               <>
-                <button className="linkish" onClick={veil.loadReplay} title="Detections recorded from real Gemini Nano (Chrome 158)">
+                <button className="linkish" onClick={() => veil.loadReplay()} title="Detections recorded from real Gemini Nano (Chrome 158)">
                   Recorded Nano run
                 </button>{" "}
                 ·{" "}
@@ -250,14 +258,14 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
         <p className="lede">
           Qualitative researchers promise ethics committees that identifiable transcripts stay under their control, then
           spend hours pseudonymising by hand before they can use any AI. Veil does it on your laptop with Gemini Nano, shows
-          you exactly what will leave, blocks anything that slipped through, and only then hands the cloud model a
+          you exactly what will leave, blocks any known identifier that slipped through, flags name-like text nothing caught, and only then hands the cloud model a
           pseudonymised copy for thematic analysis. Results come back with real names restored — locally. The same works for court judgments, HR files and clinical letters.
         </p>
         <div className="actions">
           {!study.interviews.length ? (
             <>
               {hasRecordedRun && veil.device === "unavailable" ? (
-                <button className="btn btn-device" onClick={veil.loadReplay}>
+                <button className="btn btn-device" onClick={() => veil.loadReplay()}>
                   Start here: sample study with a recorded Gemini Nano run
                 </button>
               ) : (
@@ -276,12 +284,47 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
             </button>
           )}
           {hasRecordedRun && veil.device !== "available" && study.interviews.length > 0 && !study.replay && (
-            <button className="btn btn-ghost" onClick={veil.loadReplay} title="Detections made by real Gemini Nano on another machine; cloud analysis runs live">
+            <button className="btn btn-ghost" onClick={() => veil.loadReplay()} title="Detections made by real Gemini Nano on another machine; cloud analysis runs live">
               No Gemini Nano here? Replay a recorded Nano run
             </button>
           )}
         </div>
       </div>
+
+      {study.interviews.every((iv) => iv.truth) && (
+        <div className="starters">
+          <span className="muted small">Try it on</span>
+          <button
+            className="starter"
+            onClick={() => {
+              if (hasRecordedRun && veil.device !== "available") veil.loadReplay();
+              else veil.loadSample();
+              onOpen("p01");
+            }}
+          >
+            <b>Research interviews</b>
+            <span>6 fictional Long COVID interviews{hasRecordedRun && veil.device !== "available" ? " · recorded Nano run" : ""}</span>
+          </button>
+          {[
+            ["s-hr", "HR investigation file", "Grievance + capability review"],
+            ["s-clin", "Hospital discharge summary", "Cardiology, NHS-style"],
+            ["s-legal", "Court judgment", "Real ECHR judgment (TAB)"],
+          ].map(([id, name, sub]) => (
+            <button
+              key={id}
+              className="starter"
+              onClick={() => {
+                if (veil.device !== "available") veil.loadReplay("scenarios");
+                else veil.loadScenarios();
+                onOpen(id);
+              }}
+            >
+              <b>{name}</b>
+              <span>{sub}{veil.device !== "available" ? " · recorded Nano run" : ""}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       <ol className="how">
         <li>
@@ -350,8 +393,8 @@ function slug(s: string) {
 }
 
 /** Saves a file generated in the browser. Nothing is uploaded. */
-function download(name: string, text: string, type: string) {
-  const url = URL.createObjectURL(new Blob([text], { type }));
+function download(name: string, data: string | Uint8Array, type: string) {
+  const url = URL.createObjectURL(new Blob([data as BlobPart], { type }));
   const a = document.createElement("a");
   a.href = url;
   a.download = name;

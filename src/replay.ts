@@ -2,9 +2,11 @@ import type { LedgerEntry } from "./core/airlock";
 import type { CodebookEntry } from "./core/types";
 import type { Study } from "./model";
 import { uid } from "./model";
-import { sampleStudy } from "./sample";
+import { sampleStudy, scenariosStudy } from "./sample";
 
 interface RecordedRun {
+  /** Which built-in study the detections belong to (older recordings: the sample study). */
+  study?: "sample" | "scenarios";
   capturedAt: string;
   browser: string;
   policy: "standard" | "strict";
@@ -13,20 +15,22 @@ interface RecordedRun {
 }
 
 const files = import.meta.glob<RecordedRun>("../sample-data/recorded/*.json", { eager: true, import: "default" });
-const recorded: RecordedRun | undefined = Object.values(files)[0];
+const runs = Object.values(files);
+const runFor = (kind: "sample" | "scenarios") => runs.find((r) => (r.study ?? "sample") === kind);
 
-export const hasRecordedRun = Boolean(recorded);
+export const hasRecordedRun = Boolean(runFor("sample"));
 
 /**
  * For judges whose browser can't run Gemini Nano: load the sample study with the detections that real
  * Gemini Nano produced on another machine (recorded, clearly labelled). Cloud analysis still runs live.
  */
-export function recordedStudy(): { study: Study; ledger: LedgerEntry[] } | null {
+export function recordedStudy(kind: "sample" | "scenarios" = "sample"): { study: Study; ledger: LedgerEntry[] } | null {
+  const recorded = runFor(kind);
   if (!recorded) return null;
-  const base = sampleStudy(recorded.policy);
+  const base = kind === "scenarios" ? scenariosStudy(recorded.policy) : sampleStudy(recorded.policy);
   const study: Study = {
     ...base,
-    name: "Working with Long COVID (fictional sample) — recorded Gemini Nano run",
+    name: `${kind === "scenarios" ? "Beyond interviews" : "Working with Long COVID (fictional sample)"} — recorded Gemini Nano run`,
     codebook: recorded.codebook,
     interviews: base.interviews.map((i) => ({ ...i, status: "review" as const })),
     replay: { capturedAt: recorded.capturedAt, browser: recorded.browser },

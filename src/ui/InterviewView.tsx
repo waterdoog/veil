@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { guardPayload } from "../core/airlock";
+import { guardPayload, nameLike } from "../core/airlock";
 import { applyCodebook } from "../core/codebook";
 import { evaluate } from "../core/evaluate";
 import { analysePrompt } from "../ai/prompts";
@@ -36,6 +36,7 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
   const { redacted, spans } = useMemo(() => applyCodebook(iv.raw, study.codebook, policy, iv.id), [iv.raw, study.codebook, policy, iv.id]);
   const title = useMemo(() => applyCodebook(iv.title, study.codebook, policy, iv.id).redacted, [iv.title, study.codebook, policy, iv.id]);
   const guard = useMemo(() => guardPayload(analysePrompt(title, redacted, study.researchQuestions ? applyCodebook(study.researchQuestions, study.codebook, policy, iv.id).redacted : undefined), study.codebook, policy, iv.id), [title, redacted, study.codebook, policy, iv.id, study.researchQuestions]);
+  const worth = useMemo(() => nameLike(redacted, study.codebook), [redacted, study.codebook]);
   const evalRes = useMemo(() => (iv.truth ? evaluate(iv.raw, spans, iv.truth, policy.redact) : null), [iv.truth, iv.raw, spans, policy]);
   const entries = useMemo(() => {
     const order = ["PERSON", "ORG", "LOCATION", "DATE", "CONTACT", "ID", "FINANCIAL", "QUASI", "HEALTH"];
@@ -159,6 +160,18 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
                       <b>Airlock: nothing known left.</b> None of the {entries.filter((e) => e.enabled).length} identifiers found so far, and no
                       email/phone/postcode/reference-number patterns, appear in the outgoing text. It can't see identifiers nobody
                       flagged — read the right-hand side before you release it.
+                      {worth.length > 0 && (
+                        <span className="worth">
+                          <br />
+                          <b>Worth a look</b> — name-like, but nothing flagged them (click to redact):{" "}
+                          {worth.slice(0, 8).map((w) => (
+                            <button key={w} className="chip" title="Redact this everywhere in this interview" onClick={() => veil.redactFindings([w], iv.id)}>
+                              {w}
+                            </button>
+                          ))}
+                          {worth.length > 8 && <span className="muted"> +{worth.length - 8} more</span>}
+                        </span>
+                      )}
                     </>
                   ) : (
                     <>

@@ -385,3 +385,54 @@ describe("evaluate matches whole words", () => {
     expect(evaluate(raw, spans, [{ text: "Mr Vance", type: "PERSON" }]).caught).toBe(1);
   });
 });
+
+import { locateQuote, studyToQdpx, crc32 } from "../src/core/qdpx";
+describe("REFI-QDA export", () => {
+  it("crc32 matches the reference value", () => {
+    expect(crc32(new TextEncoder().encode("123456789")).toString(16)).toBe("cbf43926");
+  });
+  it("finds quotes despite curly quotes, case, spacing and elisions", () => {
+    const t = "I said: \"it's hard to explain\", and then   I just stopped going in.";
+    expect(locateQuote(t, "it's hard to explain")).toEqual([9, 29]);
+    const r = locateQuote(t, "“It’s hard to explain ... I just stopped going in.”")!;
+    expect(t.slice(r[0], r[1])).toBe("it's hard to explain\", and then   I just stopped going in.");
+    expect(locateQuote(t, "never said this")).toBeNull();
+  });
+  it("exports pseudonymised sources with coded selections and no real names", () => {
+    const raw = "My name is Sarah Jenkins. Work was hard after the infection.";
+    const cb = mergeEntities([], [{ text: "Sarah Jenkins", type: "PERSON", source: "nano" }], "p1");
+    let n = 0;
+    const guid = () => `00000000-0000-4000-8000-${String(++n).padStart(12, "0")}`;
+    const r = studyToQdpx(
+      {
+        name: "Study",
+        policy: "standard",
+        codebook: cb,
+        interviews: [
+          {
+            id: "p1", title: "Interview", raw, status: "analysed",
+            analysis: { summary: "s", participant_context: "", tensions: [], follow_up_questions: [], themes: [{ name: "Work", description: "d", quotes: [{ quote: "Work was hard" }, { quote: "invented" }] }] },
+          },
+        ],
+      },
+      { guid, now: new Date("2026-11-22T00:00:00Z") },
+    );
+    expect(r.coded).toBe(1);
+    expect(r.unplaced).toBe(1);
+    expect(r.xml).toContain('startPosition="23" endPosition="36"');
+    expect(r.xml).not.toContain("Sarah");
+    const zipText = new TextDecoder().decode(r.bytes);
+    expect(zipText).toContain("My name is [PERSON_1].");
+    expect(zipText).not.toContain("Jenkins");
+    expect(Array.from(r.bytes.slice(0, 4))).toEqual([0x50, 0x4b, 0x03, 0x04]);
+  });
+});
+
+import { nameLike } from "../src/core/airlock";
+describe("independent name-like warnings", () => {
+  it("flags unflagged capitalised names mid-text, not labels, kept values or sentence starts", () => {
+    const out = "Job Title / Department: Store Assistant\nLine Manager (Subject): [PERSON_2]\nJob Title: Store Assistant\nPresent: [PERSON_1] and Keith Holloway. Then I went to Northgate Home & Living. The Convention applies.";
+    const kept = mergeEntities([], [{ text: "Store Assistant", type: "QUASI", source: "nano" }], "p1").map((e) => ({ ...e, enabled: false }));
+    expect(nameLike(out, kept)).toEqual(["Keith Holloway", "Northgate Home & Living"]);
+  });
+});

@@ -29,8 +29,13 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
   useEffect(() => {
     getLocal<Study>(KEY).then((s) => {
       // Evaluation sets for benchmarking: ?load=tab-dev / ?load=tab-test2 (replaces the saved study).
+      // Shareable entry points for judges and demos: ?load=replay|sample|scenarios|holdout|tab.
       const name = new URLSearchParams(location.search).get("load");
-      const ev = name ? evalStudy(name, s?.policy ?? cfg.defaultPolicy) : null;
+      const policy = s?.policy ?? cfg.defaultPolicy;
+      const rec = name === "replay" ? recordedStudy() : name === "replay-scenarios" ? recordedStudy("scenarios") : null;
+      const builtIn = { sample: sampleStudy, scenarios: scenariosStudy, holdout: holdoutStudy, tab: tabStudy }[name ?? ""];
+      const ev = rec ? rec.study : builtIn ? builtIn(policy) : name ? evalStudy(name, policy) : null;
+      if (rec) setLedger(rec.ledger);
       if (ev) setStudy(ev);
       else if (s) setStudy(s);
       setLoaded(true);
@@ -380,8 +385,8 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
         const st = evalStudy(name, studyRef.current.policy);
         if (st) setStudy(st);
       },
-      loadReplay: () => {
-        const r = recordedStudy();
+      loadReplay: (kind: "sample" | "scenarios" = "sample") => {
+        const r = recordedStudy(kind);
         if (!r) return;
         setStudy(r.study);
         setLedger(r.ledger);

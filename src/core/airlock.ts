@@ -1,4 +1,4 @@
-import { activeEntries, norm } from "./codebook";
+import { activeEntries, isGeneric, norm } from "./codebook";
 import { findPatterns } from "./patterns";
 import type { CodebookEntry, Policy } from "./types";
 
@@ -90,4 +90,34 @@ export interface LedgerEntry {
 export async function sha256(text: string): Promise<string> {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
   return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+const LEAD = new Set(["The", "A", "An", "And", "But", "So", "Then", "When", "If", "My", "Our", "Your", "We", "He", "She", "They", "It", "This", "That", "These", "Those", "In", "On", "At", "For", "From", "To", "With", "After", "Before", "Yeah", "Yes", "No", "Well", "Um", "Oh", "Okay", "OK", "Dear", "I", "I'm", "I’m", "Like", "Just", "Because", "Also", "Of", "By", "As", "Or", "Not", "All", "Every", "Some", "Any", "One", "Two", "Three", "First", "Last", "Next", "Section", "Article", "Part", "Date", "Name", "Address", "Re", "Now", "Thought", "Specifically", "Come", "Actually", "Honestly", "Obviously", "Anyway", "Still", "Even", "Maybe", "Sometimes", "I'd", "I've", "I'll", "I’d", "I’ve", "I’ll"]);
+const HEADING_WORDS = new Set(["Department", "Ward", "Clinic", "Unit", "Team", "Office", "Court", "Government", "Convention", "Protocol", "Act", "Article", "Section", "Statement", "Summary", "Details", "Report", "Plan", "Review", "Meeting", "Hearing", "Outcome", "Background", "History", "Medication", "Medications", "Diagnosis", "Investigations", "Follow", "Discharge", "Admission"]);
+
+/**
+ * A second, independent net that doesn't depend on the model: name-like phrases still in the outgoing text
+ * (two or more capitalised words mid-text, e.g. "Keith Holloway", "Northgate Home") that no detector flagged
+ * and the reviewer didn't keep. Shown as "worth a look" warnings; never sends anything and never blocks.
+ */
+export function nameLike(payload: string, codebook: CodebookEntry[] = []): string[] {
+  const kept = new Set(codebook.filter((e) => !e.enabled).map((e) => norm(e.real)));
+  const out: string[] = [];
+  const seen = new Set<string>();
+  const re = /(?<![\p{L}\p{N}\[_])(?:[A-Z][a-z'’-]+|[A-Z]['’][A-Z][a-z]+)(?:[ \t]+(?:[A-Z][a-z'’-]+|[A-Z]['’][A-Z][a-z]+|&)){1,3}(?![\p{L}\p{N}])/gu;
+  for (const m of payload.matchAll(re)) {
+    // Field labels ("Hospital Number:", "Job Title:") are form structure, not identifiers.
+    if (/^[ \t]*(?:\/[^:\n]{0,40}|\([^)\n]{0,60}\))?[ \t]*:/.test(payload.slice(m.index! + m[0].length))) continue;
+    let words = m[0].split(/[ \t]+/);
+    while (words.length && (LEAD.has(words[0]) || words[0] === "&")) words = words.slice(1);
+    while (words.length && (words[words.length - 1] === "&" || LEAD.has(words[words.length - 1]))) words = words.slice(0, -1);
+    if (words.length < 2) continue;
+    if (words.every((w) => HEADING_WORDS.has(w) || isGeneric(w))) continue;
+    const text = words.join(" ");
+    const n = norm(text);
+    if (isGeneric(text) || kept.has(n) || seen.has(n)) continue;
+    seen.add(n);
+    out.push(text);
+  }
+  return out;
 }

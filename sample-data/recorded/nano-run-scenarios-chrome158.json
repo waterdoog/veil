@@ -1,0 +1,1276 @@
+{
+ "study": "scenarios",
+ "capturedAt": "2026-11-22T04:55:00.000Z",
+ "browser": "Chrome 158",
+ "policy": "standard",
+ "codebook": [
+  {
+   "real": "born in 1944",
+   "token": "[DATE_1]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "May 2001",
+   "token": "[DATE_2]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "widows",
+   "token": "[QUASI_1]",
+   "type": "QUASI",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "widowers",
+   "token": "[QUASI_2]",
+   "type": "QUASI",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Northern Ireland",
+   "token": "[LOCATION_1]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "London",
+   "token": "[LOCATION_2]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Sussex",
+   "token": "[LOCATION_3]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "27961/02",
+   "token": "[ID_1]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "British",
+   "token": "[QUASI_3]",
+   "type": "QUASI",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "no children",
+   "token": "[QUASI_4]",
+   "type": "QUASI",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "25 October 2001",
+   "token": "[DATE_3]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "17 November 2005",
+   "token": "[DATE_4]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "29 October 2000",
+   "token": "[DATE_5]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "2 January 2001",
+   "token": "[DATE_6]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "31 May 2001",
+   "token": "[DATE_7]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Mr Tony Booth",
+   "token": "[PERSON_1]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Royds Rdw",
+   "token": "[CONTACT_1]",
+   "type": "CONTACT",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Mr C. Whomersley",
+   "token": "[PERSON_2]",
+   "type": "PERSON",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Foreign and Commonwealth Office",
+   "token": "[ORG_1]",
+   "type": "ORG",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "1944",
+   "token": "[DATE_8]",
+   "type": "DATE",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Tony Booth",
+   "token": "[PERSON_3]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Booth",
+   "token": "[PERSON_3]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Whomersley",
+   "token": "[PERSON_4]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Tony",
+   "token": "[PERSON_3]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-legal"
+  },
+  {
+   "real": "Callum Henderson",
+   "token": "[PERSON_5]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Keith Holloway",
+   "token": "[PERSON_6]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "National Transport Workers",
+   "token": "[PERSON_7]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Priya Sharma",
+   "token": "[PERSON_8]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Gareth Vance",
+   "token": "[PERSON_9]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Danielle O'Connor",
+   "token": "[PERSON_10]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Forklift Team Leader",
+   "token": "[PERSON_11]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Tariq Mahmood",
+   "token": "[PERSON_12]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "priya.sharma@vanguardfreight.example.com",
+   "token": "[CONTACT_2]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "callum.henderson@vanguardfreight.example.com",
+   "token": "[CONTACT_3]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "07700 900412",
+   "token": "[CONTACT_4]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "07700 900885",
+   "token": "[CONTACT_5]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "999 482 1104",
+   "token": "[CONTACT_6]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "NN12 8GX",
+   "token": "[LOCATION_4]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "VFL-44912",
+   "token": "[ID_2]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "900412",
+   "token": "[ID_3]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "900885",
+   "token": "[ID_4]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "HR-INV-2024-089",
+   "token": "[ID_5]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Northamptonshire",
+   "token": "[LOCATION_5]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Bradford",
+   "token": "[LOCATION_6]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "12 March 2019",
+   "token": "[DATE_9]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "14 October 2024",
+   "token": "[DATE_10]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "04 November 2024",
+   "token": "[DATE_11]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "09 October 2024",
+   "token": "[DATE_12]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "September 2024",
+   "token": "[DATE_13]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "21 October 2024",
+   "token": "[DATE_14]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "08 October 2024",
+   "token": "[DATE_15]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "October 2024",
+   "token": "[DATE_16]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "28 October 2024",
+   "token": "[DATE_17]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "02 December 2024",
+   "token": "[DATE_18]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "18 November 2024",
+   "token": "[DATE_19]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "23 OCTOBER 2024",
+   "token": "[DATE_20]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Vanguard Freight & Logistics Ltd",
+   "token": "[ORG_2]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "National Transport Workers Union",
+   "token": "[ORG_3]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Mr Henderson",
+   "token": "[PERSON_5]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Mr Vance",
+   "token": "[PERSON_9]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Dr. Helen Kemp",
+   "token": "[PERSON_13]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Dr. Kemp",
+   "token": "[PERSON_13]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "£450",
+   "token": "[FINANCIAL_1]",
+   "type": "FINANCIAL",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Brackley Distribution Hub",
+   "token": "[LOCATION_7]",
+   "type": "LOCATION",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Unit 14",
+   "token": "[LOCATION_8]",
+   "type": "LOCATION",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Silverstone Park",
+   "token": "[LOCATION_9]",
+   "type": "LOCATION",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "ulcerative colitis",
+   "token": "[HEALTH_1]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "mesalazine",
+   "token": "[HEALTH_2]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "£450 quarterly attendance bonus",
+   "token": "[FINANCIAL_2]",
+   "type": "FINANCIAL",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Midlands Occupational Health Services",
+   "token": "[ORG_4]",
+   "type": "ORG",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Gareth",
+   "token": "[PERSON_9]",
+   "type": "PERSON",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Callum",
+   "token": "[PERSON_5]",
+   "type": "PERSON",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Equality Act 2010",
+   "token": "[ORG_5]",
+   "type": "ORG",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "3.2",
+   "token": "[ID_6]",
+   "type": "ID",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Henderson",
+   "token": "[PERSON_5]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Vance",
+   "token": "[PERSON_9]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Helen Kemp",
+   "token": "[PERSON_13]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Kemp",
+   "token": "[PERSON_13]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Keith",
+   "token": "[PERSON_6]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Holloway",
+   "token": "[PERSON_6]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "National",
+   "token": "[PERSON_7]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Workers",
+   "token": "[PERSON_7]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Priya",
+   "token": "[PERSON_8]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Sharma",
+   "token": "[PERSON_8]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Danielle",
+   "token": "[PERSON_10]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Forklift",
+   "token": "[PERSON_11]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Leader",
+   "token": "[PERSON_11]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Tariq",
+   "token": "[PERSON_12]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Mahmood",
+   "token": "[PERSON_12]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Helen",
+   "token": "[PERSON_13]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-hr"
+  },
+  {
+   "real": "Arthur Pendelton",
+   "token": "[PERSON_14]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Margaret Pendelton",
+   "token": "[PERSON_15]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Dr Priya Nair",
+   "token": "[PERSON_16]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "m.pendelton@example.com",
+   "token": "[CONTACT_7]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "p.nair@oakridge.example.com",
+   "token": "[CONTACT_8]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "07700 900142",
+   "token": "[CONTACT_9]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "07700 900189",
+   "token": "[CONTACT_10]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "999 482 7104",
+   "token": "[CONTACT_11]",
+   "type": "CONTACT",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "42 Sycamore Close",
+   "token": "[LOCATION_10]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "18 Highfield Road",
+   "token": "[LOCATION_11]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "BR4 7LP",
+   "token": "[LOCATION_12]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "BR4 2QW",
+   "token": "[LOCATION_13]",
+   "type": "LOCATION",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "BV-8839201",
+   "token": "[ID_7]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "EMP-40912",
+   "token": "[ID_8]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "8839201",
+   "token": "[ID_9]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "900142",
+   "token": "[ID_10]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "900189",
+   "token": "[ID_11]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "148/86",
+   "token": "[ID_12]",
+   "type": "ID",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "14 March 1958",
+   "token": "[DATE_21]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "03 November 2024",
+   "token": "[DATE_22]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "09 November 2024",
+   "token": "[DATE_23]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "05 November 2024",
+   "token": "[DATE_24]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "07 November 2024",
+   "token": "[DATE_25]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "05 November 2025",
+   "token": "[DATE_26]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "27 November 2024",
+   "token": "[DATE_27]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "15 January 2025",
+   "token": "[DATE_28]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "12 November 2024",
+   "token": "[DATE_29]",
+   "type": "DATE",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "BRAMPTON VALE NHS FOUNDATION TRUST",
+   "token": "[ORG_6]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "St Jude's General Hospital",
+   "token": "[ORG_7]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Cardiac Rehabilitation Clinic",
+   "token": "[ORG_8]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Cardiology Outpatient Clinic",
+   "token": "[ORG_9]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Dr Marcus Thorne",
+   "token": "[PERSON_17]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Dr Chloe Vance",
+   "token": "[PERSON_18]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Mr Pendelton",
+   "token": "[PERSON_14]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "66-year-old",
+   "token": "[QUASI_5]",
+   "type": "QUASI",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "42 Sycamore Close, Brampton, BR4 7LP",
+   "token": "[LOCATION_14]",
+   "type": "LOCATION",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Margaret Pendelton (Wife)",
+   "token": "[PERSON_19]",
+   "type": "PERSON",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Oakridge Medical Centre",
+   "token": "[ORG_10]",
+   "type": "ORG",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "18 Highfield Road, Brampton, BR4 2QW",
+   "token": "[LOCATION_15]",
+   "type": "LOCATION",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "FY2 Cardiology",
+   "token": "[QUASI_6]",
+   "type": "QUASI",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Non-ST-elevation myocardial infarction (NSTEMI)",
+   "token": "[HEALTH_3]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "percutaneous coronary intervention (PCI)",
+   "token": "[HEALTH_4]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Hypertension",
+   "token": "[HEALTH_5]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Hyperlipidaemia",
+   "token": "[HEALTH_6]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Osteoarthritis",
+   "token": "[HEALTH_7]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Hawthorn Cardiology Ward",
+   "token": "[ORG_11]",
+   "type": "ORG",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "LAD",
+   "token": "[HEALTH_8]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "48%",
+   "token": "[HEALTH_9]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Ramipril",
+   "token": "[HEALTH_10]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Bisoprolol",
+   "token": "[HEALTH_11]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Atorvastatin",
+   "token": "[HEALTH_12]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "GTN spray",
+   "token": "[HEALTH_13]",
+   "type": "HEALTH",
+   "source": "nano",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Priya Nair",
+   "token": "[PERSON_20]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Nair",
+   "token": "[PERSON_20]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Marcus Thorne",
+   "token": "[PERSON_21]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Thorne",
+   "token": "[PERSON_21]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Chloe Vance",
+   "token": "[PERSON_22]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Vance",
+   "token": "[PERSON_22]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Pendelton",
+   "token": "[PERSON_14]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Arthur",
+   "token": "[PERSON_14]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Margaret",
+   "token": "[PERSON_15]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Priya",
+   "token": "[PERSON_20]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Marcus",
+   "token": "[PERSON_21]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Chloe",
+   "token": "[PERSON_22]",
+   "type": "PERSON",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "St Jude",
+   "token": "[ORG_12]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  },
+  {
+   "real": "Cardiac Rehabilitation",
+   "token": "[ORG_13]",
+   "type": "ORG",
+   "source": "pattern",
+   "enabled": true,
+   "origin": "s-clin"
+  }
+ ],
+ "calls": [
+  {
+   "interviewId": "s-legal",
+   "purpose": "pseudonymise",
+   "bytesIn": 1529,
+   "source": "on_device"
+  },
+  {
+   "interviewId": "s-hr",
+   "purpose": "pseudonymise",
+   "bytesIn": 6024,
+   "source": "on_device"
+  },
+  {
+   "interviewId": "s-clin",
+   "purpose": "pseudonymise",
+   "bytesIn": 5269,
+   "source": "on_device"
+  }
+ ]
+}
