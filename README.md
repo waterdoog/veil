@@ -96,12 +96,26 @@ Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), scored
 
 **Public benchmark — TAB** ([Text Anonymization Benchmark](https://github.com/NorskRegnesentral/text-anonymization-benchmark), MIT): short European Court of Human Rights judgments with expert annotations of direct and quasi identifiers — real public court texts, a different domain from interviews. We tuned only on TAB's **dev** split and ran the **test** documents once at the end.
 
-| TAB | Docs (labels) | Veil recall | Veil precision | Presidio default | Presidio orgs on |
-|---|---|---|---|---|---|
-| Test, first look (before any TAB work) | 8 (132) | 65.2% | 69.2% | 75.0% / 73.4% | 78.8% / 57.7% |
-| Dev, before tuning | 12 (226) | 77.0% | 81.6% | 68.6% / 75.3% | 74.8% / 56.0% |
-| Dev, after tuning (birth years, counties/regions gazetteer, marital status, case numbers, nationality, household) | 12 (226) | 88.5% | 79.7% | | |
-| **Test, unseen, final — run once** | 8 (195) | **87.2%** | **82.4%** | 60.5% / 78.4% | 64.6% / 58.2% |
+| TAB set | Docs (labels) | Veil recall / precision | Presidio default | Presidio orgs on |
+|---|---|---|---|---|
+| **Test A** — the 8 shortest test judgments, first look before any TAB work | 8 (132) | 65.2% / 69.2% | 75.0% / 73.4% | 78.8% / 57.7% |
+| Test A, current Veil (not blind: these misses informed the generic detectors) | 8 (132) | 89.4% / 77.4% | same | same |
+| **Dev** — 12 shortest dev judgments, before tuning | 12 (226) | 77.0% / 81.6% | 68.6% / 75.3% | 74.8% / 56.0% |
+| Dev, after tuning (birth years, counties/regions gazetteer, marital status, case numbers, nationality, household) | 12 (226) | 88.5% / 79.7% | same | same |
+| **Test B** — test judgments ranked 9–16 by length, unseen, run once | 8 (195) | **87.2% / 82.4%** | 60.5% / 78.4% | 64.6% / 58.2% |
+
+**Why Presidio is 75–79% on one test set and 60–65% on the other:** they are different documents, not a different scorer. Test A is the eight shortest test judgments; in Test B, the next eight, a quarter of the labels are case and application numbers (45 of 195, vs 8 of 132 in Test A) plus 8 money amounts. Presidio finds people and dates almost perfectly on both sets but catches 2 of those 45 numbers and none of the amounts, so its recall drops; with those two types left out it scores 84% on Test A and 87% on Test B. Midway through we found a bug in our scorer (it checked answer-key text as substrings, so "Vance" was "missed" inside "grievance") and fixed it to match whole words. We then re-scored **every** Presidio and Veil result we have spans or a recording for with both versions:
+
+| Set | Presidio default, old → new scorer | Presidio orgs on, old → new | Veil, old → new |
+|---|---|---|---|
+| TAB test A | 75.0 → 75.0 | 78.8 → 78.8 | live run, new scorer only |
+| TAB dev | 68.6 → 68.6 | 74.8 → 74.8 | 88.5 → 88.5 |
+| TAB test B | 60.5 → 60.5 | 64.6 → 64.6 | 87.2 (live run, old scorer; no recording to re-score) |
+| Held-out interviews | 60.4 → 61.1 | 81.2 → 81.9 | live runs, old scorer |
+| Development interviews | — | 72.8 → 72.8 | 89.8 → 89.8 |
+| HR file + discharge summary + court judgment | — | 74.7 → 75.8 | 84.2 → 85.3 |
+
+Recall in %, precision unchanged in every row. The fix never moved a TAB number; where it moved anything, it raised Presidio and Veil alike. Both baselines always use the same `evaluate()`, the same answer keys and the same policy types as Veil.
 
 **What does Gemini Nano add over the rules?** Same recorded Nano runs, replayed with and without Nano's detections (`planning/tab/offline.ts`):
 
