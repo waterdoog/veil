@@ -103,6 +103,16 @@ Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), scored
 | Dev, after tuning (birth years, counties/regions gazetteer, marital status, case numbers, nationality, household) | 12 (226) | 88.5% | 79.7% | | |
 | **Test, unseen, final — run once** | 8 (195) | **87.2%** | **82.4%** | 60.5% / 78.4% | 64.6% / 58.2% |
 
+**What does Gemini Nano add over the rules?** Same recorded Nano runs, replayed with and without Nano's detections (`planning/tab/offline.ts`):
+
+| Set | Rules only (patterns, gazetteer, field names) | Rules + Gemini Nano |
+|---|---|---|
+| Interviews (6, conversational) | 55.1% recall / 97.1% precision | **89.8% / 97.3%** |
+| TAB dev (12 court judgments) | 75.7% / 81.2% | **88.5% / 79.7%** |
+| HR file + discharge summary + court judgment | 77.9% / 91.9% | **85.3% / 89.4%** |
+
+In conversation — where names, schools and places come with no fixed shape — Nano supplies most of the recall. In form-like documents the rules carry more (they were also tuned on these two sets, so their share there is flattering). The rules never replace the model; they catch the fixed-shape things a small model drops.
+
 **Beyond interviews — court judgment, HR file, clinical letters** (load them from the sidebar: *3 more scenarios*). The same pipeline on record-style documents, real Gemini Nano in Chrome 158, Standard policy. The three documents in the app were used to fix what they exposed (multi-part reference codes like `HR-INV-2024-089`, letterheads in capitals, names listed in record fields such as "Present:"); two further documents were generated afterwards and run once (`?load=scenarios-unseen`).
 
 | Documents | Labels | Veil recall | Veil precision | Presidio default | Presidio orgs on |
