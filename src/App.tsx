@@ -99,6 +99,20 @@ export function App({
             ))}
             {!study.interviews.length && <li className="muted small pad">No interviews yet.</li>}
           </ul>
+          {veil.batch ? (
+            <div className="batch small">
+              Pseudonymising on device… {veil.batch.done}/{veil.batch.total}{" "}
+              <button className="linkish" onClick={veil.stopBatch}>
+                stop after this one
+              </button>
+            </div>
+          ) : (
+            study.interviews.some((i) => i.status === "raw") && (
+              <button className="synth-link device-link" onClick={veil.pseudonymiseAll}>
+                <DeviceIcon /> Pseudonymise all on this device
+              </button>
+            )
+          )}
           {study.interviews.length > 0 && (
             <button className={`synth-link ${view === "synthesis" ? "on" : ""}`} onClick={() => setView("synthesis")}>
               <CloudIcon /> Cross-interview synthesis

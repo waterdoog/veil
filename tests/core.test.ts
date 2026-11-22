@@ -245,3 +245,10 @@ describe("on-device JSON salvage", () => {
     expect(parseEntities('{"entities":[{"text":"Leeds","type":"LOCATION"}]}')).toEqual({ entities: [{ text: "Leeds", type: "LOCATION", source: "nano" }], truncated: false });
   });
 });
+
+describe("salvage tolerance", () => {
+  it("accepts any key order and lowercase types", () => {
+    const r = parseEntities('{"entities":[{"type":"person","text":"Maya"},{"text":"Leeds","type":"LOCATION"},{"text":"Bro');
+    expect(r.entities.map((e) => `${e.type}:${e.text}`)).toEqual(["PERSON:Maya", "LOCATION:Leeds"]);
+  });
+});

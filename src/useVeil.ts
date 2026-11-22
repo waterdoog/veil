@@ -141,6 +141,24 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
     [backend, cfg.chunkChars, addEntities, patch, log],
   );
 
+  /** Pseudonymise every interview that hasn't been done yet, one after another on this device. */
+  const [batch, setBatch] = useState<{ done: number; total: number } | null>(null);
+  const cancelBatch = useRef(false);
+  const pseudonymiseAll = useCallback(async () => {
+    const todo = studyRef.current.interviews.filter((i) => i.status === "raw").map((i) => i.id);
+    if (!todo.length) return;
+    cancelBatch.current = false;
+    setBatch({ done: 0, total: todo.length });
+    for (let n = 0; n < todo.length && !cancelBatch.current; n++) {
+      await pseudonymise(todo[n]);
+      setBatch({ done: n + 1, total: todo.length });
+    }
+    setBatch(null);
+  }, [pseudonymise]);
+  const stopBatch = useCallback(() => {
+    cancelBatch.current = true;
+  }, []);
+
   /** Runs every outbound request through the airlock. Returns null (blocked) or the guard result. */
   const airlock = useCallback(
     async (purpose: Purpose, mode: LedgerEntry["mode"], payload: string, scope?: string | GuardResult) => {
@@ -360,6 +378,9 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
     downloadPct,
     online,
     prepareDevice,
+    batch,
+    pseudonymiseAll,
+    stopBatch,
     imageStatus: () => (backend ? backend.imageStatus() : Promise.resolve("unavailable" as DeviceStatus)),
     pseudonymise,
     analyse,

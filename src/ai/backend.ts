@@ -85,11 +85,13 @@ function parseJson(text: string): unknown {
 /** Small models sometimes stop mid-JSON. Recover the complete {"text","type"} objects that did arrive. */
 function salvageEntities(text: string): unknown {
   const out: { text: string; type: string }[] = [];
-  for (const m of text.matchAll(/\{\s*"text"\s*:\s*"((?:[^"\\]|\\.)*)"\s*,\s*"type"\s*:\s*"([A-Z]+)"\s*\}/g)) {
+  // Any complete {...} object without nested braces; key order and type case don't matter.
+  for (const m of text.matchAll(/\{[^{}]*\}/g)) {
     try {
-      out.push({ text: JSON.parse(`"${m[1]}"`), type: m[2] });
+      const o = JSON.parse(m[0]) as { text?: unknown; type?: unknown };
+      if (typeof o.text === "string" && typeof o.type === "string") out.push({ text: o.text, type: o.type });
     } catch {
-      /* skip */
+      /* incomplete object */
     }
   }
   return { entities: out };
@@ -231,7 +233,9 @@ export class FirebaseBackend implements AiBackend {
       this.checker.initializeDeviceModel(),
       this.memoWriter.initializeDeviceModel(),
       // Warm the image model too if this browser supports image input, so photos work later even offline.
-      this.imageStatus().then((st) => (st !== "unavailable" ? this.imageReader.initializeDeviceModel() : undefined)),
+      this.imageStatus()
+        .then((st) => (st !== "unavailable" ? this.imageReader.initializeDeviceModel() : undefined))
+        .catch(() => undefined), // image support is optional; never let it break text setup
     ]);
   }
 
@@ -309,11 +313,23 @@ export class FirebaseBackend implements AiBackend {
   }
 }
 
+/** Retry rate-limit / overload errors (429, 503) with exponential backoff; anything else fails at once. */
+async function withBackoff<T>(fn: () => Promise<T>, tries = 4): Promise<T> {
+  for (let i = 0; ; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i >= tries - 1 || !/\b(429|503)\b|RESOURCE_EXHAUSTED|UNAVAILABLE|overloaded/i.test(String(e))) throw e;
+      await new Promise((r) => setTimeout(r, 1500 * 2 ** i + Math.random() * 500));
+    }
+  }
+}
+
 /** Cloud call expecting JSON: one retry on unparseable output, then a clear error. Shapes are normalised. */
 async function cloudJson<T>(model: GenerativeModel, prompt: string, normalise: (x: unknown) => T): Promise<AiResult<T>> {
   let lastErr: unknown;
   for (let attempt = 0; attempt < 2; attempt++) {
-    const r = await model.generateContent(prompt);
+    const r = await withBackoff(() => model.generateContent(prompt));
     try {
       return { data: normalise(parseJson(r.response.text())), source: src(r.response.inferenceSource) };
     } catch (e) {

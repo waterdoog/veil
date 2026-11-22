@@ -1061,3 +1061,10 @@ textarea.rq {
   color: var(--ink);
   resize: vertical;
 }
+.device-link {
+  color: var(--device);
+}
+.batch {
+  padding: 6px 8px;
+  color: var(--device);
+}

@@ -245,7 +245,8 @@ function chromeVersion(): number | null {
 
 const FLAGS = [
   { url: "chrome://flags/#prompt-api-for-gemini-nano-multimodal-input", why: "Prompt API with text + image input (required)" },
-  { url: "chrome://flags/#optimization-guide-on-device-model", why: "Only if the model still shows as unavailable on your machine" },
+  { url: "chrome://flags/#prompt-api-for-gemini-nano", why: "Base Prompt API — enable too if text is still unavailable" },
+  { url: "chrome://flags/#optimization-guide-on-device-model", why: "If still unavailable: set to “Enabled BypassPerfRequirement”" },
   { url: "chrome://on-device-internals", why: "See the model's download state and your device's eligibility" },
 ];
 
