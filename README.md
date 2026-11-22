@@ -64,7 +64,7 @@ flowchart LR
 | Product | How Veil uses it | Code |
 |---|---|---|
 | **Firebase AI Logic** (hybrid inference, Gemini Developer API backend) | Six model instances across `ONLY_ON_DEVICE`, `ONLY_IN_CLOUD`, `PREFER_ON_DEVICE`; `initializeDeviceModel` with download progress; structured output on device (`responseConstraint`) and in cloud (`responseSchema`); streaming; `inferenceSource` | [`src/ai/backend.ts`](src/ai/backend.ts) |
-| **App Check** | Required by AI Logic; reCAPTCHA v3 in production, debug provider in development | [`src/firebase.ts`](src/firebase.ts) |
+| **App Check** | Required by AI Logic; reCAPTCHA Enterprise in production, debug provider in development | [`src/firebase.ts`](src/firebase.ts) |
 | **Authentication** | Anonymous sign-in, so each researcher's Firestore data is private to them | [`src/firebase.ts`](src/firebase.ts) |
 | **Cloud Firestore** | Stores only pseudonymised text and analysis; offline persistence. Security rules also reject interview text containing an email, a UK mobile, a US SSN or a US phone number — a last-ditch backstop against bad writes, not the privacy mechanism (the airlock runs before anything is sent) | [`src/store/cloud.ts`](src/store/cloud.ts), [`firestore.rules`](firestore.rules) |
 | **Remote Config** | Cloud model name, default redaction policy, on-device chunk size — changeable without a redeploy | [`src/firebase.ts`](src/firebase.ts), [`remoteconfig.template.json`](remoteconfig.template.json) |
@@ -101,7 +101,7 @@ Firebase setup:
 1. Create a Firebase project → **AI Services → AI Logic → Get started** → choose the **Gemini Developer API** (no billing needed). This also enforces App Check for AI Logic.
 2. Add a **Web app**, copy its config into `.env`.
 3. **Authentication** → enable **Anonymous**. **Firestore** → create a database. 
-4. **App Check** → register the web app with **reCAPTCHA v3** (put the site key in `VITE_RECAPTCHA_SITE_KEY`). For localhost, run `npm run dev`, copy the debug token printed in the console and add it under App Check → Manage debug tokens. Never commit it.
+4. **App Check** → enable the reCAPTCHA Enterprise API, create a web key for your Hosting domains, and register the web app with the **reCAPTCHA Enterprise** provider (put the site key in `VITE_RECAPTCHA_SITE_KEY`). For localhost, run `npm run dev`, copy the debug token printed in the console and add it under App Check → Manage debug tokens. Never commit it.
 5. `npx firebase-tools deploy --only firestore:rules,remoteconfig,hosting` (after `npm run build`).
 
 ## Honest limits

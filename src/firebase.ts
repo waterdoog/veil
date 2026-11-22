@@ -1,5 +1,5 @@
 import { initializeApp, type FirebaseApp } from "firebase/app";
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 import { getAuth, onAuthStateChanged, signInAnonymously, type User } from "firebase/auth";
 import { initializeFirestore, persistentLocalCache, type Firestore } from "firebase/firestore";
 import { fetchAndActivate, getRemoteConfig, getValue, type RemoteConfig } from "firebase/remote-config";
@@ -53,7 +53,8 @@ export function initFirebase(): void {
     (self as unknown as { FIREBASE_APPCHECK_DEBUG_TOKEN: boolean }).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
   }
   initializeAppCheck(app, {
-    provider: new ReCaptchaV3Provider(env.VITE_RECAPTCHA_SITE_KEY || "debug-provider-in-use"),
+    // Production attestation: reCAPTCHA Enterprise (Google Cloud "Fraud Defense" key, scoped to our domains).
+    provider: new ReCaptchaEnterpriseProvider(env.VITE_RECAPTCHA_SITE_KEY || "debug-provider-in-use"),
     isTokenAutoRefreshEnabled: true,
   });
 
