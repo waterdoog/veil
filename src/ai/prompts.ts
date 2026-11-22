@@ -73,14 +73,18 @@ export function secondPassPrompt(chunk: string) {
   return `Pseudonymised excerpt:\n<<<\n${chunk}\n>>>\nList any identifying spans still present in plain text.`;
 }
 
-export function analysePrompt(title: string, redacted: string) {
-  return `Interview: ${title}\n\nTranscript (pseudonymised):\n${redacted}`;
+const rqBlock = (rq?: string) =>
+  rq && rq.trim() ? `Research questions (organise the analysis around these):\n${rq.trim()}\n\n` : "";
+
+export function analysePrompt(title: string, redacted: string, researchQuestions?: string) {
+  return `${rqBlock(researchQuestions)}Interview: ${title}\n\nTranscript (pseudonymised):\n${redacted}`;
 }
 
-export function synthPrompt(interviews: { id: string; title: string; redacted: string }[]) {
-  return interviews
-    .map((i) => `=== Interview ${i.id}: ${i.title} ===\n${i.redacted}`)
-    .join("\n\n");
+export function synthPrompt(interviews: { id: string; title: string; redacted: string }[], researchQuestions?: string) {
+  return (
+    rqBlock(researchQuestions) +
+    interviews.map((i) => `=== Interview ${i.id}: ${i.title} ===\n${i.redacted}`).join("\n\n")
+  );
 }
 
 export function memoPrompt(redacted: string) {

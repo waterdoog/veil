@@ -171,6 +171,10 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
     const s = studyRef.current;
     return applyCodebook(iv.title, s.codebook, POLICIES[s.policy], iv.id).redacted;
   }, []);
+  const questionsFor = useCallback((interviewId?: string) => {
+    const s = studyRef.current;
+    return s.researchQuestions ? applyCodebook(s.researchQuestions, s.codebook, POLICIES[s.policy], interviewId).redacted : undefined;
+  }, []);
 
   /** Step 2 — send pseudonymised text to the cloud model for analysis. */
   const analyse = useCallback(
@@ -189,7 +193,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       }
       const redacted = redactedOf(iv);
       const title = titleOf(iv);
-      const payload = analysePrompt(title, redacted);
+      const payload = analysePrompt(title, redacted, questionsFor(id));
       const { guard, done } = await airlock("analyse-interview", "only_in_cloud", payload, id);
       if (!guard.ok) {
         patch(id, { status: "blocked", blockedBy: guard.findings.map((f) => f.text) });
@@ -206,7 +210,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
         patch(id, { status: "review", error: `Cloud analysis failed: ${String(err)}` });
       }
     },
-    [backend, airlock, patch, redactedOf, titleOf, userId],
+    [backend, airlock, patch, redactedOf, titleOf, questionsFor, userId],
   );
 
   /** Quick memo — PREFER_ON_DEVICE on already-pseudonymised text (free/offline with Nano, cloud otherwise). */
@@ -245,9 +249,10 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
     const ready = s.interviews.filter((i) => releasable(i) && i.status !== "blocked");
     if (!ready.length) return;
     const parts = ready.map((i) => ({ id: i.id, title: titleOf(i), redacted: redactedOf(i) }));
-    const payload = synthPrompt(parts);
+    const rq = questionsFor();
+    const payload = synthPrompt(parts, rq);
     const sectionGuard = guardSections(
-      parts.map((p) => ({ interviewId: p.id, text: synthPrompt([p]) })),
+      [...parts.map((p) => ({ interviewId: p.id, text: synthPrompt([p]) })), ...(rq ? [{ interviewId: "", text: rq }] : [])],
       s.codebook,
       POLICIES[s.policy],
     );
@@ -266,7 +271,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       done({ status: "error", error: String(err) });
       setStudy((x) => ({ ...x, synthStatus: "error", synthError: String(err) }));
     }
-  }, [backend, airlock, redactedOf, titleOf, userId]);
+  }, [backend, airlock, redactedOf, titleOf, questionsFor, userId]);
 
   /** Photo of handwritten notes -> text, entirely on-device. */
   const addImage = useCallback(
@@ -299,6 +304,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
   const actions = useMemo(
     () => ({
       setName: (name: string) => setStudy((s) => ({ ...s, name })),
+      setQuestions: (researchQuestions: string) => setStudy((s) => ({ ...s, researchQuestions })),
       setPolicy: (p: PolicyName) => setStudy((s) => ({ ...s, policy: p })),
       setAttested: (id: string, v: boolean) => patch(id, { attested: v }),
       mergeToken: (from: string, to: string) => setStudy((s) => ({ ...s, codebook: mergeTokens(s.codebook, from, to) })),

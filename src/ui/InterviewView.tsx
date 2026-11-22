@@ -34,7 +34,7 @@ export function InterviewView({ veil, iv }: { veil: Veil; iv: Interview }) {
 
   const { redacted, spans } = useMemo(() => applyCodebook(iv.raw, study.codebook, policy, iv.id), [iv.raw, study.codebook, policy, iv.id]);
   const title = useMemo(() => applyCodebook(iv.title, study.codebook, policy, iv.id).redacted, [iv.title, study.codebook, policy, iv.id]);
-  const guard = useMemo(() => guardPayload(analysePrompt(title, redacted), study.codebook, policy, iv.id), [title, redacted, study.codebook, policy, iv.id]);
+  const guard = useMemo(() => guardPayload(analysePrompt(title, redacted, study.researchQuestions ? applyCodebook(study.researchQuestions, study.codebook, policy, iv.id).redacted : undefined), study.codebook, policy, iv.id), [title, redacted, study.codebook, policy, iv.id, study.researchQuestions]);
   const evalRes = useMemo(() => (iv.truth ? evaluate(iv.raw, spans, iv.truth, policy.redact) : null), [iv.truth, iv.raw, spans, policy]);
   const entries = useMemo(() => {
     const order = ["PERSON", "ORG", "LOCATION", "DATE", "CONTACT", "ID", "FINANCIAL", "QUASI", "HEALTH"];

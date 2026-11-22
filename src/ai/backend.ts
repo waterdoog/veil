@@ -95,11 +95,12 @@ function salvageEntities(text: string): unknown {
   return { entities: out };
 }
 
-function parseEntities(text: string): Entity[] {
+/** Parse the entity list; `truncated` is true when the JSON was cut off and only complete items were salvaged. */
+export function parseEntities(text: string): { entities: Entity[]; truncated: boolean } {
   try {
-    return cleanEntities(parseJson(text));
+    return { entities: cleanEntities(parseJson(text)), truncated: false };
   } catch {
-    return cleanEntities(salvageEntities(text));
+    return { entities: cleanEntities(salvageEntities(text)), truncated: true };
   }
 }
 
@@ -229,30 +230,35 @@ export class FirebaseBackend implements AiBackend {
     await Promise.all([
       this.checker.initializeDeviceModel(),
       this.memoWriter.initializeDeviceModel(),
+      // Warm the image model too if this browser supports image input, so photos work later even offline.
+      this.imageStatus().then((st) => (st !== "unavailable" ? this.imageReader.initializeDeviceModel() : undefined)),
     ]);
   }
 
   async findIdentifiers(chunk: string): Promise<AiResult<Entity[]>> {
     const r = await this.redactor.generateContent(redactPrompt(chunk));
-    const text = r.response.text();
-    let data = parseEntities(text);
-    // An empty or broken answer on a long chunk: retry once as two halves (shorter prompts, shorter replies).
-    if (!data.length && chunk.length > 1200) {
-      const mid = chunk.lastIndexOf("\n", chunk.length / 2) > 0 ? chunk.lastIndexOf("\n", chunk.length / 2) : Math.floor(chunk.length / 2);
-      const halves = [chunk.slice(0, mid), chunk.slice(mid)];
-      for (const h of halves) {
+    let source = src(r.response.inferenceSource);
+    const first = parseEntities(r.response.text());
+    let data = first.entities;
+    // Reply cut off (or empty on a long chunk): keep what arrived, then re-scan the chunk as two halves
+    // (shorter prompts, shorter replies) so identifiers in the lost tail aren't silently dropped.
+    if (first.truncated || (!data.length && chunk.length > 1200)) {
+      const nl = chunk.lastIndexOf("\n", chunk.length / 2);
+      const mid = nl > 0 ? nl : Math.floor(chunk.length / 2);
+      for (const h of [chunk.slice(0, mid), chunk.slice(mid)]) {
         const rr = await this.redactor.generateContent(redactPrompt(h));
-        data = data.concat(parseEntities(rr.response.text()));
-        // All three calls are ONLY_ON_DEVICE; report a cloud source if any of them claims one.
-        if (src(rr.response.inferenceSource) === "in_cloud") return { data, source: "in_cloud" };
+        data = data.concat(parseEntities(rr.response.text()).entities);
+        const s2 = src(rr.response.inferenceSource);
+        // Report the least private source seen across the calls (they are all ONLY_ON_DEVICE).
+        if (s2 === "in_cloud" || source === "unknown") source = s2;
       }
     }
-    return { data, source: src(r.response.inferenceSource) };
+    return { data, source };
   }
 
   async findResidual(chunk: string): Promise<AiResult<Entity[]>> {
     const r = await this.checker.generateContent(secondPassPrompt(chunk));
-    return { data: parseEntities(r.response.text()), source: src(r.response.inferenceSource) };
+    return { data: parseEntities(r.response.text()).entities, source: src(r.response.inferenceSource) };
   }
 
   async readImage(file: File): Promise<AiResult<{ transcript: string; entities: Entity[] }>> {
@@ -277,7 +283,7 @@ export class FirebaseBackend implements AiBackend {
       } catch {
         transcript = m ? m[1].replace(/\\n/g, "\n") : "";
       }
-      entities = parseEntities(text);
+      entities = parseEntities(text).entities;
     }
     if (!transcript) throw new Error("Gemini Nano couldn't read text from this photo. Try a sharper, closer shot.");
     return { data: { transcript, entities }, source: src(r.response.inferenceSource) };

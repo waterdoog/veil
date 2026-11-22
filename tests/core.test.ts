@@ -233,3 +233,15 @@ describe("merge + csv", () => {
     expect(csv.split("\n")[1]).toBe('interview,p1,Fatigue,"a, b","He said ""rest""",00:01:00');
   });
 });
+
+import { parseEntities } from "../src/ai/backend";
+describe("on-device JSON salvage", () => {
+  it("flags a cut-off reply as truncated and keeps the complete items", () => {
+    const r = parseEntities('{"entities":[{"text":"Chloe","type":"PERSON"},{"text":"Brack');
+    expect(r.truncated).toBe(true);
+    expect(r.entities.map((e) => e.text)).toEqual(["Chloe"]);
+  });
+  it("parses a complete reply", () => {
+    expect(parseEntities('{"entities":[{"text":"Leeds","type":"LOCATION"}]}')).toEqual({ entities: [{ text: "Leeds", type: "LOCATION", source: "nano" }], truncated: false });
+  });
+});

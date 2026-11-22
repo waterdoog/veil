@@ -72,6 +72,16 @@ export function App({
               ))}
             </select>
           </label>
+          <label className="field">
+            <span>Research questions</span>
+            <textarea
+              className="rq"
+              rows={3}
+              placeholder="e.g. How do workers decide whether to disclose a fluctuating condition at work?"
+              value={study.researchQuestions ?? ""}
+              onChange={(e) => veil.setQuestions(e.target.value)}
+            />
+          </label>
           <div className="list-head">
             <span>Interviews</span>
             <button className="btn btn-small" onClick={() => setAdding(true)}>

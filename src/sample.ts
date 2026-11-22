@@ -29,6 +29,8 @@ export function sampleStudy(policy: PolicyName): Study {
   return {
     id: uid(),
     name: "Working with Long COVID (fictional sample)",
+    researchQuestions:
+      "1. How do people with Long COVID decide whether and how to disclose it at work?\n2. Which workplace adjustments help, and which fail?\n3. How does the condition change their sense of work identity and financial security?",
     policy,
     codebook: [],
     interviews: sampleInterviews(),

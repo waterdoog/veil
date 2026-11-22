@@ -1052,3 +1052,12 @@ select.merge {
   color: var(--muted);
   max-width: 110px;
 }
+textarea.rq {
+  font: 12.5px/1.4 var(--sans);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: var(--card);
+  color: var(--ink);
+  resize: vertical;
+}

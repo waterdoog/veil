@@ -36,6 +36,8 @@ export interface Study {
   policy: PolicyName;
   codebook: CodebookEntry[];
   interviews: Interview[];
+  /** What the study is asking. Steers cloud analysis; goes through the codebook + airlock like everything else. */
+  researchQuestions?: string;
   synthesis?: Synthesis;
   synthesisSource?: Source;
   synthStatus?: "idle" | "running" | "done" | "blocked" | "error";
