@@ -162,6 +162,10 @@ export function App({
               Held-out set
             </button>{" "}
             ·{" "}
+            <button className="linkish" onClick={veil.loadScenarios} title="A court judgment, an HR investigation file and a hospital discharge summary">
+              3 more scenarios
+            </button>{" "}
+            ·{" "}
             <button className="linkish" onClick={veil.loadTab} title="Text Anonymization Benchmark — 8 public ECHR judgments with expert annotations">
               TAB benchmark
             </button>{" "}
@@ -247,7 +251,7 @@ function Home({ veil, onAdd, onOpen, onSetup }: { veil: Veil; onAdd: () => void;
           Qualitative researchers promise ethics committees that identifiable transcripts stay under their control, then
           spend hours pseudonymising by hand before they can use any AI. Veil does it on your laptop with Gemini Nano, shows
           you exactly what will leave, blocks anything that slipped through, and only then hands the cloud model a
-          pseudonymised copy for thematic analysis. Results come back with real names restored — locally.
+          pseudonymised copy for thematic analysis. Results come back with real names restored — locally. The same works for court judgments, HR files and clinical letters.
         </p>
         <div className="actions">
           {!study.interviews.length ? (

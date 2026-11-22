@@ -1,0 +1,171 @@
+{
+ "id": "u-hr",
+ "title": "HR disciplinary file — conduct hearing",
+ "transcript": "CONFIDENTIAL — INTERNAL HR DISCIPLINARY FILE\n\nOrganisation: Northgate Retail Group (trading as Northgate Home & Living)\nStore Location: Unit 4, Meadowbrook Retail Park, Leeds, LS11 9ZZ\nCase Reference: HR-DISC-2025-0412\nEmployee Name: Callum Pritchard\nEmployee Number: NRG-48291\nDepartment: Homewares Department\nJob Title: Customer Service Supervisor\nInvestigating Manager: Nadia Hussain (Deputy Store Manager)\nHearing Chair: Gareth Bellamy (Store Manager)\nHR Adviser: Fiona McAllister (Regional HR Adviser)\nIncident Date: 14 February 2025\nInvestigation Date: 17 February 2025\nHearing Date: 24 February 2025\nOutcome Date: 28 February 2025\n\n1. ALLEGATION OF MISCONDUCT\nIt is alleged that on 14 February 2025, Callum Pritchard breached the Northgate Retail Group Staff Discount and Refunds Policy by processing an unauthorised manual cash refund of £145.00 on TILL-04 (transaction reference TXN-992014) for a BaristaPro Espresso Machine without a valid receipt or duty manager countersignature, and subsequently re-ringing the item using his 25% colleague discount for an acquaintance who is not an eligible family member.\n\n2. INVESTIGATION AND WITNESS STATEMENTS\nOn 17 February 2025, Nadia Hussain conducted formal fact-finding interviews with two colleagues who were on duty during the closing shift on 14 February 2025.\n\nWitness Statement 1 — Sophie Lindholm (Sales Assistant):\n\"I was working on the main bank of tills right next to Callum at around 16:20 on 14 February 2025. A man I did not recognise came up carrying a boxed coffee machine. Callum did not ask him for a till receipt or an order number. He keyed his supervisor override code into TILL-04 and processed a £145.00 refund, then immediately scanned the same box back through and applied a colleague discount. When the customer left, I asked if everything was alright, and Callum said, 'Don't worry about it, Sophie, he's an old mate from school, I'm just sorting him out.' It felt uncomfortable because we had a briefing only last month about strict refund checks.\"\n\nWitness Statement 2 — Dev Patel (Sales Assistant):\n\"During the end-of-day cashing up on 14 February 2025, I noticed an automated exception flag on TILL-04 for TXN-992014. There was no original receipt stapled to the refund voucher, which is mandatory for any refund over £50.00. I asked Callum about it before he clocked out, and he looked flustered and told me he would 'square it with Gareth in the morning.' Because no note was left in the cash office logbook, I reported the discrepancy to Nadia Hussain at the start of my next shift.\"\n\n3. DISCIPLINARY HEARING NOTES (24 FEBRUARY 2025)\nPresent: Gareth Bellamy (Hearing Chair), Fiona McAllister (HR Adviser and note-taker), Callum Pritchard (Employee), and Trevor Jenkins (RWU Shop Steward, Retail Workers Union, acting as employee companion).\n\nGareth Bellamy opened the hearing at 10:00, confirmed all parties had received the investigation pack in advance, and read the allegation aloud.\n\nGareth Bellamy: \"Callum, the EPOS audit trail and CCTV footage for TILL-04 confirm that transaction TXN-992014 was processed at 16:22 on 14 February 2025. Can you explain why you bypassed the receipt requirement and applied a staff discount for a friend?\"\n\nCallum Pritchard: \"I know I messed up, Gareth, and I am not going to make excuses or deny what happened. My friend had bought the machine online a week earlier and could not find his confirmation email. He was getting frustrated, the queue was building up, and I panicked. I have been struggling with generalised anxiety disorder over the past few months and I made a really poor judgement call under pressure.\"\n\nFiona McAllister: \"Callum, thank you for being open about that. Had you informed anyone in management about your generalised anxiety disorder prior to today, or requested any adjustments to your duties?\"\n\nCallum Pritchard: \"No, I hadn't told anyone at work until now. I was embarrassed and worried people would think I couldn't handle being a supervisor.\"\n\nTrevor Jenkins: \"If I may come in here, Gareth. Callum has four years of completely unblemished service with Northgate Retail Group. There was no personal financial gain here—the store still received the discounted payment, and the £145.00 was simply refunded and re-rung. We accept this was a clear breach of policy, but given his honesty, his clean disciplinary record, and the health difficulties he has just disclosed, we ask that you treat this as misconduct rather than gross misconduct.\"\n\nGareth Bellamy thanked everyone for their contributions and adjourned the hearing at 10:50 to deliberate with Fiona McAllister.\n\n4. DISCIPLINARY OUTCOME LETTER\nPrivate and Confidential\nDate: 28 February 2025\nTo: Callum Pritchard (Employee Number: NRG-48291)\nContact Mobile: 07700 900885\n\nDear Callum,\n\nFollowing the disciplinary hearing held on 24 February 2025 at Meadowbrook Retail Park, I am writing to confirm my formal decision regarding the allegation that you breached the Northgate Retail Group Staff Discount and Refunds Policy.\n\nHaving carefully reviewed the EPOS records for TXN-992014, the witness statements from Sophie Lindholm and Dev Patel, and the mitigation presented by you and Trevor Jenkins, I find the allegation substantiated. Misusing a supervisor override code and extending colleague discounts to non-eligible individuals is a serious breach of trust.\n\nHowever, I have taken into account your full admission, your four years of clean service, and the mitigating circumstances regarding your generalised anxiety disorder. Accordingly, I have decided not to dismiss you. Instead, you are issued with a Final Written Warning.\n\nThis warning will remain active on your personnel file for 12 months, expiring on 28 February 2026. Any further instances of misconduct or policy breaches during this period may result in dismissal.\n\nNext Steps and Support:\n1. You will complete a mandatory refresher module on till security and refund procedures with Nadia Hussain by 14 March 2025.\n2. With your consent, Fiona McAllister will arrange a referral to Occupational Health so we can discuss reasonable adjustments to support your wellbeing at work.\n\nRight of Appeal:\nYou have the right to appeal this decision. If you wish to do so, please submit your grounds in writing by 7 March 2025 to hr.appeals@northgateretail.example.com.\n\nIf you have any questions about this letter or the Occupational Health referral, please contact Fiona McAllister on 07700 900412 or at fiona.mcallister@northgateretail.example.com.\n\nYours sincerely,\n\nGareth Bellamy\nStore Manager, Northgate Home & Living\nUnit 4, Meadowbrook Retail Park, Leeds, LS11 9ZZ",
+ "identifiers": [
+  {
+   "text": "Northgate Retail Group",
+   "type": "ORG"
+  },
+  {
+   "text": "Northgate Home & Living",
+   "type": "ORG"
+  },
+  {
+   "text": "Unit 4, Meadowbrook Retail Park, Leeds, LS11 9ZZ",
+   "type": "LOCATION"
+  },
+  {
+   "text": "HR-DISC-2025-0412",
+   "type": "ID"
+  },
+  {
+   "text": "Callum Pritchard",
+   "type": "PERSON"
+  },
+  {
+   "text": "NRG-48291",
+   "type": "ID"
+  },
+  {
+   "text": "Homewares Department",
+   "type": "QUASI"
+  },
+  {
+   "text": "Customer Service Supervisor",
+   "type": "QUASI"
+  },
+  {
+   "text": "Nadia Hussain",
+   "type": "PERSON"
+  },
+  {
+   "text": "Deputy Store Manager",
+   "type": "QUASI"
+  },
+  {
+   "text": "Gareth Bellamy",
+   "type": "PERSON"
+  },
+  {
+   "text": "Store Manager",
+   "type": "QUASI"
+  },
+  {
+   "text": "Fiona McAllister",
+   "type": "PERSON"
+  },
+  {
+   "text": "Regional HR Adviser",
+   "type": "QUASI"
+  },
+  {
+   "text": "14 February 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "17 February 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "24 February 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "28 February 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "£145.00",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "TILL-04",
+   "type": "ID"
+  },
+  {
+   "text": "TXN-992014",
+   "type": "ID"
+  },
+  {
+   "text": "Sophie Lindholm",
+   "type": "PERSON"
+  },
+  {
+   "text": "Sales Assistant",
+   "type": "QUASI"
+  },
+  {
+   "text": "Callum",
+   "type": "PERSON"
+  },
+  {
+   "text": "Sophie",
+   "type": "PERSON"
+  },
+  {
+   "text": "Dev Patel",
+   "type": "PERSON"
+  },
+  {
+   "text": "£50.00",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "Gareth",
+   "type": "PERSON"
+  },
+  {
+   "text": "24 FEBRUARY 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "Trevor Jenkins",
+   "type": "PERSON"
+  },
+  {
+   "text": "RWU Shop Steward",
+   "type": "QUASI"
+  },
+  {
+   "text": "Retail Workers Union",
+   "type": "ORG"
+  },
+  {
+   "text": "generalised anxiety disorder",
+   "type": "HEALTH"
+  },
+  {
+   "text": "07700 900885",
+   "type": "CONTACT"
+  },
+  {
+   "text": "Meadowbrook Retail Park",
+   "type": "LOCATION"
+  },
+  {
+   "text": "28 February 2026",
+   "type": "DATE"
+  },
+  {
+   "text": "14 March 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "7 March 2025",
+   "type": "DATE"
+  },
+  {
+   "text": "hr.appeals@northgateretail.example.com",
+   "type": "CONTACT"
+  },
+  {
+   "text": "07700 900412",
+   "type": "CONTACT"
+  },
+  {
+   "text": "fiona.mcallister@northgateretail.example.com",
+   "type": "CONTACT"
+  }
+ ]
+}

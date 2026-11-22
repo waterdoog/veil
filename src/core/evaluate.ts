@@ -39,7 +39,14 @@ export function evaluate(raw: string, spans: Span[], truth: GroundTruth[], types
     // "St Jude's" redacted as "[ORG_1]'s" is fine: the possessive carries no identity.
     // Honorifics ("Dr. ") are not identifying on their own.
     const needle = t.text.replace(/[’']s$/i, "").replace(/^(?:dr|mr|mrs|ms|miss|prof)\.?\s+/i, "").toLowerCase();
-    let idx = rawLower.indexOf(needle);
+    // Whole words only: "Vance" must not be checked inside "grievance".
+    const isWord = (c: string | undefined) => c !== undefined && /[\p{L}\p{N}]/u.test(c);
+    const nextAt = (from: number) => {
+      let i = rawLower.indexOf(needle, from);
+      while (i >= 0 && (isWord(raw[i - 1]) || isWord(raw[i + needle.length]))) i = rawLower.indexOf(needle, i + 1);
+      return i;
+    };
+    let idx = nextAt(0);
     if (idx < 0) continue;
     let ok = true;
     while (idx >= 0) {
@@ -50,7 +57,7 @@ export function evaluate(raw: string, spans: Span[], truth: GroundTruth[], types
         }
       }
       if (!ok) break;
-      idx = rawLower.indexOf(needle, idx + 1);
+      idx = nextAt(idx + 1);
     }
     total++;
     byType[t.type] ??= { total: 0, caught: 0 };

@@ -8,7 +8,7 @@ import { extendAcronyms, extendNames, extendOrgs, findPatterns } from "./core/pa
 import { POLICIES, type Entity, type EntityType, type PolicyName } from "./core/types";
 import type { RuntimeConfig } from "./firebase";
 import { emptyStudy, releasable, uid, type Interview, type Study } from "./model";
-import { evalStudy, holdoutStudy, sampleStudy, tabStudy } from "./sample";
+import { evalStudy, holdoutStudy, sampleStudy, scenariosStudy, tabStudy } from "./sample";
 import { recordedStudy } from "./replay";
 import { getLocal, setLocal } from "./store/local";
 import { saveInterview, saveSynthesis } from "./store/cloud";
@@ -44,7 +44,16 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
 
   useEffect(() => {
     if (!backend) return;
-    backend.deviceStatus().then(setDevice);
+    // Chrome can report the model as unavailable for a moment right after start-up; check again a few times.
+    let tries = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const check = () =>
+      backend.deviceStatus().then((st) => {
+        setDevice(st);
+        if (st === "unavailable" && ++tries < 4) timer = setTimeout(check, 2000 * tries);
+      });
+    check();
+    return () => clearTimeout(timer);
   }, [backend]);
 
   useEffect(() => {
@@ -366,6 +375,7 @@ export function useVeil(backend: AiBackend | null, cfg: RuntimeConfig, userId: s
       loadSample: () => setStudy(sampleStudy(studyRef.current.policy)),
       loadHoldout: () => setStudy(holdoutStudy(studyRef.current.policy)),
       loadTab: () => setStudy(tabStudy(studyRef.current.policy)),
+      loadScenarios: () => setStudy(scenariosStudy(studyRef.current.policy)),
       loadEval: (name: string) => {
         const st = evalStudy(name, studyRef.current.policy);
         if (st) setStudy(st);

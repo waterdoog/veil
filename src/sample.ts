@@ -65,9 +65,20 @@ export function tabStudy(policy: PolicyName): Study {
   };
 }
 
+/** Beyond interviews: a court judgment (real, public, TAB), an HR file and a discharge summary (both fictional). */
+const scenarios = import.meta.glob<SampleFile>("../sample-data/scenarios/*.json", { eager: true, import: "default" });
+
+export function scenariosStudy(policy: PolicyName): Study {
+  const order = ["s-legal", "s-hr", "s-clin"];
+  const ivs = toInterviews(scenarios).sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+  return { id: uid(), name: "Beyond interviews: court judgment, HR file, discharge summary", policy, codebook: [], interviews: ivs };
+}
+
 const evalSets: Record<string, Record<string, SampleFile>> = {
   "tab-dev": import.meta.glob<SampleFile>("../sample-data/tab-dev/*.json", { eager: true, import: "default" }),
   "tab-test2": import.meta.glob<SampleFile>("../sample-data/tab-test2/*.json", { eager: true, import: "default" }),
+  // Unseen HR + clinical documents, generated after the scenario fixes, to check they generalise.
+  "scenarios-unseen": import.meta.glob<SampleFile>("../sample-data/scenarios-unseen/*.json", { eager: true, import: "default" }),
 };
 
 /** Evaluation-only sets, opened with ?load=<name> (not shown in the UI). */

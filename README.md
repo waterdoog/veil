@@ -102,6 +102,16 @@ Desktop Chrome 158, Gemini Nano via Firebase AI Logic (`ONLY_ON_DEVICE`), scored
 | Dev, after tuning (birth years, counties/regions gazetteer, marital status, case numbers, nationality, household) | 12 (226) | 88.5% | 79.7% | | |
 | **Test, unseen, final — run once** | 8 (195) | **87.2%** | **82.4%** | 60.5% / 78.4% | 64.6% / 58.2% |
 
+**Beyond interviews — court judgment, HR file, clinical letters** (load them from the sidebar: *3 more scenarios*). The same pipeline on record-style documents, real Gemini Nano in Chrome 158, Standard policy. The three documents in the app were used to fix what they exposed (multi-part reference codes like `HR-INV-2024-089`, letterheads in capitals, names listed in record fields such as "Present:"); two further documents were generated afterwards and run once (`?load=scenarios-unseen`).
+
+| Documents | Labels | Veil recall | Veil precision | Presidio default | Presidio orgs on |
+|---|---|---|---|---|---|
+| Court judgment (TAB) + HR investigation file + discharge summary, first look | 95 | 74 / 95 = 77.9% | 88.9% | 65.3% / 81.9% | 75.8% / 79.7% |
+| Same three, after the fixes | 95 | 84 / 95 = **88.4%** | 91% | | |
+| **Unseen: HR disciplinary file + respiratory clinic letter, run once** | 75 | 64 / 75 = **85.3%** | **92%** | 50.7% / 79.0% | 70.7% / 79.2% |
+
+The airlock found no known identifier in the outgoing text of any of the five. What's left is mostly job titles ("Senior HR Adviser"), bare years and small details ("border collie") — quasi-identifiers a reviewer still has to judge.
+
 A well-configured Presidio finds about as many identifiers as Veil did at first look, but a third of what it redacts isn't an identifier — that's review work and lost research data — and it misses most quasi-identifiers (4 of 13). Presidio also needs a Python server; Veil runs in the browser with nothing to install.
 
 The six-interview study pseudonymises in about 4–5 minutes on a MacBook, entirely on device; the airlock found no known identifier in any outgoing payload in any run. What Nano still misses is mostly quasi-identifiers — a rare hobby, an unusual job description, a small place name — which is why Veil keeps the human review step and shows every miss. Nano is not deterministic: a few items caught in one run are missed in the next.

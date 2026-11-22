@@ -1,0 +1,239 @@
+{
+ "id": "u-clin",
+ "title": "Outpatient clinic letter — respiratory",
+ "transcript": "Northbridge University Hospitals NHS Foundation Trust\nSt Jude's Hospital\nDepartment of Respiratory Medicine, Clinic 4B\n120 Highfield Road, Northbridge, NB4 2TQ\nTel: 01632 960412 | Email: respiratory.admin@example.com\n\nDate: 13/11/2025\n\nDr. Alistair Finch\nOakwood Medical Centre\n45 Oakwood Avenue\nNorthbridge\nNB2 8LP\n\nDear Dr. Finch,\n\nRe: Mr. Arthur Pendelton\nDOB: 14/03/1956\nNHS Number: 999 482 1037\nHospital Number: NBH-884920\nAddress: 18 Willow Crescent, Northbridge, NB3 5RT\nTelephone: 07700 900418\nNext of Kin: Mrs. Margaret Pendelton (Wife) – Tel: 07700 900419\n\nClinic Date: 12/11/2025\n\nDiagnoses:\n1. Chronic Obstructive Pulmonary Disease (COPD) – GOLD Stage 3, Group E\n2. Recent infective exacerbation of COPD (admitted 19/10/2025 to 24/10/2025, Maple Ward)\n3. Type 2 Diabetes Mellitus\n4. Essential Hypertension\n5. Bilateral Knee Osteoarthritis\n\nCurrent Medications:\n- Trimbow (beclometasone/formoterol/glycopyrronium) 87/5/9 micrograms, two puffs twice daily via spacer\n- Salbutamol 100 micrograms MDI, two puffs as required\n- Metformin 500 mg twice daily\n- Ramipril 5 mg once daily\n- Paracetamol 1 g up to four times daily as required\n\nThank you for your ongoing care of Mr. Arthur Pendelton, whom I reviewed in the Respiratory Outpatient Clinic on 12/11/2025 following his recent inpatient admission to Maple Ward at St Jude's Hospital.\n\nHistory of Presenting Complaint:\nMr. Pendelton was admitted on 19/10/2025 with a five-day history of worsening dyspnoea, increased purulent green sputum, and wheeze. On admission, he was mildly hypoxic requiring 1 L/min of supplementary oxygen via nasal cannulae to maintain saturations between 88% and 92%. Sputum culture grew Haemophilus influenzae, sensitive to doxycycline. He was treated with oral Prednisolone 30 mg once daily for five days, oral Doxycycline for seven days, and nebulised bronchodilators. He responded well, was weaned off oxygen, and was discharged home on 24/10/2025.\n\nAt today's review, he reports that his breathing has returned close to his pre-admission baseline, though he remains significantly limited by exertional breathlessness (mMRC grade 3). He can walk approximately 50 yards on the flat before needing to stop and rest. He has a mild morning cough producing scant clear mucoid sputum. He denies chest pain, orthopnoea, paroxysmal nocturnal dyspnoea, haemoptysis, or unintentional weight loss. His inhaler technique was observed today and is satisfactory when using his Volumatic spacer.\n\nOccupational, Social, and Family History:\nMr. Pendelton is a retired foundry worker, having worked at Northbridge Ironworks for 38 years with significant historical exposure to metallic dust and fumes. He is an ex-smoker with a 45 pack-year history, having successfully stopped smoking in 2021. He drinks minimal alcohol. He lives with his wife, Mrs. Margaret Pendelton, in a two-storey terraced house at 18 Willow Crescent. He struggles considerably with the stairs and has recently applied for Attendance Allowance to assist with his mobility and care needs. Regarding his family history, his father died of lung cancer at the age of 68, and his younger brother has asthma.\n\nExamination:\nOn examination today, he was comfortable at rest. Oxygen saturations were 93% on room air, respiratory rate was 18 breaths per minute, heart rate was 78 beats per minute and regular, and blood pressure was 138/82 mmHg. Auscultation of the chest revealed a hyperinflated chest with globally reduced air entry and scattered bilateral expiratory wheeze, but no focal crackles. There was no peripheral oedema and his JVP was not elevated.\n\nInvestigations:\n- Spirometry (12/11/2025): Post-bronchodilator FEV1 1.18 L (42% predicted), FVC 2.18 L (64% predicted), FEV1/FVC ratio 0.54, confirming severe airflow obstruction.\n- Chest X-ray (19/10/2025): Hyperinflated lung fields consistent with emphysema; no focal consolidation, pleural effusion, or suspicious mass lesion.\n- Blood tests (23/10/2025): Full blood count normal with peripheral blood eosinophils 0.28 x10^9/L. CRP improved to 14 mg/L (down from 98 mg/L on admission). Renal and liver profiles normal. HbA1c 56 mmol/mol.\n\nManagement Plan:\n1. Continue regular triple therapy with Trimbow 87/5/9 micrograms two puffs twice daily via spacer, and Salbutamol as required.\n2. Given his history of two exacerbations in the past twelve months, I have issued a written COPD self-management plan and would be grateful if you could provide him with a standby rescue pack (Prednisolone 30 mg once daily for 5 days and Doxycycline 200 mg stat followed by 100 mg once daily for 6 days) to keep at home.\n3. I have referred him to the Northbridge Community Pulmonary Rehabilitation programme, which is scheduled to commence on 01/12/2025.\n4. Please ensure his annual influenza, pneumococcal, and COVID-19 vaccinations are up to date at Oakwood Medical Centre.\n5. I have sent a referral to community occupational therapy for a home assessment regarding stair rails and bathing equipment.\n6. I have arranged to review him again in the Respiratory Outpatient Clinic on 18/02/2026.\n\nPlease do not hesitate to contact my secretary on 01632 960412 if you have any queries.\n\nYours sincerely,\n\nDr. Hannah Patel\nConsultant Respiratory Physician\nGMC 9876543\n\nDictated: 12/11/2025\nTyped: 13/11/2025\n\nCC: Mr. Arthur Pendelton",
+ "identifiers": [
+  {
+   "text": "Northbridge University Hospitals NHS Foundation Trust",
+   "type": "ORG"
+  },
+  {
+   "text": "St Jude's Hospital",
+   "type": "ORG"
+  },
+  {
+   "text": "Department of Respiratory Medicine",
+   "type": "ORG"
+  },
+  {
+   "text": "Clinic 4B",
+   "type": "LOCATION"
+  },
+  {
+   "text": "120 Highfield Road, Northbridge, NB4 2TQ",
+   "type": "LOCATION"
+  },
+  {
+   "text": "01632 960412",
+   "type": "CONTACT"
+  },
+  {
+   "text": "respiratory.admin@example.com",
+   "type": "CONTACT"
+  },
+  {
+   "text": "13/11/2025",
+   "type": "DATE"
+  },
+  {
+   "text": "Dr. Alistair Finch",
+   "type": "PERSON"
+  },
+  {
+   "text": "Oakwood Medical Centre",
+   "type": "ORG"
+  },
+  {
+   "text": "45 Oakwood Avenue\nNorthbridge\nNB2 8LP",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Dr. Finch",
+   "type": "PERSON"
+  },
+  {
+   "text": "Mr. Arthur Pendelton",
+   "type": "PERSON"
+  },
+  {
+   "text": "14/03/1956",
+   "type": "DATE"
+  },
+  {
+   "text": "999 482 1037",
+   "type": "ID"
+  },
+  {
+   "text": "NBH-884920",
+   "type": "ID"
+  },
+  {
+   "text": "18 Willow Crescent, Northbridge, NB3 5RT",
+   "type": "LOCATION"
+  },
+  {
+   "text": "07700 900418",
+   "type": "CONTACT"
+  },
+  {
+   "text": "Mrs. Margaret Pendelton",
+   "type": "PERSON"
+  },
+  {
+   "text": "07700 900419",
+   "type": "CONTACT"
+  },
+  {
+   "text": "12/11/2025",
+   "type": "DATE"
+  },
+  {
+   "text": "Chronic Obstructive Pulmonary Disease (COPD)",
+   "type": "HEALTH"
+  },
+  {
+   "text": "GOLD Stage 3, Group E",
+   "type": "HEALTH"
+  },
+  {
+   "text": "infective exacerbation of COPD",
+   "type": "HEALTH"
+  },
+  {
+   "text": "19/10/2025",
+   "type": "DATE"
+  },
+  {
+   "text": "24/10/2025",
+   "type": "DATE"
+  },
+  {
+   "text": "Maple Ward",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Type 2 Diabetes Mellitus",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Essential Hypertension",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Bilateral Knee Osteoarthritis",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Trimbow",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Salbutamol",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Metformin",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Ramipril",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Paracetamol",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Mr. Pendelton",
+   "type": "PERSON"
+  },
+  {
+   "text": "Haemophilus influenzae",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Prednisolone",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Doxycycline",
+   "type": "HEALTH"
+  },
+  {
+   "text": "mMRC grade 3",
+   "type": "HEALTH"
+  },
+  {
+   "text": "foundry worker",
+   "type": "QUASI"
+  },
+  {
+   "text": "Northbridge Ironworks",
+   "type": "ORG"
+  },
+  {
+   "text": "2021",
+   "type": "DATE"
+  },
+  {
+   "text": "18 Willow Crescent",
+   "type": "LOCATION"
+  },
+  {
+   "text": "Attendance Allowance",
+   "type": "FINANCIAL"
+  },
+  {
+   "text": "lung cancer",
+   "type": "HEALTH"
+  },
+  {
+   "text": "asthma",
+   "type": "HEALTH"
+  },
+  {
+   "text": "FEV1 1.18 L (42% predicted)",
+   "type": "HEALTH"
+  },
+  {
+   "text": "FVC 2.18 L (64% predicted)",
+   "type": "HEALTH"
+  },
+  {
+   "text": "FEV1/FVC ratio 0.54",
+   "type": "HEALTH"
+  },
+  {
+   "text": "emphysema",
+   "type": "HEALTH"
+  },
+  {
+   "text": "23/10/2025",
+   "type": "DATE"
+  },
+  {
+   "text": "HbA1c 56 mmol/mol",
+   "type": "HEALTH"
+  },
+  {
+   "text": "Northbridge Community Pulmonary Rehabilitation",
+   "type": "ORG"
+  },
+  {
+   "text": "01/12/2025",
+   "type": "DATE"
+  },
+  {
+   "text": "18/02/2026",
+   "type": "DATE"
+  },
+  {
+   "text": "Dr. Hannah Patel",
+   "type": "PERSON"
+  },
+  {
+   "text": "GMC 9876543",
+   "type": "ID"
+  }
+ ]
+}

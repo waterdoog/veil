@@ -36,6 +36,12 @@ const PLACES = [
 ];
 const GAZETTEER = new RegExp(`\\b(?:${[...PLACES].sort((a, b) => b.length - a.length).map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`, "g");
 
+const INSTITUTION_WORDS = ["Clinic", "Union", "University", "Group", "Trust", "Hospital", "Infirmary", "Surgery", "Practice", "School", "College", "Council", "Ltd", "Limited", "Foundation", "Society", "Association", "Partnership"];
+
+// Letterheads in capitals ("BRAMPTON VALE NHS FOUNDATION TRUST"); must end the heading, so
+// "INVESTIGATIONS AND HOSPITAL COURSE" is not an organisation.
+const UPPER_INST = INSTITUTION_WORDS.map((w) => w.toUpperCase()).join("|");
+
 const PATTERNS: { type: EntityType; re: RegExp }[] = [
   { type: "CONTACT", re: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi },
   // UK mobiles and landlines, with or without +44 and spaces/dashes.
@@ -57,6 +63,8 @@ const PATTERNS: { type: EntityType; re: RegExp }[] = [
   { type: "ID", re: /\b\d{3}[\s-]\d{3}[\s-]\d{4}\b/g },
   { type: "ID", re: /\b(?=[A-Z0-9-]*\d)[A-Z]{1,4}-?\d{5,}\b/g },
   { type: "ID", re: /\b\d{6,}\b/g },
+  // Multi-part reference codes: "HR-INV-2024-089", "CASE-22-0417". (Needs two hyphens and a digit, so "COVID-19" stays.)
+  { type: "ID", re: /\b(?=[A-Z]{2,6}-[A-Z0-9-]*\d)[A-Z]{2,6}(?:-[A-Z0-9]+){2,}\b/g },
   // Years that place a person: "born in 1951", "since 1996", "in May 2000", tax years "1995/6".
   // (Recent years after "in"/"since" are usually research context in interviews, so only birth years and 19xx count.)
   { type: "DATE", re: /\bborn\s+(?:in\s+)?(?:(?:early|mid|late)[- ])?(?:18|19|20)\d{2}\b|\b(?:in|since|until|till|from|of|during)\s+(?:(?:early|mid|late)[- ])?19\d{2}\b/gi },
@@ -83,10 +91,16 @@ const PATTERNS: { type: EntityType; re: RegExp }[] = [
     re: /\b(?:\d{1,2}(?:st|nd|rd|th)?\s+(?:of\s+)?(?:January|February|March|April|May|June|July|August|September|October|November|December)(?:,?\s+\d{4})?|(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{4})?|(?:January|February|March|April|June|July|August|September|October|November|December)\s+\d{4})\b/g,
   },
   { type: "DATE", re: /\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/g },
+  // Headings in capitals: "TAKEN 23 OCTOBER 2024".
+  { type: "DATE", re: /\b\d{1,2}(?:ST|ND|RD|TH)?\s+(?:JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)\s+\d{4}\b/g },
   // Named institutions: capitalised phrases ending in an institution word, "University of X".
   {
     type: "ORG",
-    re: /\b(?:(?:[A-Z][\w'’.-]*|&|of|and|for)\s+){0,5}?[A-Z][\w'’.-]*\s+(?:Clinic|Union|University|Group|Trust|Hospital|Infirmary|Surgery|Practice|School|College|Council|Ltd|Limited|Foundation|Society|Association|Partnership)\b|\bUniversity of [A-Z][a-z]+(?:\s[A-Z][a-z]+)?/g,
+    // [ \t] not \s: a name never runs across a line break ("GP Name: Dr Nair\nPractice: ...").
+    re: new RegExp(
+      String.raw`\b(?:(?:[A-Z][\w'’.-]*|&|of|and|for)[ \t]+){0,5}?[A-Z][\w'’.-]*[ \t]+(?:(?:${INSTITUTION_WORDS.join("|")})\b|(?:${UPPER_INST})(?:[ \t]+(?:${UPPER_INST}))*\b(?![ \t]+[A-Z]))|\bUniversity of [A-Z][a-z]+(?:[ \t][A-Z][a-z]+)?`,
+      "g",
+    ),
   },
   // Titled names are people whether or not the model noticed: "Mrs. Gable", "Dr Kerr", "Prof. Mensah".
   { type: "PERSON", re: /\b(?:Dr|Mrs|Mr|Ms|Miss|Prof|Nurse|Sister|Father|Rev)\.?\s[A-Z][a-z'’-]+(?:\s[A-Z][a-z'’-]+)?\b/g },
@@ -101,9 +115,29 @@ const PATTERNS: { type: EntityType; re: RegExp }[] = [
   { type: "FINANCIAL", re: /[£$€]\s?\d[\d,]*(?:\.\d{2})?(?:\s?(?:k|K|grand|a (?:month|week|year)))?/g },
 ];
 
+// Record fields that hold people: "Present: Callum Henderson, Keith Holloway (union rep)", "Statement of Danielle O'Connor".
+const PEOPLE_FIELD = /\b(?:Present|Attendees|Attending|In attendance|Witness(?:es)?|Statement of|Interviewed by|Signed by|Prepared by|Reviewed by|Next of Kin|Name)\b[ \t]*:?[ \t]*([^\n]+)/g;
+const FIELD_NAME = /^(?:(?:Dr|Mr|Mrs|Ms|Miss|Prof)\.?\s)?[A-Z][a-z'’-]+(?:\s(?:[A-Z]['’])?[A-Z][a-zA-Z'’-]+){1,2}/;
+
+function fieldNames(text: string): string[] {
+  const names: string[] = [];
+  for (const m of text.matchAll(PEOPLE_FIELD)) {
+    for (const part of m[1].split(/,|;|\band\b|\(/)) {
+      const n = part.trim().match(FIELD_NAME)?.[0];
+      if (n) names.push(n);
+    }
+  }
+  return names;
+}
+
 export function findPatterns(text: string): Entity[] {
   const out: Entity[] = [];
   const seen = new Set<string>();
+  for (const n of fieldNames(text)) {
+    if (seen.has("PERSON|" + n.toLowerCase())) continue;
+    seen.add("PERSON|" + n.toLowerCase());
+    out.push({ text: n, type: "PERSON", source: "pattern" });
+  }
   for (const { type, re } of PATTERNS) {
     re.lastIndex = 0;
     for (const m of text.matchAll(re)) {

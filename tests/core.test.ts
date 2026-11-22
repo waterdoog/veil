@@ -353,3 +353,35 @@ describe("place names, birth years, marital status", () => {
     expect(f.join(" ")).not.toContain("2019");
   });
 });
+
+describe("record-style documents (HR files, clinical letters)", () => {
+  const std = POLICIES.standard;
+  const redact = (raw: string) => applyCodebook(raw, mergeEntities([], findPatterns(raw), "d1"), std, "d1").redacted;
+  it("multi-part reference codes, but not COVID-19", () => {
+    expect(redact("Case Reference: HR-INV-2024-089")).toBe("Case Reference: [ID_1]");
+    expect(redact("after COVID-19 hit")).toBe("after COVID-19 hit");
+  });
+  it("letterheads in capitals, but not capital section headings", () => {
+    expect(redact("BRAMPTON VALE NHS FOUNDATION TRUST\nDISCHARGE")).toBe("[ORG_1]\nDISCHARGE");
+    expect(redact("INVESTIGATIONS AND HOSPITAL COURSE")).toBe("INVESTIGATIONS AND HOSPITAL COURSE");
+  });
+  it("an organisation name never runs across a line break", () => {
+    const out = redact("GP Name: Dr Priya Nair\nPractice: Oakridge Medical Centre");
+    expect(out).toContain("GP Name: [PERSON_1]\nPractice:");
+  });
+  it("dates in capitals", () => {
+    expect(redact("STATEMENTS (TAKEN 23 OCTOBER 2024)")).toBe("STATEMENTS (TAKEN [DATE_1])");
+  });
+  it("people listed in record fields", () => {
+    const out = redact("Present: Callum Henderson, Keith Holloway (union rep).\n3.1 Statement of Danielle O'Connor (Team Leader)");
+    expect(out).not.toMatch(/Callum|Holloway|O'Connor/);
+  });
+});
+
+describe("evaluate matches whole words", () => {
+  it("a surname is not checked inside a longer word", () => {
+    const raw = "Mr Vance heard the grievance.";
+    const spans = [{ start: 0, end: 8, token: "[PERSON_1]", type: "PERSON" as const }];
+    expect(evaluate(raw, spans, [{ text: "Mr Vance", type: "PERSON" }]).caught).toBe(1);
+  });
+});
